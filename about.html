@@ -1,0 +1,118 @@
+<!--Ver 1.1-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resume\PRsTrOpHY</title>
+    <meta charset="utf-8">
+    <!--Tells the browser about the character set being used-->
+    <meta name="author" content="Prashid Pradhan">
+    <meta name="viewport" content="device-width" initial-scale=1>
+    <!--Specifying the viewport and setting the device-width for responsiveness-->
+    <meta rel="icon" href="favicon.ico">
+    <!--Configuring favicon-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--Linking of CSS file-->
+    <style>
+        body {
+            background-image: url();
+            /*Overrides the original background image*/
+            background-color: black;
+        }
+        
+        @font-face {
+            /*Consolas is a font used in modern text-editors which seems more fitting for code presentation.*/
+            font-family: consola;
+            src: url(../../assets/fonts/consolas.ttf) format("truetype");
+        }
+        
+        @font-face {
+            font-family: effralight;
+            src: url(../../assets/fonts/effralight.ttf) format("truetype");
+        }
+    </style>
+    <!--This font does not work if it is kept in the external css-->
+</head>
+
+<body>
+<!--Overlay Navigation-->
+		<div id="navigation" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>	<!--Void(0) means redirection to undefined. hence, it stays in the same page. It runs regardless of the href. But, the mouse icon does not change if it is not inside an a tag. Hence, it was kept.-->
+			<div class="overlay-content">
+				<a href="index.html">Home</a>
+				<!--<a href="contact.html">Contact</a>-->
+				<!--<a href="portfolio.html">portfolio</a>-->
+			</div>
+		</div>
+		<center><span class="downarrow dblue" onclick="openNav()">&#9947;<!--downarrow--></span></center>
+		<!----------End of Overlay Navigation---------->
+	
+
+    <div id="about_main" class="slideup">
+        <div class="rectangle">
+            <p>!this.img.
+            </br>notavailable</p>
+        </div>
+        <p class="level_2 grey">// When u want CV in Code Style ⬇️   </p>
+    <h2>&ltAbout.Me&gt</h2>
+        
+    <p class="white"><span class="red">class</span> <span class="cyan">Myinfo</span> {     </p>  
+
+    <p class="level_2 grey">//Passionate about Tech, always staying updated with latest advancements   </p>
+    <p class="level_2 grey">//Love Gaming/Gamer  Was part of some Gaming Tournament Organization</p>
+    <p class="level_2 grey">//Keen to learn and enhance skills, embracing latest tools and methods.</p>
+		
+
+        <p class="level_2 white"><span class="red">constructor</span>() {</p>
+        <!--Level_2 class gives it the padding that is used to represent a tab space i.e. 4 space characters.-->
+        <p class="level_3 white"><span class="orange">this</span>.<span class="green">name</span> = <span class="lblue">"Prashid Pradhan"</span>;</p>
+        <p class="level_3 white"><span class="orange">this</span>.<span class="green">dateOfBirth</span> = <span class="lblue">"1996-08-30"</span>;</p>
+        <p class="level_3 white"><span class="orange">this</span>.<span class="green">email</span> = <span class="lblue">"stropher@gmail.com"</span>;</p>
+        <p class="level_2 white">}</p>
+        <p class="level_2 grey">//Linkedin Profile <a link href="https://www.linkedin.com/in/prashid-pradhan-b29160b5/"> Link </a> </p>
+        <p class="level_2 grey">//Github <a link href="https://github.com/prstrophy"> Link </a> </p>
+        <p class="level_2 white"><span class="cyan">education()</span> {</p>
+        <p class="level_3 white"><span class="red">return</span> [</p>
+        <p class="level_4 white">{ <span class="lblue">"2017" &nbsp;: "Bachelors in Information Technology (Hons.) at The British College, Kathmandu, Nepal"</span> }</p>
+        <p class="level_4 white">{ <span class="lblue">"2013" &nbsp;: "HSEB Exam from at SOS Hermann Gmienar ,Shreekhandapur , Kavre, Nepal"</span> }</p>
+        <p class="level_4 white">{ <span class="lblue">"2011" &nbsp;: "School Leaving Examination From Vidhya Sagar Higher Secondary School, Banepa, Kavre, Nepal"</span> }</p>
+        <p class="level_3 white">]</p>
+        <p class="level_2 white">}</p>
+        <p class="level_2 grey">//Learned some Node.js(youtube) Knockout.js(intern) and little use of Wordpress helping in friends project </p>
+        <p class="level_2 white"><span class="cyan">skills</span>() {</p>
+        <p class="level_3 white"><span class="red">return</span> [</p>
+        <p class="level_4 white">{<span class="lblue">"HTML/CSS","JavaScript", "Bootstrap/Gumby CSS Framework" ,"MySQL" , "PHP", "Oracle Database", "Java", "C/C++/C#" , "Asp.NET", "Python", "WindowsFormApplication"</span>}</p>
+        <p class="level_3 white">]</p>
+        <p class="level_2 white">}</p>
+        <p class="level_2 grey">//Made some Pamplet/logo like freelance also worked in UI/UX while helping in college project</p>
+		<p class="level_2 white"><span class="cyan">tools</span>() {</p>
+        <p class="level_3 white"><span class="red">return</span> [</p>
+        <p class="level_4 white">{<span class="lblue">"Eclipse", "Apache", "Aptana", "Oracle", "XAMPP", "WAMPP", "SublineText","Notepad++", "Visual-Studio/Code" , "Adobe XD" ,"Photoshop" ,"Illustrator"</span>}</p> 
+        <p class="level_3 white">]</p>
+        <p class="level_2 white">}</p>
+		
+        <p class="level_2 white"><span class="cyan">languages</span>() {</p>
+        <p class="level_3 white"><span class="red">return</span> [</p>
+        <p class="level_4 white">{<span class="lblue">"Nepali (Native)", "Newari", "English", "Hindi"</span>}</p>
+        <p class="level_3 white">]</p>
+        <p class="level_2 white">}</p>
+        <p class="level_2 grey">//Also did Intern in ASP.net in PCS</p>  
+        <p class="level_2 grey">//Had also been Leader in CF Toli and in some academic projects</p> 
+		 <p class="level_2 white"><span class="cyan">Job</span>() {</p>
+        <p class="level_3 white"><span class="red">return</span> [</p>
+        <p class="level_4 white">{"<span class="lblue"> Part-time AI/Data trainer and Data Analystist at Cloudfactory . Also looking for new Opportunity/Job so click the <a link href="CV_Pradhan_Prashid.pdf"> Link </a>  to Download my CV for any Job Offers </span>"}  </p>        <p class="level_3 white">]</p>
+        <p class="level_2 white">}</p>
+        <h2>&lt/About.Me&gt</h2>
+    </div>
+		
+    <!--Footer-->
+    <div id="footer">
+
+    </div>
+    <!--End of footer-->
+    <!--Importing Scripts-->
+    <script src="scripts/overlay.js"></script>
+	<!--Thanks to my bro about this idea and help "Sahir Prajapati"-->
+</body>
+
+</html>

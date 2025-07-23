@@ -1,0 +1,366 @@
+html{
+  scroll-behavior: smooth;
+}
+
+a{
+  text-decoration: none;
+  text-decoration-color: white;
+  color:white;
+}
+
+body {
+  background-image: url("img/backdrop.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width:100%;
+  height: 400px;
+
+}
+
+.two_letters_in_logo{
+  color: #5BC3EB;
+}
+
+#home_main_header{
+font-family: yatra; 
+color: #2980b9;
+font-size: 5vw;
+margin-top: 7vw;
+margin-bottom: 1vw;
+}
+
+#home_sub_header{
+font-family: yatra;
+font-size: 3vw;
+margin-top:2vw;
+margin-bottom:8px;
+}
+
+.red{
+  color: #e22424;
+}
+.orange{
+color: #ff904f;
+}
+.cyan{
+color: #00FFFF	;
+}
+
+.purple{
+  color: #9616e5
+}
+
+.green{
+  color: #24e27a;
+}
+
+.bright_green{
+  color: #7cfc00;
+}
+
+.yellow{
+  color: #f8fc16;
+}
+
+.grey{
+  color: #808080;
+}
+
+.white{
+  color: #ffffff;
+}
+.lblue{
+	color:#6cb6da
+}
+.brown{
+	color:#d0b221;
+}
+.dblue{
+  color:#0b2f66
+}
+.rectangle {
+  height: 140px;
+  width: 125px;
+  background-color: #0b0b0b;
+  color: #3a0d0d;
+  float:right;
+  
+}
+/*Container of home page*/
+.container{
+padding: 7% 9% 2% 30%;
+height: 75vh;
+}
+
+.footer{
+  width: 88vw;
+  bottom: 0;
+  background-color: #2980b9;
+  height: 2.5vw;
+  font-family: effralight;
+  margin-top: 1vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  font-size: 1.2vw;
+}
+
+.footer p{
+  margin:0;
+  padding: 0.5vw;
+}
+
+/*Loading Screen*/
+.loading_screen{
+    position: fixed;
+    z-index: 99; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #222d34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading_screen.hidden{
+    animation: fadeout 1s ease-out;
+    animation-fill-mode: forwards;
+}
+
+#loading_text{
+    font-family: effralight,arial;
+    font-size: 5.5vw;
+}
+.loader{
+    position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+-webkit-mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%);
+  transform-origin: 50% 60%;
+  transform: perspective(200px) rotateX(66deg);
+  animation: spinner-wiggle 1.2s infinite;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  margin: -5px 0px 0px -100px;
+  box-sizing: inherit;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  opacity: .05;
+  border: inherit;
+  border-color: transparent;
+  animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+}
+
+.loader:before {
+  border-top-color: #132c54;
+}
+
+.loader:after {
+  border-top-color: #850505;
+  animation-delay: 0.3s;
+}
+
+@keyframes spinner-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner-fade {
+  20% {
+    opacity: .1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: .1;
+  }
+}
+
+ @keyframes fadeout{
+    100%{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.fadein{
+  animation-name: fadein;
+  animation-delay: 0.5s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein{
+  100%{
+      opacity: 1;
+      visibility: visible;
+  }
+}
+/*End of laoding Screen*/
+
+/*Overlay Navigation*/
+.downarrow{
+  position: fixed;
+  font-size: 3.0vw;
+  cursor:pointer;
+  top: 0;
+  left: 2.6vw;;
+  z-index: 96;
+}
+
+.downarrow:hover{
+  color: #2980b9;
+}
+
+.overlay {
+  z-index:97;
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(116, 113, 113, 0.95);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 10%;
+  height: 100%;
+  margin-top: 5%;    
+  width: 80vw;
+  padding-right: 0px;
+  margin-right: 10vw;
+  margin-left: 10vw;
+}
+
+.overlay a {
+  text-decoration: none;
+  font-size: 2.5vw;
+  font-family: effralight;
+  padding-left: 6vw;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus{
+  color: #85f18e;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+/*End of overlay navigation*/
+
+/*Typewriter effect elements*/
+
+#typewriting {
+  display: inline-block;
+  color: #000000;
+  border-right: 3px solid #24e2d9;
+  max-height: 65px;
+}
+
+/*End of typwriter effect elements*/
+
+/*End of homepage*/
+
+/*About Page*/
+#about_main{
+  color: #0aa21d;
+  margin-top: 3vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  opacity: 0;
+}
+
+#about_main h2{
+  font-family: consola;
+  font-size: 2vw;
+}
+
+#about_main p{
+  font-family: consola;
+  font-size: 1.2vw;
+  margin: 0.5vw;
+}
+
+
+.level_2{
+  padding-left: 2vw;
+}
+
+.level_3{
+  padding-left: 4vw;
+}
+
+.level_4{
+  padding-left: 6vw;
+}
+
+/*End of About page*/
+
+
+/* The Close Button of the overlay*/
+.close {    
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover, .close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+.white_background{
+  height: 143vw;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding-top: 2vw;
+}
+
+
+.slideup {
+  animation-name: slideup;
+  animation-delay: 0.5s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  visibility: visible;
+}
+
+@keyframes slideup {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(70%);
+  } 
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+    
+  }
+}

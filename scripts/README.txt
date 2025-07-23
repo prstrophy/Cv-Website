@@ -1,0 +1,1 @@
+Javascript Files are to be kept here. Please name the .js files properly and manage them in a good folder structure if possible.
