@@ -4,122 +4,117 @@ Main JavaScript Logic
 This script manages the preloader, animations, and other dynamic features of the portfolio website.
 ========================================================================================
 */
-
 // Wait for the entire HTML document to be fully loaded and parsed before running the script.
-// This prevents errors where the script tries to access elements that don't exist yet.
 document.addEventListener('DOMContentLoaded', () => {
     // DOM elements for the preloader
     const preloader = document.getElementById("preloader");
     const preName = document.querySelector(".pre-name");
     const shapeContainer = document.getElementById("shape-container");
     const mainContent = document.getElementById("main-content");
-
+    // Check if all necessary elements exist before proceeding
+    if (!preloader || !preName || !shapeContainer || !mainContent) {
+        console.error("One or more preloader elements are missing in the HTML.");
+        return; // Exit the script if elements are not found
+    }
     // Function to generate a random hex color
     function getRandomColor() {
         return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
     }
-
-    // Function to generate a CSS gradient string with random colors
-    function generateGradient() {
+    // Generates CSS linear-gradient string for the text
+    function generateCssGradient() {
         const color1 = getRandomColor();
         const color2 = getRandomColor();
         const color3 = getRandomColor();
         return `linear-gradient(270deg, ${color1}, ${color2}, ${color3})`;
     }
-
-    // The SVG code for a variety of shapes, including an irregular hexagon.
+    // The SVG code for a variety of shapes, now accepts colors as arguments
     const shapes = {
-        circle: `
+        circle: (c1, c2, c3) => `
           <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:white;" />
-                    <stop offset="100%" style="stop-color:white;" />
+                    <stop offset="0%" style="stop-color:${c1};" />
+                    <stop offset="50%" style="stop-color:${c2};" />
+                    <stop offset="100%" style="stop-color:${c3};" />
                 </linearGradient>
             </defs>
             <path fill="transparent" stroke="url(#preloaderGradient)" stroke-width="6" d="M50,3 A47,47 0 1,1 50,97 A47,47 0 1,1 50,3" />
           </svg>
         `,
-        hexagon_irregular: `
+        hexagon_irregular: (c1, c2, c3) => `
           <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:white;" />
-                    <stop offset="100%" style="stop-color:white;" />
+                    <stop offset="0%" style="stop-color:${c1};" />
+                    <stop offset="50%" style="stop-color:${c2};" />
+                    <stop offset="100%" style="stop-color:${c3};" />
                 </linearGradient>
             </defs>
             <path fill="transparent" stroke="url(#preloaderGradient)" stroke-width="6" d="M50,3 L93,25 L85,70 L50,97 L15,70 L7,25 Z" />
           </svg>
         `,
-        pentagon: `
+        pentagon: (c1, c2, c3) => `
           <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:white;" />
-                    <stop offset="100%" style="stop-color:white;" />
+                    <stop offset="0%" style="stop-color:${c1};" />
+                    <stop offset="50%" style="stop-color:${c2};" />
+                    <stop offset="100%" style="stop-color:${c3};" />
                 </linearGradient>
             </defs>
             <path fill="transparent" stroke="url(#preloaderGradient)" stroke-width="6" d="M50,3 L97,38 L78,97 L22,97 L3,38 Z" />
           </svg>
         `,
-        heptagon: `
+        heptagon: (c1, c2, c3) => `
           <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:white;" />
-                    <stop offset="100%" style="stop-color:white;" />
+                    <stop offset="0%" style="stop-color:${c1};" />
+                    <stop offset="50%" style="stop-color:${c2};" />
+                    <stop offset="100%" style="stop-color:${c3};" />
                 </linearGradient>
             </defs>
             <path fill="transparent" stroke="url(#preloaderGradient)" stroke-width="6" d="M50,3 L90,20 L100,60 L75,97 L25,97 L0,60 L10,20 Z" />
           </svg>
         `,
-        infinity: `
+        infinity: (c1, c2, c3) => `
           <svg viewBox="0 0 100 100">
             <defs>
                 <linearGradient id="preloaderGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:white;" />
-                    <stop offset="100%" style="stop-color:white;" />
+                    <stop offset="0%" style="stop-color:${c1};" />
+                    <stop offset="50%" style="stop-color:${c2};" />
+                    <stop offset="100%" style="stop-color:${c3};" />
                 </linearGradient>
             </defs>
             <path fill="transparent" stroke="url(#preloaderGradient)" stroke-width="6" d="M25 50 C25 30 45 10 75 10 C105 10 125 30 125 50 C125 70 105 90 75 90 C45 90 25 70 25 50 Z M75 10 C95 10 115 30 115 50 C115 70 95 90 75 90 C55 90 35 70 35 50 C35 30 55 10 75 10 Z" transform="translate(-15) scale(0.7)" />
           </svg>
         `
     };
-
     // Selects a random shape and injects it into the shape container
     const shapeNames = Object.keys(shapes);
-    const randomShapeKey = shapeNames[`${Math.floor(Math.random() * shapeNames.length)}`];
-    shapeContainer.innerHTML = shapes[`${randomShapeKey}`];
-
-    // Sets a custom CSS property with a random gradient
-    document.documentElement.style.setProperty('--preloader-gradient', generateGradient());
-
-
+    const randomShapeKey = shapeNames[Math.floor(Math.random() * shapeNames.length)];
+    // Generate random colors for the SVG gradient stops
+    const svgColor1 = getRandomColor();
+    const svgColor2 = getRandomColor();
+    const svgColor3 = getRandomColor();
+    // Inject the shape with dynamic gradient colors
+    shapeContainer.innerHTML = shapes[randomShapeKey](svgColor1, svgColor2, svgColor3);
+    // Sets a custom CSS property with a random gradient (for the text)
+    document.documentElement.style.setProperty('--preloader-gradient', generateCssGradient());
     // Fades out the preloader after a set delay.
     const fadeOutDelay = 2500; // You can change this value to make the preloader last longer or shorter (in milliseconds)
-
     // Apply the new text animation duration based on the fadeOutDelay
     preName.style.animation = `text-loading-bar ${fadeOutDelay / 1000}s cubic-bezier(0.8, 0.2, 0.2, 0.8) forwards 0.5s, outline-fade-in 0.5s ease forwards`;
-
-    if (preloader && mainContent) {
+    // Fades out the preloader and shows the main content
+    setTimeout(() => {
+        preloader.classList.add("fade-out");
         setTimeout(() => {
-            preloader.classList.add("fade-out");
-            // After a brief transition, hide the preloader entirely and show the main content
-            setTimeout(() => {
-                preloader.style.display = "none";
-                mainContent.style.visibility = "visible";
-            }, 700);
-        }, fadeOutDelay);
-    }
-
-    /*
-    ========================================================================================
-    Home Section Logic
-    This script initializes the typing animation for the home section.
-    ========================================================================================
-    */
+            preloader.style.display = "none";
+            mainContent.style.visibility = "visible";
+        }, 700);
+    }, fadeOutDelay);
+    // Home section typing animation logic
     new Typed("#typed", {
-        // You can change the strings to display different phrases
         strings: [
             "App Development.",
             "Database Systems.",
@@ -132,16 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         backSpeed: 40,
         loop: true,
     });
-
-
-    /*
-    ========================================================================================
-    General Animations
-    These scripts handle the scroll-based animations and active link highlighting.
-    ========================================================================================
-    */
-    // Intersection Observer for scroll animations
-    // This observes elements with the "hidden" class and adds the "show" class when they come into view.
+    // General scroll animations and active link highlighting
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((e) => {
@@ -151,9 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { threshold: 0.2 }
     );
     document.querySelectorAll(".hidden").forEach((el) => observer.observe(el));
-
-    // Active link highlighting based on scroll position
-    // This script checks which section is currently in the viewport and highlights the corresponding link in the header.
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll("header a");
     window.addEventListener("scroll", () => {
@@ -173,14 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    /*
-    ========================================================================================
-    Quote Carousel Logic
-    This script manages the dynamic quotes in the "About" section. The quote changes when the user clicks anywhere on the quote box.
-    ========================================================================================
-    */
-    // Array of inspirational quotes
+    // Quote Carousel Logic
     const quotes = [
         { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
         { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
@@ -197,135 +173,98 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: "Things work out best for those who make the best of how things work out.", author: "John Wooden" },
         { text: "To live a creative life, we must lose our fear of being wrong.", author: "Joseph Chilton Pearce" },
     ];
-
-    // Select the DOM elements for the quote and author display
     const quoteDisplay = document.getElementById("quote-display");
     const authorDisplay = document.getElementById("author-display");
-
-    // Function to display a random quote from the array
     function displayRandomQuote() {
         const randomIndex = Math.floor(Math.random() * quotes.length);
         const quote = quotes[randomIndex];
         quoteDisplay.textContent = quote.text;
         authorDisplay.textContent = `- ${quote.author}`;
     }
-
-    // Call the function once to display a quote on initial page load
     displayRandomQuote();
-
-    // Add a click event listener to the quote section to change the quote
     document.getElementById("quote-section").addEventListener("click", displayRandomQuote);
-
-
-    /*
-    ========================================================================================
-    Mobile Navigation Logic
-    This script handles the opening and closing of the mobile navigation menu (hamburger icon).
-    ========================================================================================
-    */
+    // Mobile Navigation Logic
     const openMenuBtn = document.getElementById('open-menu');
     const closeMenuBtn = document.getElementById('close-menu');
     const mobileNavMenu = document.getElementById('mobile-nav-menu');
     const mobileNavLinks = mobileNavMenu.querySelectorAll('a');
-
-    // Function to open the mobile menu
     function openMobileMenu() {
         mobileNavMenu.classList.add('active');
         openMenuBtn.style.display = 'none';
         closeMenuBtn.style.display = 'block';
     }
-
-    // Function to close the mobile menu
     function closeMobileMenu() {
         mobileNavMenu.classList.remove('active');
         openMenuBtn.style.display = 'block';
         closeMenuBtn.style.display = 'none';
     }
-
-    // Event listeners for opening and closing the mobile menu
     if (openMenuBtn) {
         openMenuBtn.addEventListener('click', openMobileMenu);
     }
     if (closeMenuBtn) {
         closeMenuBtn.addEventListener('click', closeMobileMenu);
     }
-
-    // Close the mobile menu when a navigation link is clicked
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', closeMobileMenu);
     });
+});
 
-    /*
+ /*
     ========================================================================================
     Project Section Logic (GitHub API Fetch)
     This is commented-out code to show how you would fetch and display your GitHub projects.
     You need to uncomment this code and fill in your GitHub username to make it work.
     ========================================================================================
     */
-
     /*
     // --- START: GITHUB API FETCHING CODE ---
-    
     // Step 1: Replace 'YOUR_GITHUB_USERNAME' with your actual GitHub username.
-    // const githubUsername = 'YOUR_GITHUB_USERNAME';
-
-    // // The URL for the GitHub API to get your public repositories.
-    // const githubApiUrl = `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`;
-
-    // const projectsGrid = document.getElementById('projects-grid');
-
-    // // Function to fetch projects from GitHub and display them on the page
-    // async function fetchAndDisplayProjects() {
-    //     try {
-    //         const response = await fetch(githubApiUrl);
-    //         if (!response.ok) {
-    //             throw new Error(`GitHub API error: ${response.statusText}`);
-    //         }
-    //         const repos = await response.json();
-
-    //         // Clear the dummy projects from the page
-    //         projectsGrid.innerHTML = '';
-
-    //         // Check if any repositories were found
-    //         if (repos.length === 0) {
-    //             projectsGrid.innerHTML = '<p>No public repositories found on GitHub.</p>';
-    //             return;
-    //         }
-
-    //         // Loop through the fetched repositories and create project cards
-    //         repos.forEach(repo => {
-    //             const projectCard = document.createElement('div');
-    //             projectCard.classList.add('project-card', 'hidden'); // Add 'hidden' class for the scroll animation
-
-    //             projectCard.innerHTML = `
-    //                 <h4>${repo.name}</h4>
-    //                 <p>${repo.description || 'No description provided.'}</p>
-    //                 <a href="${repo.html_url}" class="project-btn" target="_blank"
-    //                     >View on GitHub<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-    //                         <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
-    //                         <path d="M5 5h5V3H3v7h2z"/>
-    //                     </svg>
-    //                 </a>
-    //             `;
-    //             projectsGrid.appendChild(projectCard);
-    //         });
-
-    //         // Re-observe the new project cards for the scroll animation
-    //         document.querySelectorAll('.project-card.hidden').forEach(el => observer.observe(el));
-
-    //     } catch (error) {
-    //         console.error("Failed to fetch GitHub projects:", error);
-    //         projectsGrid.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
-    //     }
-    // }
-
-    // // Call the function to fetch projects when the page loads
+    const githubUsername = 'YOUR_GITHUB_USERNAME';
+    // The URL for the GitHub API to get your public repositories.
+    const githubApiUrl = `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`;
+    const projectsGrid = document.getElementById('projects-grid');
+    // Function to fetch projects from GitHub and display them on the page
+    async function fetchAndDisplayProjects() {
+        try {
+            const response = await fetch(githubApiUrl);
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.statusText}`);
+            }
+            const repos = await response.json();
+            // Clear the dummy projects from the page
+            projectsGrid.innerHTML = '';
+            // Check if any repositories were found
+            if (repos.length === 0) {
+                projectsGrid.innerHTML = '<p>No public repositories found on GitHub.</p>';
+                return;
+            }
+            // Loop through the fetched repositories and create project cards
+            repos.forEach(repo => {
+                const projectCard = document.createElement('div');
+                projectCard.classList.add('project-card', 'hidden'); // Add 'hidden' class for the scroll animation
+                projectCard.innerHTML = `
+                    <h4>${repo.name}</h4>
+                    <p>${repo.description || 'No description provided.'}</p>
+                    <a href="${repo.html_url}" class="project-btn" target="_blank"
+                        >View on GitHub<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+                            <path d="M5 5h5V3H3v7h2z"/>
+                        </svg>
+                    </a>
+                `;
+                projectsGrid.appendChild(projectCard);
+            });
+            // Re-observe the new project cards for the scroll animation
+            document.querySelectorAll('.project-card.hidden').forEach(el => observer.observe(el));
+        } catch (error) {
+            console.error("Failed to fetch GitHub projects:", error);
+            projectsGrid.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
+        }
+    }
+    // Call the function to fetch projects when the page loads
     // window.addEventListener('load', fetchAndDisplayProjects);
-    
     // --- END: GITHUB API FETCHING CODE ---
     */
-
-
     /*
     ========================================================================================
     Contact Form Logic (EmailJS)
@@ -333,26 +272,21 @@ document.addEventListener('DOMContentLoaded', () => {
     like EmailJS to make your contact form functional without a backend server.
     ========================================================================================
     */
-
     /*
     // --- START: EMAILJS FORM CODE ---
-
     // Step 1: Include the EmailJS SDK in your HTML file
-    // Add this script tag in your <head> section:
+    // This is already in your <head> section:
     // <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     //
     // Step 2: Sign up for an account at https://www.emailjs.com/
     // and get your User ID, Service ID, and Template ID.
-
     // (function() {
     //     // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS User ID
     //     emailjs.init('YOUR_PUBLIC_KEY');
     // })();
-
     // const contactForm = document.getElementById('contact-form');
     // contactForm.addEventListener('submit', function(e) {
     //     e.preventDefault(); // Prevents the default form submission behavior
-
     //     // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
     //     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
     //         .then(function(response) {
@@ -364,7 +298,5 @@ document.addEventListener('DOMContentLoaded', () => {
     //             alert('Failed to send the message. Please try again.');
     //         });
     // });
-
     // --- END: EMAILJS FORM CODE ---
     */
-});

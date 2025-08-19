@@ -244,23 +244,22 @@ header a.active::after {
 }
 
 /* Media query for responsive header */
-@media (max-width: 768px) {
-    header {
-        justify-content: space-between; /* Space out nav and icon */
-        padding: 0.8rem 1.5rem;
-        border-radius: 0; /* Remove rounded corner for full width */
-        width: 100%; /* Full width on mobile */
+@media (min-width: 900px) {
+    /* Hides the hamburger and close icons on larger screens */
+    #open-menu, #close-menu {
+        display: none !important;
     }
-
-    header a {
-        display: none; /* Hide regular nav links on small screens */
-    }
-
-    .menu-icon {
-        display: block; /* Show hamburger icon */
+    /* Ensures the mobile nav menu is hidden on larger screens */
+    #mobile-nav-menu {
+        display: none;
     }
 }
-
+@media (max-width: 899px) {
+    /* Hides the main navigation links on smaller screens */
+    .header-nav {
+        display: none;
+    }
+}
 
 /*
 ========================================================================================
@@ -297,6 +296,14 @@ Section-specific Styles
     font-size: 1.3rem;
     line-height: 1.7;
     margin-bottom: 1rem;
+    min-height: 50px; /* NEW: Added to prevent layout shift */
+}
+
+@media (max-width: 768px) {
+    #home p {
+        font-size: 1rem;
+        min-height: 80px; /* NEW: Added to prevent layout shift on mobile */
+    }
 }
 
 #home #typed { color: #7dacbd; }
@@ -306,6 +313,7 @@ Section-specific Styles
     background: linear-gradient(180deg, rgba(31, 1, 60, 0.6), rgba(11, 30, 31, 0.75)), url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1600");
     background-size: cover;
     background-position: center;
+    padding-top: 5.75rem; /* Adjust this value as needed */
 }
 
 #about .content {
@@ -333,9 +341,9 @@ Quote Section Styles (Updated)
 .quote-section {
     position: relative; /* Needed for positioning the pseudo-element and text */
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     background: #1e2531; /* A slightly darker background to make the border pop */
-    border-radius: 10px;
+    border-radius: 20px;
     backdrop-filter: blur(4px);
     margin-top: 40px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
