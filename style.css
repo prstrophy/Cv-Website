@@ -1,366 +1,632 @@
-html{
-  scroll-behavior: smooth;
+/*
+========================================================================================
+General Website Styles
+These styles apply to the entire website for a consistent look and feel.
+========================================================================================
+*/
+/* Universal box-sizing rule for consistent element dimensions */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-a{
-  text-decoration: none;
-  text-decoration-color: white;
-  color:white;
-}
-
+/* Base styles for the body, including background, font, and scroll behavior */
 body {
-  background-image: url("img/backdrop.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  width:100%;
-  height: 400px;
-
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    scroll-behavior: smooth;
 }
 
-.two_letters_in_logo{
-  color: #5BC3EB;
+/* Styles for each main content section */
+section {
+    min-height: 100vh;
+    padding: 8rem 8% 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-size: cover;
+    background-position: center;
 }
 
-#home_main_header{
-font-family: yatra; 
-color: #2980b9;
-font-size: 5vw;
-margin-top: 7vw;
-margin-bottom: 1vw;
+/* Section title styling and animation */
+h2.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    font-weight: 700;
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 6s ease infinite;
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: all 0.8s ease;
 }
 
-#home_sub_header{
-font-family: yatra;
-font-size: 3vw;
-margin-top:2vw;
-margin-bottom:8px;
+/* Class to show the title when it scrolls into view */
+h2.section-title.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.red{
-  color: #e22424;
-}
-.orange{
-color: #ff904f;
-}
-.cyan{
-color: #00FFFF	;
+/* Specific gradient for each section title */
+#about h2 { background-image: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff); }
+#edu-exp h2 { background-image: linear-gradient(270deg, #f7971e, #ffd200, #f7971e); }
+#skills h2 { background-image: linear-gradient(270deg, #8e2de2, #4a00e0, #8e2de2); }
+#projects h2 { background-image: linear-gradient(270deg, #43cea2, #185a9d, #43cea2); }
+#contact h2 { background-image: linear-gradient(270deg, #ff512f, #dd2476, #ff512f); }
+
+/* Keyframe animation for flowing gradient effect */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.purple{
-  color: #9616e5
-}
-
-.green{
-  color: #24e27a;
-}
-
-.bright_green{
-  color: #7cfc00;
-}
-
-.yellow{
-  color: #f8fc16;
-}
-
-.grey{
-  color: #808080;
-}
-
-.white{
-  color: #ffffff;
-}
-.lblue{
-	color:#6cb6da
-}
-.brown{
-	color:#d0b221;
-}
-.dblue{
-  color:#0b2f66
-}
-.rectangle {
-  height: 140px;
-  width: 125px;
-  background-color: #0b0b0b;
-  color: #3a0d0d;
-  float:right;
-  
-}
-/*Container of home page*/
-.container{
-padding: 7% 9% 2% 30%;
-height: 75vh;
-}
-
-.footer{
-  width: 88vw;
-  bottom: 0;
-  background-color: #2980b9;
-  height: 2.5vw;
-  font-family: effralight;
-  margin-top: 1vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  font-size: 1.2vw;
-}
-
-.footer p{
-  margin:0;
-  padding: 0.5vw;
-}
-
-/*Loading Screen*/
-.loading_screen{
+/*
+========================================================================================
+Preloader Styles
+========================================================================================
+*/
+/* Main preloader container that covers the entire viewport */
+#preloader {
     position: fixed;
-    z-index: 99; 
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #06080d 0%, #04060a 100%);
+    transition: opacity 700ms ease;
+}
+
+/* Class to fade out the preloader and make it non-interactive */
+#preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Container for the shape and name */
+.preloader-container {
+    display: flex;
+    flex-direction: column; /* Stacks the shape and name vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* Adds space between the shape and the name */
+}
+
+/* The small SVG shape container */
+#shape-container {
+    width: 100px;
+    height: 100px;
+    animation: container-spin 6s linear infinite;
+}
+
+/* Ensures the SVG fits inside its container */
+#shape-container svg {
     width: 100%;
     height: 100%;
-    background: #222d34;
+}
+
+/* Styling for the name 'PRsTrOpHY' with a gradient fill and animation */
+.pre-name {
+    font-family: Poppins, Inter;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 4vw, 3rem); /* Responsive font size */
+    letter-spacing: 0.08em;
+    -webkit-text-fill-color: transparent;
+    background: var(--preloader-gradient); /* Uses a CSS variable for the gradient */
+    background-clip: text;
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+}
+
+/* Keyframe animation for the shape's continuous spin */
+@keyframes container-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Keyframe animation to fade in the text outline */
+@keyframes outline-fade-in {
+    0% { -webkit-text-stroke: 1px transparent; }
+    100% { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1); }
+}
+
+/* Keyframe animation for the text's loading bar effect */
+@keyframes text-loading-bar {
+    0% { background-size: 0% 100%; }
+    100% { background-size: 100% 100%; }
+}
+
+/*
+========================================================================================
+Header & Navigation Styles
+========================================================================================
+*/
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    padding: 0.8rem 2rem;
+    background: rgba(13, 17, 23, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 0 15px;
+    z-index: 1000;
 }
 
-.loading_screen.hidden{
-    animation: fadeout 1s ease-out;
-    animation-fill-mode: forwards;
-}
-
-#loading_text{
-    font-family: effralight,arial;
-    font-size: 5.5vw;
-}
-.loader{
+header a {
+    color: #e6edf3;
+    text-decoration: none;
+    font-size: 0.95rem;
     position: relative;
-  margin: auto;
-  box-sizing: border-box;
-  background-clip: padding-box;
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
--webkit-mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%);
-  transform-origin: 50% 60%;
-  transform: perspective(200px) rotateX(66deg);
-  animation: spinner-wiggle 1.2s infinite;
-}
-.loader:before,
-.loader:after {
-  content: "";
-  position: absolute;
-  margin: -5px 0px 0px -100px;
-  box-sizing: inherit;
-  width: inherit;
-  height: inherit;
-  border-radius: inherit;
-  opacity: .05;
-  border: inherit;
-  border-color: transparent;
-  animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+    padding-bottom: 3px;
 }
 
-.loader:before {
-  border-top-color: #132c54;
+header a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: cyan;
+    transform: scaleX(0);
+    transition: transform 0.3s;
 }
 
-.loader:after {
-  border-top-color: #850505;
-  animation-delay: 0.3s;
+header a:hover::after,
+header a.active::after {
+    transform: scaleX(1);
 }
 
-@keyframes spinner-spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes spinner-fade {
-  20% {
-    opacity: .1;
-  }
-  40% {
-    opacity: 1;
-  }
-  60% {
-    opacity: .1;
-  }
+/*
+========================================================================================
+Section-specific Styles
+========================================================================================
+*/
+#home {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600");
+    background-size: cover;
+    background-position: center;
 }
 
- @keyframes fadeout{
-    100%{
-        opacity: 0;
-        visibility: hidden;
+#home .content {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+}
+
+#home h1 {
+    font-size: 3.8rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(270deg, cyan, teal, purple);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 6s infinite;
+}
+
+#home p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+#home #typed { color: #7dacbd; }
+#home #typedtext { color: #367b7d; font-weight: bold; }
+
+#about {
+    background: linear-gradient(180deg, rgba(31, 1, 60, 0.6), rgba(11, 30, 31, 0.75)), url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1600");
+    background-size: cover;
+    background-position: center;
+}
+
+#about .content {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+}
+
+#about p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/*
+========================================================================================
+Quote Section Styles (Updated)
+========================================================================================
+*/
+.quote-section {
+    position: relative; /* Needed for positioning the pseudo-element and text */
+    text-align: center;
+    padding: 20px;
+    background: #1e2531; /* A slightly darker background to make the border pop */
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    margin-top: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    overflow: hidden; /* This hides the gradient overflow */
+}
+
+/* Pseudo-element for the gradient border */
+.quote-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 8px; /* The thickness of the border */
+    /* A repeating linear gradient with multiple colors */
+    background: linear-gradient(
+        180deg,
+        #00c6ff, /* Light Blue */
+		 #ffff00,  /* Yellow */
+        #ff00ff, /* Magenta */
+        #ff3d00, /* Orange */
+        #00ff00, /* Green */
+		#38f5a3,
+		#45a2d1
+       
+    );
+    /* Make the gradient large to allow for the animation */
+    background-size: 100% 400%;
+    animation: color-cycle 40s linear infinite; /* Increased duration to 40 seconds */
+    z-index: -1; /* Place the border behind the content */
+}
+
+/* New style for the vertical "Quote of the Day" text */
+.quote-label {
+    position: absolute;
+    top: 50%;
+    left: 15px; /* Adjust this value to move the text further from the border */
+    transform: translateY(-50%) rotate(180deg); /* Flipped 180 degrees */
+    writing-mode: vertical-rl; /* Writes the text vertically from right to left */
+    color: rgba(255, 255, 255, 0.4); /* Faded color for subtlety */
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+/* Keyframes for the color-changing animation */
+@keyframes color-cycle {
+    to {
+        background-position: 0 -200%; /* Scrolls the gradient to create the color-changing effect */
     }
 }
 
-.fadein{
-  animation-name: fadein;
-  animation-delay: 0.5s;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+.quote-text {
+    font-style: italic;
+    font-size: 1.2em;
+    color: #e6edf3;
+    margin-bottom: 15px;
 }
 
-@keyframes fadein{
-  100%{
-      opacity: 1;
-      visibility: visible;
-  }
-}
-/*End of laoding Screen*/
-
-/*Overlay Navigation*/
-.downarrow{
-  position: fixed;
-  font-size: 3.0vw;
-  cursor:pointer;
-  top: 0;
-  left: 2.6vw;;
-  z-index: 96;
+.quote-author {
+    font-weight: bold;
+    color: #ff83e3;
 }
 
-.downarrow:hover{
-  color: #2980b9;
+#edu-exp {
+    background: linear-gradient(80deg, rgba(34, 33, 37, 0.6), rgba(32, 1, 53, 0.5)), url("https://images.unsplash.com/photo-1510519138101-570d1dca3d66?w=1600&q=80");
+	 background-size: cover;
+    background-position: center;
 }
 
-.overlay {
-  z-index:97;
-  height: 0%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(116, 113, 113, 0.95);
-  overflow-y: hidden;
-  transition: 0.5s;
+.edu-exp-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
 }
 
-.overlay-content {
-  position: relative;
-  top: 10%;
-  height: 100%;
-  margin-top: 5%;    
-  width: 80vw;
-  padding-right: 0px;
-  margin-right: 10vw;
-  margin-left: 10vw;
+.edu h3, .exp h3 {
+    margin-bottom: 1rem;
+    color: cyan;
+    text-align: center;
 }
 
-.overlay a {
-  text-decoration: none;
-  font-size: 2.5vw;
-  font-family: effralight;
-  padding-left: 6vw;
-  color: #ffffff;
-  transition: 0.3s;
+.edu-card, .exp-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s, background 0.3s;
 }
 
-.overlay a:hover, .overlay a:focus{
-  color: #85f18e;
+.edu-card:hover, .exp-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.12);
 }
 
-.overlay .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
+.edu-card h4, .exp-card h4 { color: cyan; }
+
+.hidden-info {
+    display: none;
+    font-size: 0.9rem;
+    color: #bbb;
 }
 
-/*End of overlay navigation*/
-
-/*Typewriter effect elements*/
-
-#typewriting {
-  display: inline-block;
-  color: #000000;
-  border-right: 3px solid #24e2d9;
-  max-height: 65px;
+.edu-card:hover .hidden-info, .exp-card:hover .hidden-info {
+    display: block;
 }
 
-/*End of typwriter effect elements*/
-
-/*End of homepage*/
-
-/*About Page*/
-#about_main{
-  color: #0aa21d;
-  margin-top: 3vw;
-  margin-left: 5vw;
-  margin-right: 5vw;
-  opacity: 0;
+#skills {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+    url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80");
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+/* The skill group container which replaced .skill-category */
+.skill-group {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 1rem;
+}
+.skill-group h3 {
+    margin-bottom: 1rem;
+    color: teal;
+}
+/* The individual skill item which replaced the li tag */
+.skill {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.stars {
+  color: gold;
+  text-shadow: 0 0 4px #000;
 }
 
-#about_main h2{
-  font-family: consola;
-  font-size: 2vw;
+#projects {
+    background: linear-gradient(180deg, rgba(40, 20, 60, 0.7), rgba(10, 5, 25, 0.85)), url("https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1600");
+    background-size: cover;
+    background-position: center;
 }
 
-#about_main p{
-  font-family: consola;
-  font-size: 1.2vw;
-  margin: 0.5vw;
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
-
-.level_2{
-  padding-left: 2vw;
+.project-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.3s, background 0.3s;
 }
 
-.level_3{
-  padding-left: 4vw;
+.project-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.level_4{
-  padding-left: 6vw;
+.project-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    background: teal;
+    color: #0d1117;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-/*End of About page*/
-
-
-/* The Close Button of the overlay*/
-.close {    
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
+.project-btn:hover {
+    background: cyan;
+    color: #111;
+    transform: translateY(-2px);
 }
 
-.close:hover, .close:focus {
-  color: #f44336;
-  cursor: pointer;
+#contact {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
 
-.white_background{
-  height: 143vw;
-  width: 100%;
-  top: 0;
-  left: 0;
-  margin: 0;
-  background-color: rgba(0, 0, 0, 0.15);
-  padding-top: 2vw;
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 2rem;
+    align-items: center;
 }
 
+.contact-info { text-align: center; }
 
-.slideup {
-  animation-name: slideup;
-  animation-delay: 0.5s;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  visibility: visible;
+.contact-info img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid cyan;
+    margin-bottom: 1rem;
 }
 
-@keyframes slideup {
-  0% {
+.contact-info a {
+    color: white;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.form-group { position: relative; margin-bottom: 1.5rem; }
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-bottom: 2px solid teal;
+    background: transparent;
+    color: #e6edf3;
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus + label, .form-group input:valid + label,
+.form-group textarea:focus + label, .form-group textarea:valid + label {
+    top: -12px;
+    left: 5px;
+    font-size: 0.8rem;
+    color: cyan;
+}
+
+select + label {
+    top: -12px !important;
+    transform: none !important;
+}
+
+select option { color: black; }
+
+button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background: cyan;
+    color: #0d1117;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: teal;
+    transform: scale(1.05);
+}
+
+.warning-text {
+    font-size: 0.8rem;
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 1rem;
+    opacity: 0.85;
+    animation: fadeBlink 3s infinite;
+}
+
+@keyframes fadeBlink {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 0.4; }
+}
+
+footer {
+    background: linear-gradient(-45deg, #000428, #004e92, #1a2980, #0f2027);
+    background-size: 300% 300%;
+    animation: gradientFlow 10s infinite;
+    text-align: center;
+    padding: 1rem;
+    color: #bbb;
+}
+
+footer .old-version {
+    margin-left: 10px;
+    position: relative;
+    cursor: pointer;
+    color: white;
+}
+
+footer .old-version .tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
     opacity: 0;
-    -webkit-transform: translateY(70%);
-  } 
-  100% {
+    transition: opacity 0.3s;
+}
+
+footer .old-version:hover .tooltip {
+    visibility: visible;
     opacity: 1;
-    -webkit-transform: translateY(0%);
-    
-  }
+}
+
+/* Floating CV download button */
+.cv-pill {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 40px;
+    height: 40px;
+    border: 2px solid teal;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: teal;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cv-pill:hover {
+    background: teal;
+    color: #0d1117;
+}
+
+.cv-pill .tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 55px;
+    right: 0;
+    background: #111;
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.cv-pill:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Classes for scroll animations (hidden to show) */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
 }

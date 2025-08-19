@@ -1,0 +1,86 @@
+<!--Ver 1.1-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>cv\PRsTrOpHY</title>
+		<meta charset="utf-8">		<!--Tells the browser about the character set being used-->
+		<meta name="author" content="-">
+		<meta name="viewport" content="device-width" initial-scale=1>		<!--Specifying the viewport and setting the device-width for responsiveness-->
+		<meta rel="icon" href="favicon.ico" type="image/ico">	
+			<!--Configuring favicon-->
+			<link rel="preconnect" href="https://fonts.gstatic.com">
+			
+			<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&family=Sniglet&display=swap" rel="stylesheet">
+			 <!--linking Google fonts-->
+		<link rel="stylesheet" type="text/css" href="style.css">		<!--Linking of CSS file-->
+		<style>			
+			@font-face {
+    		font-family: yatra;
+			src: url(fonts/yatra.ttf) format("truetype");
+			}
+			@font-face {
+    		font-family: effralight;
+			src: url(fonts/effralight.ttf) format("truetype");
+			}
+			@font-face{
+			font-family: 'Josefin Sans', sans-serif;
+			 src: url('path-to-fonts/JosefinSans-Regular.woff2') format('woff2'),
+       url('path-to-fonts/JosefinSans-Regular.woff') format('woff');
+			}
+			@font-face{
+				font-family: 'Sniglet', cursive;
+			src: url('path-to-fonts/Sniglet-Regular.woff2') format('woff2'),
+       		url('path-to-fonts/Sniglet-Regular.woff') format('woff');
+			}
+		</style>	<!--This font does not work if it is kept in the external css.-->
+		<!--Loading screen Script-->
+		<script src="scripts/script_loading_screen.js"></script>
+		<script>fadeout_loading_screen()</script>
+	</head>
+	<body>
+		<!----------Loading Screen---------->
+		<div class="loading_screen">	<!--Loading Screen Content-->
+			<div id=loading_text>	<!--qwerty Style yeta use gareko because logo aru thau ma pani use huncha tara yo loading screen ma thulo cha-->
+					<p style="color:rgb(255, 255, 255)">PRs<span style="color:rgb(232, 176, 73)">TrO<span style="color:rgb(247, 58, 58)">pHY</span></p>	
+					<br/>	<!--Line Break-->
+					<center>
+					<div class="loader"></div>
+					</center>
+			</div>
+		</div>	
+		
+		<!----------End of Loading Screen---------->  
+
+		<!--Overlay Navigation-->
+		<div id="navigation" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>	<!--Void(0) means redirection to undefined. hence, it stays in the same page. It runs regardless of the href. But, the mouse icon does not change if it is not inside an a tag. Hence, it was kept.-->
+			<div class="overlay-content">
+				<a href="about.html">About</a>
+					<a href="../index.html">Go back to new version</a>
+				<!--<a href="contact.html">Contact</a>-->
+				<!--<a href="portfolio.html">portfolio</a>-->
+			</div>
+		</div>
+		<center><span class="downarrow red" onclick="openNav()">&#9947;<!--downarrow--></span></center>
+		<!----------End of Overlay Navigation---------->
+
+		<center>
+		<section>
+			<div class="container">				
+				<h1 id="home_main_header">PRASHID PRADHAN</h1>
+				<h2 id="home_sub_header">
+					I am Passionate about <!--This is required text-->
+					<br/>
+					<div id="typewriting">
+						<!--Typewriter Effect from this point-->
+					</div>	<!--Div typewriting-->
+				</h2>
+			</div>
+		</section>
+		</center>
+
+		<!--Importing Scripts-->
+		<script src="scripts/overlay.js"></script>
+		<script src="scripts/typewriting.js"></script>
+	</body>
+</html>

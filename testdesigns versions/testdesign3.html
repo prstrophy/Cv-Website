@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prashid Pradhan — CV</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --accent: #2dd4bf;
+  --accent-2: #06b6d4;
+  --bg-dark: #0b0f14;
+  --muted: #98a7b8;
+  --radius: 12px;
+  --trans: 250ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* ======= BACKGROUNDS ======= */
+#home{ background: linear-gradient(180deg, rgba(7,10,14,0.6), rgba(6,8,12,0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600') center/cover; }
+#about{ background: linear-gradient(180deg, rgba(20, 40, 80, 0.7), rgba(10, 50, 60, 0.85)), url('https://images.unsplash.com/photo-1526378721306-6b9f2cd89b2f?q=80&w=1600') center/cover; }
+#education-experience{ background: linear-gradient(180deg, rgba(60, 80, 110, 0.7), rgba(40, 30, 60, 0.85)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600') center/cover; }
+#skills{ background: linear-gradient(180deg, rgba(40, 20, 60, 0.7), rgba(10, 5, 25, 0.85)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600') center/cover; }
+#projects{ background: linear-gradient(180deg, rgba(50, 60, 40, 0.7), rgba(20, 30, 20, 0.85)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600') center/cover;}
+#contact{ background: linear-gradient(135deg, #042f31, #04373a, #021b1e); }
+footer{ background: linear-gradient(80deg, rgba(60, 40, 80, 0.7), rgba(10, 10, 20, 0.85)); }
+
+/* ======= GLOBAL ======= */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter, sans-serif;
+  background: var(--bg-dark);
+  color: #cbd5e1;
+  line-height: 1.5;
+  scroll-behavior:smooth;
+}
+h1,h2,h3,h4{font-family:Poppins, sans-serif; font-weight:700;}
+p{color:var(--muted);}
+a{text-decoration:none}
+
+/* ======= NAVIGATION ======= */
+header.site-nav{
+  position:fixed;top:0;right:0;
+  padding:1rem 2rem;
+  z-index:1000;
+}
+.nav-links{
+  display:flex;
+  gap:1rem;
+}
+.nav-links a{
+  color:#fff;font-weight:600;font-size:.95rem;
+  opacity:.85;
+  padding:.3rem .6rem;
+  border-radius:6px;
+  transition:background var(--trans),opacity var(--trans);
+}
+.nav-links a.active,
+.nav-links a:hover{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#000;opacity:1;
+}
+
+/* ======= CV BUTTON ======= */
+.cv-pill{
+  position:fixed;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+  background: rgba(45,212,191,0.1);
+  border:1px solid rgba(45,212,191,0.2);
+  color:var(--accent);
+  padding:10px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
+  z-index:1200;
+}
+.cv-pill:hover{
+  transform:translateY(-6px);
+  background:rgba(45,212,191,0.15);
+  box-shadow:0 0 10px rgba(45,212,191,0.4);
+}
+.cv-pill svg{width:18px;height:18px;}
+
+/* ======= SECTIONS ======= */
+section{
+  min-height:100vh;
+  padding:100px 20px;
+  display:flex;
+  align-items:center;
+}
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+}
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px;
+  border-radius:14px;
+  backdrop-filter:blur(6px);
+  opacity:0; transform:translateY(40px);
+}
+
+/* ======= FADE ANIMATIONS ======= */
+.fade-up{opacity:0; transform:translateY(40px); transition:all .7s ease;}
+.fade-up.visible{opacity:1; transform:translateY(0);}
+
+/* ======= HOME ======= */
+.home-inner{text-align:center}
+.home-title{font-size:2.4rem;color:var(--accent);}
+.home-sub{max-width:800px;margin:auto;margin-bottom:18px;}
+
+/* ======= ABOUT ======= */
+#about .card p{margin-bottom:12px;}
+
+/* ======= EDU & EXP ======= */
+.edu-exp-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.edu-section,.exp-section{display:flex;flex-direction:column;gap:20px;}
+.edu-item,.exp-item{
+  background:rgba(255,255,255,0.04);
+  padding:16px;border-radius:10px;
+  position:relative;
+  transition:transform .3s ease;
+}
+.edu-item:hover .extra,
+.exp-item:hover .extra{opacity:1;max-height:200px;}
+.extra{
+  opacity:0;max-height:0;overflow:hidden;
+  transition:opacity .3s ease,max-height .3s ease;
+  font-size:.9rem;color:var(--muted);margin-top:6px;
+}
+
+/* ======= SKILLS ======= */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.skill-box{background:rgba(255,255,255,0.04);padding:16px;border-radius:10px;}
+.skill-line{display:flex;justify-content:space-between;margin-bottom:6px;}
+
+/* ======= PROJECTS ======= */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.project{background:rgba(255,255,255,0.04);padding:16px;border-radius:10px;transition:transform .3s ease;}
+.project:hover{transform:translateY(-5px);}
+
+/* ======= CONTACT ======= */
+.contact-container{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;}
+.contact-info{text-align:center;}
+.contact-info img{width:120px;height:120px;border-radius:50%;margin-bottom:10px;}
+.contact-icons{display:flex;justify-content:center;gap:12px;margin-top:10px;}
+.contact-icons a{color:white;font-size:1.5rem;transition:transform .3s ease;}
+.contact-icons a:hover{transform:scale(1.2);}
+form .field{display:flex;flex-direction:column;margin-bottom:12px;}
+form input,form textarea,form select{
+  background:rgba(255,255,255,0.08);
+  border:none;padding:10px;border-radius:8px;color:white;
+}
+form select option{background:#0f172a;color:white;}
+button.btn-primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border:none;padding:12px 16px;border-radius:10px;
+  font-weight:700;cursor:pointer;color:#000;
+  transition:opacity .3s ease;
+}
+button.btn-primary:hover{opacity:.8;}
+
+/* ======= FOOTER ======= */
+footer{
+  padding:15px;text-align:center;
+  color:#cbd5e1;
+  font-size:.9rem;
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#education-experience">Education & Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<a class="cv-pill" href="cv.pdf" download aria-label="Download CV">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</a>
+
+<main>
+<section id="home">
+  <div class="container card fade-up home-inner">
+    <h1 class="home-title">Prashid Pradhan</h1>
+    <p>BSc(Hons) Computing graduate specializing in Software Engineering & Database Systems.
+	<br>Dedicated to creating efficient, scalable software that provides innovative solutions.</p>
+    <div id="typed"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container card fade-up">
+    <h2>About</h2>
+    <p>Full-stack developer with a passion for building efficient, scalable, and user-friendly applications.</p>
+    <p>Strong background in database design, API development, and optimizing complex queries.</p>
+    <p>Proficient in translating business requirements into technical solutions and collaborating across teams.</p>
+    <p>Skilled in modern web technologies, agile workflows, and continuous integration practices.</p>
+  </div>
+</section>
+
+<section id="education-experience">
+  <div class="container fade-up">
+    <h2>Education & Experience</h2>
+    <div class="edu-exp-wrapper">
+      <div class="edu-section">
+        <h3>Education</h3>
+        <div class="edu-item"><strong>BSc (Hons) Computing</strong> — The British College<div class="extra">Major in Software Engineering & Database Systems</div></div>
+        <div class="edu-item"><strong>HSEB</strong> — SOS Hermann Gmeiner<div class="extra">Higher Secondary level - Management</div></div>
+		 <div class="edu-item"><strong>SLC</strong> — Vidhya Sagar English School<div class="extra">Secondary school level</div></div>
+      </div>
+      <div class="exp-section">
+        <h3>Experience</h3>
+        <div class="exp-item"><strong>Image Annotator & AI Data Trainer</strong> — CloudFactory<div class="extra">Enhanced dataset quality for AI projects</div></div>
+        <div class="exp-item"><strong>Freelance Designer</strong> — GauleTech<div class="extra">Designed Logos, Pamphlets, and Leaflets.</div></div>
+		<div class="exp-item"><strong>Intern App development</strong> — Professional Computer System (PCS)<div class="extra">ASP.NET Webapp projects, gaining hands-on experience</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container fade-up">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-box"><h4>Programming Languages</h4>
+	  <div class="skill-line"><span>Python</span><span>★★★★★</span></div>
+	  <div class="skill-line"><span>JavaScript</span><span>★★★★☆</span></div>
+	  <div class="skill-line"><span>HTML/CSS(Bootstrap & Gumby)</span><span>★★★★☆</span></div>
+	</div>
+      <div class="skill-box"><h4>Tools</h4>
+	  <div class="skill-line"><span>Git / Github</span><span>★★★★★</span></div>
+	  <div class="skill-line"><span>Visual Studio Code</span><span>★★★☆☆</span></div>
+	   <div class="skill-line"><span>Aptana</span><span>★★★☆☆</span></div>
+	   <div class="skill-line"><span>Eclipse</span><span>★★★☆☆</span></div>
+	</div>
+      <div class="skill-box"><h4>Database
+	  </h4><div class="skill-line"><span>SQL/MySQL</span><span>★★★★☆</span></div>
+	  <div class="skill-line"><span>Oracle DB</span><span>★★★☆☆</span></div>
+	  <div class="skill-line"><span>Mongo DB</span><span>★★★☆☆</span></div>
+	</div>
+      <div class="skill-box"><h4>Design Tools
+	  </h4><div class="skill-line"><span>Figma</span><span>★★★★☆</span></div>
+	  <div class="skill-line"><span>Adobe XD</span><span>★★★☆☆</span></div>
+	   <div class="skill-line"><span>Adobe Photoshop</span><span>★★★☆☆</span></div>
+	    <div class="skill-line"><span>Adobe Illustrator</span><span>★★★☆☆</span></div>
+	  </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container fade-up">
+    <h2>Projects</h2>
+    <div class="projects-grid" id="projects-grid">
+      <div class="project"><h4>Inventory Management System</h4><p>Tracks products, orders, and deliveries with real-time stock updates.</p></div>
+      <div class="project"><h4>Task Scheduling API</h4><p>Backend API for automated job scheduling using Node.js and PostgreSQL.</p></div>
+      <div class="project"><h4>Portfolio Website</h4><p>Responsive personal site showcasing projects and resume.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact-container fade-up">
+    <div class="contact-info">
+      <img src="https://api.dicebear.com/6.x/bottts-neutral/svg?seed=JobHunter" alt="Profile">
+     
+      <div class="contact-icons">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div>
+      <form id="contact-form">
+        <div class="field"><label>Name</label><input type="text" name="from_name" required></div>
+        <div class="field"><label>Email</label><input type="email" name="reply_to" required></div>
+        <div class="field"><label>Reason</label><select name="reason"><option>Job Offer</option><option>Collaboration</option><option>General</option></select></div>
+        <div class="field"><label>Message</label><textarea name="message" rows="4" required></textarea></div>
+        <button class="btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>© 2025 Prashid Pradhan. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+emailjs.init('YOUR_EMAILJS_USER_ID');
+
+// Typed effect
+(function(){
+  const spot=document.getElementById('typed');
+  const phrases=['reliable backends','scalable databases','full-stack solutions','optimized SQL'];
+  const staticText='Passionate about ';
+  let pi=0;
+  function type(){let i=0;function step(){if(i<=phrases[pi].length){spot.textContent=staticText+phrases[pi].slice(0,i);i++;setTimeout(step,100);}else{setTimeout(erase,1400);}}step();}
+  function erase(){if(spot.textContent.length>staticText.length){spot.textContent=spot.textContent.slice(0,-1);setTimeout(erase,40);}else{pi=(pi+1)%phrases.length;type();}}
+  type();
+})();
+
+// Scrollspy
+(function(){
+  const links=document.querySelectorAll('.nav-links a');
+  const sections=document.querySelectorAll('main section');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
+    });
+  },{threshold:0.6});
+  sections.forEach(s=>obs.observe(s));
+})();
+
+// Fade-up animations
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+/* Uncomment to fetch GitHub projects
+(function(){
+  const user='prashidpradhan';
+  fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=6`)
+  .then(r=>r.json())
+  .then(repos=>{
+    const grid=document.getElementById('projects-grid');
+    grid.innerHTML='';
+    repos.forEach(repo=>{
+      const div=document.createElement('div');
+      div.className='project';
+      div.innerHTML=`<h4>${repo.name}</h4><p>${repo.description||'No description.'}</p>`;
+      grid.appendChild(div);
+    });
+  });
+})();
+*/
+</script>
+</body>
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prashid Pradhan | Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  
+    <style>
+      /* ===== PRELOADER STYLES  ===== */
+	   #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Preloader Text Styling */
+    #preloader h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      font-family: 'Poppins', sans-serif;
+      background: var(--text-gradient, linear-gradient(90deg, #5b5b5b, #444444, #222222));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400% 400%;
+      animation: gradientFlow 6s ease infinite;
+    }
+
+    /* Morphing Grid Container */
+    .morphing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px; /* Adjust the gap between squares */
+      width: 60px; /* Adjust the overall size of the loader */
+      height: 60px;
+      margin-top: 20px;
+    }
+
+    /* Styles for each individual square */
+    .morphing-grid span {
+      width: 25px; /* Adjust the size of the individual squares */
+      height: 25px;
+      transform-origin: 50% 50%; /* Set the rotation origin to the center */
+      animation: morph-in 2.5s ease-in-out infinite, square-gradient-flow 4s ease-in-out infinite; /* Added a new animation */
+
+      /* --- ADDED FOR THE FLOWING GRADIENT EFFECT --- */
+      /* Defines the gradient colors, with a larger background-size to allow for movement. */
+      background: var(--square-gradient, linear-gradient(90deg, #777, #ccc, #777));
+      background-size: 200% 100%;
+    }
+
+    /* This is the key to the unique morphing effect. Each square has a different animation delay. */
+    .morphing-grid span:nth-child(2) { animation-delay: 0.2s, 0.4s; }
+    .morphing-grid span:nth-child(3) { animation-delay: 0.4s, 0.6s; }
+    .morphing-grid span:nth-child(4) { animation-delay: 0.6s, 0.8s; }
+
+    /* Keyframes for the text gradient animation */
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* The core morphing animation */
+    @keyframes morph-in {
+      0%, 100% { transform: scale(1) rotate(0deg); border-radius: 0; }
+      25% { transform: scale(0.8) rotate(90deg); border-radius: 10%; }
+      50% { transform: scale(1.1) rotate(180deg); border-radius: 50%; } /* Morph into a circle */
+      75% { transform: scale(0.8) rotate(270deg); border-radius: 10%; }
+    }
+
+    /* The new keyframes for the gradient flow on the squares */
+    @keyframes square-gradient-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+	 /* --- Global Styles & Body Reset --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #0d1117;
+        color: #e6edf3;
+        scroll-behavior: smooth;
+      }
+      section {
+        min-height: 100vh;
+        padding: 8rem 8% 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* --- Section Headers --- */
+      h2.section-title {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 5rem;
+        font-weight: 700;
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientFlow 6s ease infinite;
+        opacity: 0;
+        transform: translateY(-40px);
+        transition: all 0.8s ease;
+      }
+      h2.section-title.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #about h2 {
+        background-image: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff);
+      }
+      #edu-exp h2 {
+        background-image: linear-gradient(270deg, #f7971e, #ffd200, #f7971e);
+      }
+      #skills h2 {
+        background-image: linear-gradient(270deg, #8e2de2, #4a00e0, #8e2de2);
+      }
+      #projects h2 {
+        background-image: linear-gradient(270deg, #43cea2, #185a9d, #43cea2);
+      }
+      #contact h2 {
+        background-image: linear-gradient(270deg, #ff512f, #dd2476, #ff512f);
+      }
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* --- Navbar --- */
+      header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        padding: 0.8rem 2rem;
+        background: rgba(13, 17, 23, 0.5);
+        backdrop-filter: blur(8px);
+        border-radius: 0 0 0 15px;
+        z-index: 1000;
+      }
+      header a {
+        color: #e6edf3;
+        text-decoration: none;
+        font-size: 0.95rem;
+        position: relative;
+        padding-bottom: 3px;
+      }
+      header a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: cyan;
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+      header a:hover::after,
+      header a.active::after {
+        transform: scaleX(1);
+      }
+
+      /* --- Home Section --- */
+      #home {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+          url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600");
+        background-size: cover;
+        background-position: center;
+      }
+      #home .content {
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        backdrop-filter: blur(6px);
+      }
+      #home h1 {
+        font-size: 3.8rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(270deg, cyan, teal, purple);
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientFlow 6s infinite;
+      }
+      #home p {
+        font-size: 1.3rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+      #home #typed {
+        color: #7dacbd; /* A shade of neon green */
+      }
+      #home #typedtext {
+        color: #367b7d;
+        font-weight: bold;
+      }
+
+      /* --- About Section --- */
+      #about {
+        background: linear-gradient(
+            160deg,
+            rgba(40, 20, 60, 0.7),
+            rgba(10, 5, 25, 0.85)
+          ),
+          url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1600");
+        background-size: cover;
+        background-position: center;
+      }
+      #about .content {
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        padding: 2.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        backdrop-filter: blur(6px);
+      }
+      #about p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      /* --- CV Pill Button --- */
+      .cv-pill {
+        position: fixed;
+        right: 2rem;
+        bottom: 2rem;
+        width: 40px;
+        height: 40px;
+        border: 2px solid teal;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: teal;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .cv-pill:hover {
+        background: teal;
+        color: #0d1117;
+      }
+      .cv-pill .tooltip {
+        visibility: hidden;
+        position: absolute;
+        bottom: 55px;
+        right: 0;
+        background: #111;
+        color: #fff;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .cv-pill:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      /* --- Education & Experience Section --- */
+      #edu-exp {
+        background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
+          url("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80");
+      }
+      .edu-exp-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+      .edu h3,
+      .exp h3 {
+        margin-bottom: 1rem;
+        color: cyan;
+        text-align: center;
+      }
+      .edu-card,
+      .exp-card {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 1.2rem;
+        border-radius: 12px;
+        margin-bottom: 1.2rem;
+        transition: transform 0.3s, background 0.3s;
+      }
+      .edu-card:hover,
+      .exp-card:hover {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .edu-card h4,
+      .exp-card h4 {
+        color: cyan;
+      }
+      .hidden-info {
+        display: none;
+        font-size: 0.9rem;
+        color: #bbb;
+      }
+      .edu-card:hover .hidden-info,
+      .exp-card:hover .hidden-info {
+        display: block;
+      }
+
+      /* --- Skills Section --- */
+      #skills {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+          url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80");
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .skill-category h3 {
+        margin-bottom: 1rem;
+        color: teal;
+      }
+      .skill-category ul {
+        list-style: none;
+      }
+      .skill-category li {
+        margin-bottom: 0.5rem;
+      }
+      .stars {
+        color: gold;
+        margin-left: 8px;
+        text-shadow: 0 0 4px #000;
+      }
+
+      /* --- Projects Section --- */
+      #projects {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+          url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 10px;
+        transition: transform 0.3s, background 0.3s;
+      }
+      .project-card:hover {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .project-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 6px;
+        background: teal;
+        color: #0d1117;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .project-btn:hover {
+        background: cyan;
+        color: #111;
+        transform: translateY(-2px);
+      }
+
+      /* --- Contact Section --- */
+      #contact {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      }
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .contact-info {
+        text-align: center;
+      }
+      .contact-info img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: 3px solid cyan;
+        margin-bottom: 1rem;
+      }
+      .contact-info a {
+        color: white;
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+      }
+      form {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2rem;
+        border-radius: 12px;
+      }
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-bottom: 2px solid teal;
+        background: transparent;
+        color: #e6edf3;
+        outline: none;
+      }
+      /* Labels float EXCEPT Reason */
+      .form-group label {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+        pointer-events: none;
+        transition: 0.2s;
+      }
+      .form-group input:focus + label,
+      .form-group input:valid + label,
+      .form-group textarea:focus + label,
+      .form-group textarea:valid + label {
+        top: -12px;
+        left: 5px;
+        font-size: 0.8rem;
+        color: cyan;
+      }
+      select + label {
+        top: -12px !important;
+        transform: none !important;
+      } /* Fix for Reason */
+      select option {
+        color: black;
+      }
+      button {
+        padding: 0.8rem 1.2rem;
+        border: none;
+        border-radius: 5px;
+        background: cyan;
+        color: #0d1117;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: teal;
+        transform: scale(1.05);
+      }
+      .warning-text {
+        font-size: 0.8rem;
+        color: #ff6b6b;
+        text-align: center;
+        margin-top: 1rem;
+        opacity: 0.85;
+        animation: fadeBlink 3s infinite;
+      }
+      @keyframes fadeBlink {
+        0%,
+        100% {
+          opacity: 0.85;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      /* --- Footer --- */
+      footer {
+        background: linear-gradient(-45deg, #000428, #004e92, #1a2980, #0f2027);
+        background-size: 300% 300%;
+        animation: gradientFlow 10s infinite;
+        text-align: center;
+        padding: 1rem;
+        color: #bbb;
+      }
+      footer .old-version {
+        margin-left: 10px;
+        position: relative;
+        cursor: pointer;
+        color: white;
+      }
+      footer .old-version .tooltip {
+        visibility: hidden;
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #111;
+        color: #fff;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      footer .old-version:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      /* --- Animation visibility classes --- */
+      .hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+      .show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+  <!-- ===== PRELOADER ===== -->
+<div id="preloader">
+  <h1>PRsTrOpHY</h1>
+  <div class="morphing-grid">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+</div>
+    <header>
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#edu-exp">Education & Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </header>
+
+    <section id="home">
+      <div class="content hidden">
+        <h1>Prashid Pradhan</h1>
+        <p>
+          BSc(Hons) Computing graduate with a specialization in Software
+          Engineering and Database Systems. I'm dedicated to creating efficient,
+          scalable software that provides innovative solutions.
+        </p>
+        <p id="typedtext">
+          I’m passionate about <span id="typed"></span>
+        </p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title hidden">About</h2>
+      <div class="content hidden">
+        <p>
+          I am a BSc Computing graduate with a strong foundation in software
+          engineering and database management. During my academic journey, I
+          specialized in Software & Database Systems, which helped me build
+          expertise in backend development, SQL optimization, and system design.
+        </p>
+        <p>
+          My curiosity for technology extends beyond coding. I’ve worked in AI
+          data training, image annotation, and collaborative tech projects,
+          contributing to machine learning development. I thrive in
+          problem-solving and always enjoy learning new frameworks, tools, and
+          technologies that push the boundaries of innovation.
+        </p>
+      </div>
+    </section>
+
+    <section id="edu-exp">
+      <h2 class="section-title hidden">Education & Experience</h2>
+      <div class="edu-exp-container">
+        <div class="edu hidden">
+          <h3>Education</h3>
+          <div class="edu-card">
+            <h4>BSc Computing – The British College</h4>
+            <p>2017</p>
+            <div class="hidden-info">Major: Software & Database Systems</div>
+          </div>
+          <div class="edu-card">
+            <h4>HSEB – SOS Hermann Gmeiner</h4>
+            <p>2013</p>
+            <div class="hidden-info">Higher Secondary Level - Management</div>
+          </div>
+          <div class="edu-card">
+            <h4>SLC – Vidhya Sagar School</h4>
+            <p>2011</p>
+            <div class="hidden-info">Secondary School level</div>
+          </div>
+        </div>
+        <div class="exp hidden">
+          <h3>Experience</h3>
+          <div class="exp-card">
+            <h4>Image Annotator, AI Trainer & Data Specialist – CloudFactory</h4>
+            <p>2019–Present</p>
+            <div class="hidden-info">
+              Ensuring high-quality labeled datasets for AI projects.
+            </div>
+          </div>
+          <div class="exp-card">
+            <h4>Freelance Graphic Designer - GauleTech</h4>
+            <p>2021–2023</p>
+            <div class="hidden-info">
+              Designed Logos, Pamphlets, and Leaflets
+            </div>
+          </div>
+          <div class="exp-card">
+            <h4>Intern App development - Professional Computer System (PCS)</h4>
+            <p>2017 – 2018</p>
+            <div class="hidden-info">
+              ASP.NET Webapp projects, gained hands-on experience
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title hidden">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category hidden">
+          <h3>Programming</h3>
+          <ul>
+            <li>Python <span class="stars">★★★★★</span></li>
+            <li>JavaScript <span class="stars">★★★★☆</span></li>
+            <li>Java <span class="stars">★★★☆☆</span></li>
+          </ul>
+        </div>
+        <div class="skill-category hidden">
+          <h3>Databases</h3>
+          <ul>
+            <li>SQL <span class="stars">★★★★★</span></li>
+            <li>MongoDB <span class="stars">★★★★☆</span></li>
+            <li>PostgreSQL <span class="stars">★★★★☆</span></li>
+          </ul>
+        </div>
+        <div class="skill-category hidden">
+          <h3>Design</h3>
+          <ul>
+            <li>Figma <span class="stars">★★★★☆</span></li>
+            <li>Adobe XD <span class="stars">★★★☆☆</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title hidden">Projects</h2>
+      <div class="projects-grid" id="projects-grid">
+        <div class="project-card hidden">
+          <h4>Inventory Management</h4>
+          <p>Web-based inventory with SQL integration.</p>
+          <a href="#" class="project-btn">View Project</a>
+        </div>
+        <div class="project-card hidden">
+          <h4>Portfolio Website</h4>
+          <p>Responsive portfolio with animations.</p>
+          <a href="#" class="project-btn">View Project</a>
+        </div>
+        <div class="project-card hidden">
+          <h4>AI Annotation Tool</h4>
+          <p>Custom tool to label datasets for ML pipelines.</p>
+          <a href="#" class="project-btn">View Project</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title hidden">Contact</h2>
+      <div class="contact-container">
+        <div class="contact-info hidden">
+          <img src="https://avatar.iran.liara.run/public/41" alt="Profile" />
+          <div>
+            <a href="https://github.com/prstrophy" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/prashid-pradhan-b29160b5/"
+              target="_blank"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+        <form id="contact-form" class="hidden">
+          <div class="form-group">
+            <input type="text" name="name" required />
+            <label>Your Name</label>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" required />
+            <label>Your Email</label>
+          </div>
+          <div class="form-group">
+            <select name="reason" required>
+              <option value="" disabled selected>
+                ---------- Select Reason -------------
+              </option>
+              <option>Job Opportunity</option>
+              <option>General Inquiry</option>
+              <option>Other</option>
+            </select>
+            <label>Reason</label>
+          </div>
+          <div class="form-group">
+            <textarea name="message" required></textarea>
+            <label>Your Message</label>
+          </div>
+          <button type="submit">Send</button>
+          <p class="warning-text">
+            *Send Message not working correctly due to missing implementation of
+            JsEmail
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        © 2020 Prashid Pradhan All Rights Reserved.
+        <a href="old.html" class="old-version" target="_blank"
+          ><i class="fas fa-history"></i
+          ><span class="tooltip">Old Version</span></a
+        >
+      </p>
+    </footer>
+
+    <div class="cv-pill">
+      <a href="cv.pdf" class="cv-pill" target="_blank">
+        <i class="fas fa-file-download"></i
+        ><span class="tooltip">Download CV</span>
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+  /* ===== PRELOADER DYNAMIC GRADIENT & FADE OUT ===== */
+    const getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+    
+    const preloader = document.getElementById("preloader");
+    
+    // --- DYNAMIC GRADIENT APPLICATION ---
+    // Sets the random colors for the text gradient.
+    const textGradient = `linear-gradient(90deg, ${getRandomColor()}, ${getRandomColor()}, ${getRandomColor()})`;
+    preloader.style.setProperty('--text-gradient', textGradient);
+  
+    // Sets a random gradient for the morphing squares.
+    const squareGradient = `linear-gradient(90deg, ${getRandomColor()}, ${getRandomColor()})`;
+    preloader.style.setProperty('--square-gradient', squareGradient);
+
+    // --- FADE OUT AFTER PAGE LOAD ---
+    window.addEventListener("load", () => {
+      const fadeOutDelay = 2000; // Adjust this value to change the fade-out delay.
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+      }, fadeOutDelay);
+    });
+
+      /* --- Typed.js in Home Section --- */
+      new Typed("#typed", {
+        strings: [
+          "App Development.",
+          "Database Systems.",
+          "Designing.",
+          "Data Training.",
+          "Technology.",
+          "Gaming.",
+        ],
+        typeSpeed: 80,
+        backSpeed: 40,
+        loop: true,
+      });
+
+      /* --- Reveal animations on scroll --- */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("show");
+          });
+        },
+        { threshold: 0.2 }
+      );
+      document.querySelectorAll(".hidden").forEach((el) => observer.observe(el));
+
+      /* --- Navbar active section underline --- */
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("header a");
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((sec) => {
+          const top = window.scrollY;
+          const offset = sec.offsetTop - 150;
+          const height = sec.offsetHeight;
+          if (top >= offset && top < offset + height) {
+            current = sec.getAttribute("id");
+          }
+        });
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      /* --- Contact Form Submit with EmailJS --- */
+      /*
+       * IMPORTANT: The following is a placeholder for EmailJS integration.
+       * 1. Sign up at https://www.emailjs.com
+       * 2. Create service, template & get public key.
+       * 3. Replace YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, YOUR_PUBLIC_KEY
+       */
+      document.getElementById("contact-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        // TODO: Replace with EmailJS integration
+        // Example:
+        // emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
+        //   .then(() => alert("Message sent!"), (err) => alert("Error: " + err));
+        alert("This would send email using EmailJS.");
+      });
+
+      /* --- OPTIONAL: Fetch GitHub Projects --- */
+      /*
+       * To enable this feature:
+       * 1. Uncomment the code block below.
+       * 2. Replace YOUR_GITHUB_USERNAME with your actual GitHub username.
+       * 3. Remove the dummy project cards from the HTML above.
+       */
+      /*
+      fetch("https://api.github.com/users/YOUR_GITHUB_USERNAME/repos")
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("projects-grid");
+          container.innerHTML = ""; // Remove dummy projects
+          data.forEach(repo => {
+            const card = document.createElement("div");
+            card.className = "project-card hidden";
+            card.innerHTML = `
+              <h4>${repo.name}</h4>
+              <p>${repo.description || "No description"}</p>
+              <a href="${repo.html_url}" target="_blank" class="project-btn">View Project</a>`;
+            container.appendChild(card);
+          });
+          // Re-apply observer to the new elements
+          document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+        });
+      */
+    </script>
+  </body>
+</html>

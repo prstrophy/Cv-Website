@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prashid Pradhan | Computing CV</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    scroll-behavior: smooth;
+  }
+
+  a {
+    color: #58a6ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid #30363d;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #58a6ff;
+    margin: 0;
+    user-select: none;
+  }
+  nav a {
+    margin-left: 1.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+  }
+  nav a.active,
+  nav a:hover {
+    color: #58a6ff;
+  }
+  nav a.active::after,
+  nav a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #58a6ff;
+    border-radius: 4px;
+  }
+
+  /* Sections */
+  section {
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+  }
+  #home {
+    background:
+      linear-gradient(135deg, rgba(13,17,23,0.9), rgba(31,41,55,0.9)),
+      url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1470&q=80');
+    color: #58a6ff;
+    text-align: center;
+  }
+  #home h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  #home p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+ #typed-text {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: #9eceff;
+  min-height: 1.8rem;
+  text-align: center; /* Add this to center the entire block */
+}
+
+#typed-text span {
+  font-weight: 700;
+  color: #58a6ff; /* A different color might look nice */
+}
+
+  #about {
+    background:
+      linear-gradient(135deg, rgba(22,27,34,0.9), rgba(13,17,23,0.9)),
+      url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1470&q=80');
+		display: flex;
+		flex-direction: column;
+		align-items: center;	  
+  }
+  #about h2 {
+    color: #58a6ff;
+    margin-bottom: 1rem;
+	text-align: center;
+  }
+  #about p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 850px;
+	 margin: 0;
+  text-align: justify;
+  }
+
+  /* Download CV Button */
+  .download-btn {
+    display: flex; /* Changed from inline-flex */
+  align-items: center;
+  justify-content: center; 
+  gap: 8px;
+  margin: 2rem auto 0 auto; 
+ 
+    padding: 0.65rem 1.8rem;
+    border: 2.5px solid #58a6ff;
+    border-radius: 35px;
+    font-weight: 700;
+	max-width:220px;
+    font-size: 1.1rem;
+    background: transparent;
+    color: #58a6ff;
+	
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+    user-select: none;
+    text-decoration: none;
+  }
+  .download-btn svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+  }
+  .download-btn:hover,
+  .download-btn:focus {
+    background-color: #58a6ff;
+    color: #0d1117;
+    box-shadow: 0 0 15px #58a6ff;
+    outline: none;
+  }
+
+  /* Education & Experience Tab Nav */
+  .tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .tab-nav button {
+    background: transparent;
+    border: 2px solid #58a6ff;
+    color: #58a6ff;
+    padding: 0.5rem 1.8rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    min-width: 150px;
+    text-align: center;
+  }
+  .tab-nav button.active,
+  .tab-nav button:hover {
+    background-color: #58a6ff;
+    color: #0d1117;
+    box-shadow: 0 0 15px #58a6ff;
+    outline: none;
+  }
+
+  /* Tab content */
+  .tab-content {
+    background: rgba(13,17,23,0.85);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(88,166,255,0.3);
+    color: #c9d1d9;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  /* Timeline style */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+	max-width:1200px;
+	width:100%;
+    border-left: 3px solid #58a6ff;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 20px;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-item::before {
+
+    position: absolute;
+    left: -11px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #0d1117;
+    border: 3px solid #58a6ff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #58a6ff;
+    transition: background-color 0.3s ease;
+  }
+  .timeline-item:hover::before,
+  .timeline-item:focus-within::before {
+    background-color: #58a6ff;
+  }
+  .timeline-item h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.4rem;
+    color: #58a6ff;
+  }
+  .timeline-item p {
+    margin: 0.2rem 0;
+  }
+
+  /* Skills */
+  #skills {
+    background:
+      linear-gradient(135deg, rgba(13,17,23,0.9), rgba(17,24,39,0.9)),
+      url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1470&q=80');
+  }
+  #skills h2 {
+    color: #58a6ff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .skill-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .skill-group {
+    flex: 1 1 220px;
+    min-width: 220px;
+    background: rgba(22,27,34,0.85);
+    padding: 1.6rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(88,166,255,0.3);
+  }
+  .skill-group h3 {
+    margin-top: 0;
+    color: #58a6ff;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .skill {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    font-size: 1.1rem;
+  }
+  .stars {
+    color: gold;
+    font-size: 1.2rem;
+  }
+
+  /* Projects */
+  #projects {
+    background:
+      linear-gradient(135deg, rgba(31,41,55,0.9), rgba(13,17,23,0.9)),
+      url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1470&q=80');
+  }
+  #projects h2 {
+    color: #58a6ff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .project-card {
+    background: rgba(22,27,34,0.85);
+    padding: 1.2rem 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(88,166,255,0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(88,166,255,0.7);
+    outline: none;
+  }
+  .project-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    color: #58a6ff;
+  }
+  .project-card p {
+    flex-grow: 1;
+  }
+  .project-card a {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #9eceff;
+    align-self: flex-start;
+  }
+  .project-card a:hover {
+    text-decoration: underline;
+  }
+
+  /* Contact */
+  #contact {
+    background:
+      linear-gradient(135deg, rgba(22,27,34,0.9), rgba(13,17,23,0.9)),
+      url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80');
+    padding-bottom: 6rem;
+  }
+  #contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(13,17,23,0.9);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(88,166,255,0.4);
+  }
+  #contact h2 {
+    color: #58a6ff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  #contact label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  #contact input,
+  #contact textarea {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-top: 0.4rem;
+    border-radius: 8px;
+    border: 1.5px solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+  }
+  #contact input:focus,
+  #contact textarea:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 8px #58a6ff;
+  }
+  #contact button {
+    margin-top: 1.8rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #0d1117;
+    background-color: #58a6ff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #contact button:hover,
+  #contact button:focus {
+    background-color: #3b74d1;
+    outline: none;
+  }
+  #form-status {
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    min-height: 1.5rem;
+    color: #9eceff;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #161b22;
+    color: #8b949e;
+    padding: 1.2rem 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+  footer a {
+    color: #58a6ff;
+    margin: 0 0.5rem;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.9rem;
+    }
+    #home h2 {
+      font-size: 2.2rem;
+    }
+    #skills .skill-groups {
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prashid Pradhan</h1>
+  <nav aria-label="Primary navigation">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#education-experience">Education & Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home" tabindex="0" aria-label="Home introduction section">
+  <h2>Hello, I'm Prashid Pradhan</h2>
+  <p>BSc(Hons) Computing graduate with a specialization in Software Engineering and Database Systems. 
+  I'm dedicated to creating efficient, scalable software that provides innovative solutions.</p>
+ 
+  
+  <div id="typed-text" aria-live="polite" aria-atomic="true">
+</div>
+</section>
+
+<section id="about" tabindex="0" aria-label="About section">
+  <h2>About Me</h2>
+  <p>
+    I am a dedicated computing graduate with a strong focus on software development and database management.
+    Throughout my academic career and professional experience, I have honed skills in multiple programming languages,
+    software frameworks, and modern database technologies. I enjoy collaborating in teams and have a passion
+    for continuous learning and innovation.
+  </p>
+  <p>
+    My interests extend to AI data training, cloud computing, and creating user-friendly, performant applications.
+    I have worked on diverse projects, from RESTful APIs to full-stack web applications, always emphasizing clean
+    code and maintainability.
+  </p>
+  <a href="cv.pdf" class="download-btn" download aria-label="Download CV">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    Download CV
+  </a>
+</section>
+
+<section id="education-experience" tabindex="0" aria-label="Education and Experience section">
+  <h2>Education & Experience</h2>
+  <div class="tab-nav" role="tablist" aria-label="Education and Experience Tabs">
+    <button class="active" role="tab" aria-selected="true" aria-controls="education-tab" id="education-tab-btn" tabindex="0">Education</button>
+    <button role="tab" aria-selected="false" aria-controls="experience-tab" id="experience-tab-btn" tabindex="-1">Experience</button>
+  </div>
+
+  <div id="education-tab" class="tab-content timeline" role="tabpanel" aria-labelledby="education-tab-btn">
+    <div class="timeline-item" tabindex="0">
+     <h3>Bachelor's Degree</h3>
+      <p><strong>Degree:</strong> Bsc(Hons) Computing</p>
+      <p><strong>Institution:</strong> The British College</p>
+	  <p><strong>Location:</strong> Kathmandu, Nepal</p>
+      <p><strong>Year:</strong> 2017</p>
+    </div>
+    <div class="timeline-item" tabindex="0">
+     <h3>Higher Secondary Education Board Exam</h3>
+      <p><strong>School:</strong> SOS Hermann Gmeiner </p>
+	   <p><strong>Location:</strong> Shreekhandapur, Nepal</p>
+      <p><strong>Year:</strong> 2013</p>
+    </div>
+    <div class="timeline-item" tabindex="0">
+      <h3>Secondary Education Examination (SEE)</h3>
+      <p><strong>School:</strong> Vidhya Sagar  School</p>
+	   <p><strong>Location:</strong> Banepa, Nepal</p>
+      <p><strong>Year:</strong> 2011</p>
+    </div>
+  </div>
+
+ <div id="experience-tab" class="tab-content timeline" role="tabpanel" aria-labelledby="experience-tab-btn" hidden> 
+    <div class="timeline-item" tabindex="0">
+      <h3>Image Annotator & AI Data Trainer</h3>
+      <p><strong>Company:</strong> CloudFactory</p>
+      <p><strong>Duration:</strong> 2019 - Present</p>
+    </div>
+    <div class="timeline-item" tabindex="0">
+      <h3>Freelance Graphic Designer</h3>
+      <p><strong>Company:</strong> Gaule-Tech</p>
+      <p><strong>Duration:</strong> 2021 - 2023</p>
+    </div>
+    <div class="timeline-item" tabindex="0">
+      <h3>Intern Developer(ASP.NET)</h3>
+      <p><strong>Company:</strong>  PROFESSIONAL COMPUTER SYSTEM (PCS)</p>
+      <p><strong>Duration:</strong> 2017 - 2018</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" tabindex="0" aria-label="Skills section">
+  <h2>Skills</h2>
+<div class="skill-groups" role="list">
+    <div class="skill-group" role="listitem" aria-label="Programming Languages">
+        <h3>Programming Languages</h3>
+        <div class="skill"><span>Python</span><span class="stars" aria-label="5 out of 5 stars">★★☆☆☆</span></div>
+        <div class="skill"><span>JavaScript</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>Java</span><span class="stars" aria-label="4 out of 5 stars">★★☆☆☆</span></div>
+        <div class="skill"><span>SQL</span><span class="stars" aria-label="5 out of 5 stars">★★★★☆</span></div>
+		  <div class="skill"><span>HTML / CSS (Bootstrap & Gumby)</span><span class="stars" aria-label="4 out of 5 stars">★★★★★</span></div>
+		   <div class="skill"><span>C++/C#</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+    </div>
+    <div class="skill-group" role="listitem" aria-label=Tools">
+        <h3> Tools</h3>
+		<div class="skill"><span>Aptana</span><span class="stars" aria-label="5 out of 5 stars">★★★☆☆</span></div>
+		   <div class="skill"><span>Eclipse</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>Git & GitHub</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+        <div class="skill"><span>Visual Studio Code</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>XAMPP/WAMPP</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
+    </div>
+    <div class="skill-group" role="listitem" aria-label="Databases">
+        <h3>Databases</h3>
+        <div class="skill"><span>MongoDB</span><span class="stars" aria-label="5 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>MySQL</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+        <div class="skill"><span>Oracle Database</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
+    </div>
+    <div class="skill-group" role="listitem" aria-label="Design & Creative Tools">
+        <h3>Design & Creative Tools</h3>
+        <div class="skill"><span>Adobe XD</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>Photoshop</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+        <div class="skill"><span>Illustrator</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+    </div>
+</section>
+
+<section id="projects" tabindex="0" aria-label="Projects section">
+  <h2>Projects</h2>
+  <div class="project-container" aria-live="polite" aria-relevant="additions">
+    <!-- Dummy projects -->
+    <article class="project-card" tabindex="0">
+      <h3>Inventory Management System</h3>
+      <p>A full-stack application for managing warehouse inventory with real-time updates and reporting.</p>
+      <a href="https://github.com/prashidpradhan/inventory-management" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+    <article class="project-card" tabindex="0">
+      <h3>Personal Portfolio</h3>
+      <p>Responsive portfolio website showcasing projects and skills with interactive UI effects.</p>
+      <a href="https://github.com/prashidpradhan/portfolio" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+    <article class="project-card" tabindex="0">
+      <h3>Chat Application</h3>
+      <p>Real-time chat app built with React and Socket.io supporting private and group chats.</p>
+      <a href="https://github.com/prashidpradhan/chat-app" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+    <article class="project-card" tabindex="0">
+      <h3>Task Tracker API</h3>
+      <p>RESTful API to track daily tasks with user authentication and data persistence.</p>
+      <a href="https://github.com/prashidpradhan/task-tracker-api" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+    <article class="project-card" tabindex="0">
+      <h3>Weather Dashboard</h3>
+      <p>Web dashboard displaying real-time weather info using public APIs and chart visualizations.</p>
+      <a href="https://github.com/prashidpradhan/weather-dashboard" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+    <article class="project-card" tabindex="0">
+      <h3>Blog CMS</h3>
+      <p>Content management system for blogs with admin panel and user commenting features.</p>
+      <a href="https://github.com/prashidpradhan/blog-cms" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+  </div>
+</section>
+
+<section id="contact" tabindex="0" aria-label="Contact section">
+  <h2>Contact Me</h2>
+  <form id="contact-form" aria-describedby="form-status" aria-live="polite" aria-relevant="additions" novalidate>
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" placeholder="Your full name" required aria-required="true" />
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="you@example.com" required aria-required="true" />
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required aria-required="true"></textarea>
+
+    <button type="submit" aria-label="Send message">Send Message</button>
+    <div id="form-status" role="alert" aria-live="assertive"></div>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Prashid Pradhan. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init('YOUR_USER_ID'); // Replace with your EmailJS user ID
+
+  // Typed Text Effect on Home Section
+ const typedText = document.getElementById('typed-text');
+const phrases = [
+	'Software',
+    'Database Systems',
+    'Data Training',
+    'Gaming',
+    'Techology '
+];
+let phraseIndex = 0;
+let letterIndex = 0;
+let typingDelay = 100;
+let erasingDelay = 50;
+let newPhraseDelay = 2000;
+
+// The static text that always stays
+const staticText = 'Passionate About ';
+
+function type() {
+    // Check if the static text is already there
+    if (!typedText.textContent.startsWith(staticText)) {
+        typedText.textContent = staticText;
+    }
+
+    // Now, append the new phrase
+    if (letterIndex < phrases[phraseIndex].length) {
+        typedText.textContent += phrases[phraseIndex].charAt(letterIndex);
+        letterIndex++;
+        setTimeout(type, typingDelay);
+    } else {
+        setTimeout(erase, newPhraseDelay);
+    }
+}
+
+function erase() {
+    // Erase the typed part, but keep the static text
+    if (typedText.textContent.length > staticText.length) {
+        typedText.textContent = typedText.textContent.slice(0, -1);
+        letterIndex--;
+        setTimeout(erase, erasingDelay);
+    } else {
+        phraseIndex++;
+        if (phraseIndex >= phrases.length) phraseIndex = 0;
+        setTimeout(type, typingDelay + 1100);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (phrases.length) {
+        // Initialize the text immediately with the first phrase
+        typedText.textContent = staticText + phrases[phraseIndex];
+        letterIndex = phrases[phraseIndex].length;
+        
+        // Start the erasing process after the initial delay
+        setTimeout(erase, newPhraseDelay);
+    }
+});
+  // Tab switching for Education & Experience
+  const tabs = document.querySelectorAll('.tab-nav button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.tabIndex = -1;
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      tab.tabIndex = 0;
+
+      tabContents.forEach(content => content.hidden = true);
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+    });
+  });
+
+  // Highlight nav based on scroll
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // EmailJS contact form submission
+  const form = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    formStatus.textContent = 'Sending message...';
+
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(() => {
+        formStatus.textContent = 'Message sent successfully!';
+        form.reset();
+      }, (err) => {
+        formStatus.textContent = 'Failed to send message. Please try again later.';
+        console.error(err);
+      });
+  });
+</script>
+</body>
+</html>

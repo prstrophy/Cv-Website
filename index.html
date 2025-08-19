@@ -1,83 +1,285 @@
-<!--Ver 1.1-->
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>cv\PRsTrOpHY</title>
-		<meta charset="utf-8">		<!--Tells the browser about the character set being used-->
-		<meta name="author" content="-">
-		<meta name="viewport" content="device-width" initial-scale=1>		<!--Specifying the viewport and setting the device-width for responsiveness-->
-		<meta rel="icon" href="favicon.ico" type="image/ico">	
-			<!--Configuring favicon-->
-			<link rel="preconnect" href="https://fonts.gstatic.com">
-			
-			<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&family=Sniglet&display=swap" rel="stylesheet">
-			 <!--linking Google fonts-->
-		<link rel="stylesheet" type="text/css" href="style.css">		<!--Linking of CSS file-->
-		<style>			
-			@font-face {
-    		font-family: yatra;
-			src: url(fonts/yatra.ttf) format("truetype");
-			}
-			@font-face {
-    		font-family: effralight;
-			src: url(fonts/effralight.ttf) format("truetype");
-			}
-			@font-face{
-			font-family: 'Josefin Sans', sans-serif;
-			//src:url();
-			}
-			@font-face{
-				font-family: 'Sniglet', cursive;
-				//src:url();
-			}
-		</style>	<!--This font does not work if it is kept in the external css.-->
-		<!--Loading screen Script-->
-		<script src="scripts/script_loading_screen.js"></script>
-		<script>fadeout_loading_screen()</script>
-	</head>
-	<body>
-		<!----------Loading Screen---------->
-		<div class="loading_screen">	<!--Loading Screen Content-->
-			<div id=loading_text>	<!--qwerty Style yeta use gareko because logo aru thau ma pani use huncha tara yo loading screen ma thulo cha-->
-					<p style="color:rgb(255, 255, 255)">PRs<span style="color:rgb(232, 176, 73)">TrO<span style="color:rgb(247, 58, 58)">pHY</span></p>	
-					<br/>	<!--Line Break-->
-					<center>
-					<div class="loader"></div>
-					</center>
-			</div>
-		</div>	
-		
-		<!----------End of Loading Screen---------->  
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prashid Pradhan | Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-		<!--Overlay Navigation-->
-		<div id="navigation" class="overlay">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>	<!--Void(0) means redirection to undefined. hence, it stays in the same page. It runs regardless of the href. But, the mouse icon does not change if it is not inside an a tag. Hence, it was kept.-->
-			<div class="overlay-content">
-				<a href="about.html">About</a>
-				<!--<a href="contact.html">Contact</a>-->
-				<!--<a href="portfolio.html">portfolio</a>-->
-			</div>
-		</div>
-		<center><span class="downarrow red" onclick="openNav()">&#9947;<!--downarrow--></span></center>
-		<!----------End of Overlay Navigation---------->
+    <div id="preloader" aria-hidden="true">
+        <div class="preloader-container">
+            <div id="shape-container"></div>
+            <div class="pre-name">PRsTrOpHY</div>
+        </div>
+    </div>
 
-		<center>
-		<section>
-			<div class="container">				
-				<h1 id="home_main_header">PRASHID PRADHAN</h1>
-				<h2 id="home_sub_header">
-					I am Passionate about <!--This is required text-->
-					<br/>
-					<div id="typewriting">
-						<!--Typewriter Effect from this point-->
-					</div>	<!--Div typewriting-->
-				</h2>
-			</div>
-		</section>
-		</center>
+    <div id="main-content">
+        
+        <header>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#edu-exp">Education & Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </header>
 
-		<!--Importing Scripts-->
-		<script src="scripts/overlay.js"></script>
-		<script src="scripts/typewriting.js"></script>
-	</body>
+        <section id="home">
+            <div class="content hidden">
+                <h1>Prashid Pradhan</h1>
+                <p>
+                    BSc(Hons) Computing graduate with a specialization in Software
+                    Engineering and Database Systems. I'm dedicated to creating efficient,
+                    scalable software that provides innovative solutions.
+                </p>
+                <p id="typedtext">
+                    I’m passionate about <span id="typed"></span>
+                </p>
+            </div>
+        </section>
+
+        <section id="about">
+                <h2 class="section-title hidden">About Me</h2>
+                <div class="content hidden">
+                    <p>
+					I'm an enthusiastic and highly motivated professional with a degree in Software Engineering and Database.
+					  My technical foundation is built on hands-on experience as an intern in ASP.NET MVC web development.
+					  I've also expanded my skills into Designing by working as a Freelance designer crafting impactful logos, pamphlets, and user interfaces.
+					  
+                    </p>
+                    <p>
+                        Currently, I am leveraging my expertise as an AI Trainer and Data Annotator, specializing in data processing and AI model refinement.
+						My experience in academic projects, work, and internships has helped me gain excellent communication skills and the ability to interact effectively with clients and users from diverse backgrounds. 
+						I have a strong adaptability to new working environments and am always eager to contribute my skills to new and challenging projects.
+						</p>
+                    <div id="quote-section" class="quote-section">
+                        <span class="quote-label">Quote of the Day</span>
+                        <p class="quote-text" id="quote-display"></p>
+                        <p class="quote-author" id="author-display"></p>
+                    </div>
+                </div>
+            </section>
+
+        <section id="edu-exp">
+            <h2 class="section-title hidden">Education & Experience</h2>
+            <div class="edu-exp-container">
+                <div class="edu hidden">
+                    <h3>Education</h3>
+                    <div class="edu-card">
+                        <h4>BSc Computing – The British College</h4>
+                        <p>2017</p>
+                        <div class="hidden-info">Major: Software & Database Systems</div>
+                    </div>
+                    <div class="edu-card">
+                        <h4>HSEB – SOS Hermann Gmeiner</h4>
+                        <p>2013</p>
+                        <div class="hidden-info">Higher Secondary Level - Management</div>
+                    </div>
+                    <div class="edu-card">
+                        <h4>SLC – Vidhya Sagar School</h4>
+                        <p>2011</p>
+                        <div class="hidden-info">Secondary School level</div>
+                    </div>
+                </div>
+                <div class="exp hidden">
+                    <h3>Experience</h3>
+                    <div class="exp-card">
+                        <h4>Image Annotator, AI Trainer & Data Specialist – CloudFactory</h4>
+                        <p>2019–Present</p>
+                        <div class="hidden-info">
+                            Ensuring high-quality labeled datasets for AI projects.
+                        </div>
+                    </div>
+                    <div class="exp-card">
+                        <h4>Freelance Graphic Designer - GauleTech</h4>
+                        <p>2021–2023</p>
+                        <div class="hidden-info">
+                            Designed Logos, Pamphlets, and Leaflets
+                        </div>
+                    </div>
+                    <div class="exp-card">
+                        <h4>Intern App development - Professional Computer System (PCS)</h4>
+                        <p>2017 – 2018</p>
+                        <div class="hidden-info">
+                            ASP.NET Webapp projects, gained hands-on experience
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+       <section id="skills">
+            <h2 class="section-title hidden">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-group" role="listitem" aria-label="Programming Languages">
+                    <h3>Programming Languages</h3>
+                    <div class="skill"><span>Python</span><span class="stars" aria-label="5 out of 5 stars">★★☆☆☆</span></div>
+                    <div class="skill"><span>JavaScript</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>Java</span><span class="stars" aria-label="4 out of 5 stars">★★☆☆☆</span></div>
+                    <div class="skill"><span>SQL</span><span class="stars" aria-label="5 out of 5 stars">★★★★☆</span></div>
+                    <div class="skill"><span>HTML / CSS (Bootstrap & Gumby)</span><span class="stars" aria-label="4 out of 5 stars">★★★★★</span></div>
+                    <div class="skill"><span>C++/C#</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+                </div>
+                <div class="skill-group" role="listitem" aria-label="Tools">
+                    <h3>Tools</h3>
+                    <div class="skill"><span>Aptana</span><span class="stars" aria-label="5 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>Eclipse</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>Git & GitHub</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+                    <div class="skill"><span>Visual Studio Code</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>XAMPP/WAMPP</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
+                </div>
+                <div class="skill-group" role="listitem" aria-label="Databases">
+                    <h3>Databases</h3>
+                    <div class="skill"><span>MongoDB</span><span class="stars" aria-label="5 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>MySQL</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+                    <div class="skill"><span>Oracle Database</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
+                </div>
+                <div class="skill-group" role="listitem" aria-label="Design & Creative Tools">
+                    <h3>Design & Creative Tools</h3>
+                    <div class="skill"><span>Adobe XD</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>Photoshop</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+                    <div class="skill"><span>Illustrator</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="projects">
+            <h2 class="section-title hidden">Projects</h2>
+            <div id="projects-grid" class="projects-grid">
+                <div class="project-card hidden">
+                    <h4>Project One</h4>
+                    <p>
+                        A full-stack e-commerce platform with user
+                        authentication and a payment gateway.
+                    </p>
+                    <a href="#" class="project-btn"
+                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+                            <path d="M5 5h5V3H3v7h2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-card hidden">
+                    <h4>Project Two</h4>
+                    <p>
+                        A real-time chat application built with WebSockets and
+                        Node.js.
+                    </p>
+                   <a href="#" class="project-btn"
+                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+                            <path d="M5 5h5V3H3v7h2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-card hidden">
+                    <h4>Project Three</h4>
+                    <p>
+                        A data visualization dashboard for analyzing sales
+                        data using React and D3.js.
+                    </p>
+                   <a href="#" class="project-btn"
+                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+                            <path d="M5 5h5V3H3v7h2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-card hidden">
+                    <h4>Project Four</h4>
+                    <p>
+                        A personal portfolio website showcasing my skills and
+                        projects.
+                    </p>
+                <a href="#" class="project-btn"
+                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
+                            <path d="M5 5h5V3H3v7h2z"/>
+                        </svg>
+                    </a>
+                </div>
+				
+            </div>
+			 <p class="warning-text" style="text-align: center;" >
+                        *Projects are missing for NOW (This is just dummy tester ) until the fetch system is done correctly..Until then use the Github icon in contact 
+                    </p>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title hidden">Contact</h2>
+            <div class="contact-container">
+                <div class="contact-info hidden">
+                    <img src="https://avatar.iran.liara.run/public/41" alt="Profile" />
+                    <div>
+                        <a href="https://github.com/prstrophy" target="_blank"
+                        ><i class="fab fa-github"></i
+                        ></a>
+                        <a
+                        href="https://www.linkedin.com/in/prashid-pradhan-b29160b5/"
+                        target="_blank"
+                        ><i class="fab fa-linkedin"></i
+                        ></a>
+                    </div>
+                </div>
+                <form id="contact-form" class="hidden">
+                    <div class="form-group">
+                        <input type="text" name="name" required />
+                        <label>Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" required />
+                        <label>Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <select name="reason" required>
+                            <option value="" disabled selected>
+                                ---------- Select Reason -------------
+                            </option>
+                            <option>Job Opportunity</option>
+                            <option>General Inquiry</option>
+                            <option>Other</option>
+                        </select>
+                        <label>Reason</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" required></textarea>
+                        <label>Your Message</label>
+                    </div>
+                    <button type="submit">Send</button>
+                    <p class="warning-text">
+                        *Send Message not working correctly due to missing implementation of
+                        JsEmail
+                    </p>
+                </form>
+            </div>
+        </section>
+        
+        <footer>
+            <p>
+                © 2020 Prashid Pradhan All Rights Reserved. | Built with ❤️ and JavaScript.
+                <a href="old/index.html" class="old-version" target="_blank"><i class="fas fa-history">
+				</i><span class="tooltip">Old Version</span></a>
+            </p>
+        </footer>
+        
+        <div class="cv-pill">
+            <a href="CV_Pradhan_Prashid.pdf" class="cv-pill" target="_blank">
+                <i class="fas fa-file-download"></i
+                ><span class="tooltip">Download CV</span>
+            </a>
+        </div>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
 </html>

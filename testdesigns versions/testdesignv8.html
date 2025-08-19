@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prashid Pradhan | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      scroll-behavior: smooth;
+    }
+    section {
+      min-height: 100vh;
+      padding: 6rem 8% 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* SECTION HEADERS */
+    h2.section-title {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 6s ease infinite;
+    }
+    #about h2 { background-image: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff); }
+    #edu-exp h2 { background-image: linear-gradient(270deg, #f7971e, #ffd200, #f7971e); }
+    #skills h2 { background-image: linear-gradient(270deg, #8e2de2, #4a00e0, #8e2de2); }
+    #projects h2 { background-image: linear-gradient(270deg, #43cea2, #185a9d, #43cea2); }
+    #contact h2 { background-image: linear-gradient(270deg, #ff512f, #dd2476, #ff512f); }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 0; right: 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+      padding: .8rem 2rem;
+      background: rgba(13,17,23,0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 0 15px;
+      z-index: 1000;
+    }
+    header a {
+      color: #e6edf3;
+      text-decoration: none;
+      font-size: .95rem;
+      position: relative;
+      padding-bottom: 3px;
+    }
+    header a::after {
+      content: "";
+      position: absolute; left: 0; bottom: 0;
+      width: 100%; height: 2px;
+      background: cyan;
+      transform: scaleX(0);
+      transition: transform .3s;
+    }
+    header a:hover::after,
+    header a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* HOME */
+    #home {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+        url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1600&q=80');
+    }
+    #home .content {
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      backdrop-filter: blur(6px);
+    }
+    #home h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(270deg, cyan, teal, purple);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 6s infinite;
+    }
+    #home p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 1rem; }
+
+    /* CV PILL */
+    .cv-pill {
+      position: fixed;
+      right: 2rem; bottom: 2rem;
+      width: 55px; height: 55px;
+      border: 2px solid teal;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: teal; background: transparent;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .cv-pill:hover { background: teal; color: #0d1117; }
+    .cv-pill .tooltip {
+      visibility: hidden;
+      position: absolute;
+      bottom: 70px; right: 0;
+      background: #111; color: #fff;
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      font-size: .8rem;
+      opacity: 0; transition: opacity .3s;
+    }
+    .cv-pill:hover .tooltip { visibility: visible; opacity: 1; }
+
+    /* EDUCATION & EXPERIENCE */
+    #edu-exp {
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), 
+        url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80');
+    }
+    .edu-exp-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .edu, .exp { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; }
+    .edu h3, .exp h3 { color: cyan; margin-bottom: 1rem; }
+    .edu li, .exp li { margin-bottom: 1rem; }
+    .hidden-info { display: none; font-size: .9rem; color: #bbb; }
+    li:hover .hidden-info { display: block; }
+
+    /* SKILLS */
+    #skills {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
+        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80');
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .skill-category h3 { margin-bottom: 1rem; color: teal; }
+    .skill-category ul { list-style: none; }
+    .skill-category li { margin-bottom: .5rem; }
+    .stars { color: gold; margin-left: 8px; }
+
+    /* PROJECTS */
+    #projects {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
+        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80');
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+	a{
+	color:cyan;
+	}
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform .3s, background .3s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* CONTACT */
+    #contact { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .contact-info { text-align: center; }
+    .contact-info img {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 3px solid cyan;
+      margin-bottom: 1rem;
+    }
+    .contact-info a { color: white; margin: 0 .5rem; font-size: 1.5rem; }
+
+    form {
+      background: rgba(255,255,255,0.05);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+    .form-group { position: relative; margin-bottom: 1.5rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: .9rem;
+      border: none; border-bottom: 2px solid teal;
+      background: transparent; color: #e6edf3; outline: none;
+    }
+    .form-group label {
+      position: absolute; left: 10px; top: 10px;
+      color: #aaa; pointer-events: none;
+      transition: .2s;
+    }
+    .form-group input:focus+label,
+    .form-group input:valid+label,
+    .form-group textarea:focus+label,
+    .form-group textarea:valid+label,
+    .form-group select:focus+label,
+    .form-group select:valid+label {
+      top: -12px; left: 5px; font-size: .8rem; color: cyan;
+    }
+    button {
+      padding: .8rem 1.2rem;
+      border: none; border-radius: 8px;
+      background: teal; color: #0d1117;
+      font-weight: bold; cursor: pointer;
+      transition: transform .2s;
+    }
+    button:hover { background: cyan; transform: scale(1.05); }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #000428, #004e92);
+      text-align: center;
+      padding: 1rem;
+      color: #bbb;
+    }
+    footer .old-version {
+      margin-left: 10px;
+      position: relative;
+      cursor: pointer;
+      color: white;
+    }
+    footer .old-version .tooltip {
+      visibility: hidden;
+      position: absolute;
+      bottom: 125%; left: 50%;
+      transform: translateX(-50%);
+      background: #111; color: #fff;
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      font-size: .8rem;
+      opacity: 0; transition: opacity .3s;
+    }
+    footer .old-version:hover .tooltip { visibility: visible; opacity: 1; }
+
+    /* ANIMATION CLASSES */
+    .hidden { opacity: 0; transform: translateY(40px); transition: all .8s ease; }
+    .show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="#home" class="active">Home</a>
+  <a href="#about">About</a>
+  <a href="#edu-exp">Education & Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</header>
+
+<section id="home">
+  <div class="content hidden">
+    <h1>Prashid Pradhan</h1>
+    <p>BSc Computing Graduate passionate about building scalable systems, exploring data-driven solutions, and delivering impactful user experiences.</p>
+    <p>I’m passionate about <span id="typed"></span></p>
+  </div>
+</section>
+
+<section id="about">
+  <h2 class="section-title hidden">About Me</h2>
+  <div class="content hidden">
+    <p>Enthusiastic and detail-oriented software engineer with hands-on experience in web development, API integration, and database optimization.</p>
+    <p>Beyond coding, I am keen on UI/UX design and AI data annotation, always striving to merge functionality with usability.</p>
+  </div>
+</section>
+
+<section id="edu-exp">
+  <h2 class="section-title hidden">Education & Experience</h2>
+  <div class="edu-exp-container">
+    <div class="edu hidden">
+      <h3>Education</h3>
+      <ul>
+        <li><strong>2017:</strong> BSc Computing – The British College, Kathmandu <div class="hidden-info">Major: Software & Database</div></li>
+        <li><strong>2013:</strong> HSEB Exam – SOS Hermann Gmeiner, Shreekhandapur</li>
+        <li><strong>2011:</strong> SEE Exam – SOS Hermann Gmeiner, Shreekhandapur</li>
+      </ul>
+    </div>
+    <div class="exp hidden">
+      <h3>Experience</h3>
+      <ul>
+        <li><strong>2023–Present:</strong> Image Annotator & AI Data Trainer, CloudFactory <div class="hidden-info">Ensuring high-quality labeled datasets for AI projects.</div></li>
+        <li><strong>2018–2023:</strong> Freelance Software Developer <div class="hidden-info">Developed scalable apps and provided database solutions.</div></li>
+        <li><strong>2017–2018:</strong> Intern Developer, Tech Startup Kathmandu <div class="hidden-info">Worked on APIs and frontend prototypes.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title hidden">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-category hidden"><h3>Programming</h3><ul>
+	<li>Python <span class="stars">★★★★★</span></li>
+	<li>JavaScript <span class="stars">★★★★☆</span></li>
+	<li>Java <span class="stars">★★★★☆</span></li>
+	</ul>
+	</div>
+    <div class="skill-category hidden"><h3>Databases</h3><ul>
+	<li>SQL <span class="stars">★★★★★</span></li>
+	<li>MongoDB <span class="stars">★★★★☆</span></li>
+	</ul>
+	</div>
+    <div class="skill-category hidden"><h3>Tools</h3>
+	<ul>
+	<li>Git & GitHub <span class="stars">★★★★★</span></li>
+	<li>Docker <span class="stars">★★★★☆</span></li>
+	</ul>
+	</div>
+    <div class="skill-category hidden"><h3>Design</h3>
+	<ul>
+	<li>Figma <span class="stars">★★★★☆</span></li>
+	<li>Adobe XD <span class="stars">★★★★☆</span></li>
+	</ul>
+	</div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="section-title hidden">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card hidden"><h4>Inventory Management</h4><p>Web-based inventory with SQL integration.</p><a href="#">View Project</a></div>
+    <div class="project-card hidden"><h4>Portfolio Website</h4><p>Responsive portfolio with animations.</p><a href="#">View Project</a></div>
+    <div class="project-card hidden"><h4>Chat App</h4><p>Real-time chat using Node.js & MongoDB.</p><a href="#">View Project</a></div>
+    <div class="project-card hidden"><h4>Task Tracker</h4><p>React-based task management tool.</p><a href="#">View Project</a></div>
+  </div>
+  <!-- GitHub projects fetch script here if needed -->
+</section>
+
+<section id="contact">
+  <h2 class="section-title hidden">Contact</h2>
+  <div class="contact-container">
+    <div class="contact-info hidden">
+      <img src="https://i.pravatar.cc/150?img=12" alt="Profile">
+      <div><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-linkedin"></i></a></div>
+    </div>
+    <form id="contact-form" class="hidden">
+      <div class="form-group"><input type="text" name="name" required><label>Your Name</label></div>
+      <div class="form-group"><input type="email" name="email" required><label>Your Email</label></div>
+      <div class="form-group">
+        <select name="reason" required><option value="" disabled selected></option><option value="job">Job Offer</option><option value="collab">Collaboration</option><option value="general">General Inquiry</option></select>
+        <label>Reason</label>
+      </div>
+      <div class="form-group"><textarea name="message" rows="4" required></textarea><label>Your Message</label></div>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Prashid Pradhan. All rights reserved.
+    <a href="old.html" class="old-version"><i class="fa fa-history"></i><span class="tooltip">Old Version</span></a>
+  </p>
+</footer>
+
+<!-- CV PILL -->
+<div class="cv-pill">
+  <i class="fa fa-download"></i>
+  <span class="tooltip">Download CV</span>
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  new Typed("#typed", {
+    strings: ["software engineering","AI training","web development","UI/UX design"],
+    typeSpeed: 70, backSpeed: 40, loop: true
+  });
+
+  // Section reveal
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add("show");
+    });
+  },{threshold:0.2});
+  document.querySelectorAll(".hidden").forEach(el=>observer.observe(el));
+
+  // Navbar active link
+  const sections=document.querySelectorAll("section");
+  const navLinks=document.querySelectorAll("header a");
+  window.addEventListener("scroll",()=>{
+    let current="";
+    sections.forEach(sec=>{
+      const top=window.scrollY;
+      const offset=sec.offsetTop-100;
+      const height=sec.offsetHeight;
+      if(top>=offset && top<offset+height){ current=sec.getAttribute("id"); }
+    });
+    navLinks.forEach(link=>{
+      link.classList.remove("active");
+      if(link.getAttribute("href")==="#"+current){ link.classList.add("active"); }
+    });
+  });
+
+  // Contact form mock
+  document.getElementById("contact-form").addEventListener("submit",e=>{
+    e.preventDefault();
+    alert("This would send email using EmailJS.");
+  });
+</script>
+</body>
+</html>

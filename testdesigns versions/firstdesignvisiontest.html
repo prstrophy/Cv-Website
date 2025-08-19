@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prashid Pradhan | BSc Computing</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0d1117;
+  --bg-light: #161b22;
+  --accent: #58a6ff;
+  --text-light: #f0f6fc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-light); }
+
+/* Navbar */
+nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.8rem 2rem;
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+nav .logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+nav ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+nav ul li a:hover::after { width: 100%; }
+
+/* Sections */
+section {
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+/* Backgrounds for sections */
+#home { background: linear-gradient(120deg, #0d1117, #161b22); }
+#about { background: linear-gradient(120deg, #0d1117, #21262d); }
+#skills { background: linear-gradient(120deg, #0d1117, #1f2937); }
+#projects { background: linear-gradient(120deg, #0d1117, #0b1a28); }
+#contact { background: linear-gradient(120deg, #0d1117, #161b22); }
+
+/* Headings */
+section h1, section h2 {
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+/* Home Section */
+#home h1 { font-size: 2.5rem; }
+#home p { max-width: 600px; margin: auto; font-size: 1.1rem; }
+
+/* About Section */
+.download-btn {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  margin-top: 1.5rem;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  border-radius: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.download-btn:hover {
+  background: var(--accent);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* Skills Section */
+.skill {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 300px; margin: 0.5rem auto;
+}
+.stars {
+  color: gold;
+}
+
+/* Projects Section */
+.project-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+}
+.project-card {
+  background: rgba(255,255,255,0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.project-card:hover { transform: translateY(-5px); }
+
+/* Contact */
+.contact-info {
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Footer */
+footer {
+  background: rgba(13, 17, 23, 0.8);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+footer a {
+  color: var(--accent);
+  margin: 0 0.5rem;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Prashid Pradhan</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <h1>Hi, I'm Prashid</h1>
+  <p>BSc Computing Graduate | Specializing in Software Development & Database Systems. Passionate about building robust software, optimizing databases, and crafting seamless user experiences.</p>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I hold a Bachelor of Science in Computing, majoring in Software Development and Database Management. My expertise spans full-stack development, database optimization, and software lifecycle management. I thrive in collaborative environments and aim to bridge the gap between technology and user needs.</p>
+  <a class="download-btn" href="cv.pdf" download>Download CV</a>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skill"><span>Java</span><span class="stars">★★★★★</span></div>
+  <div class="skill"><span>Python</span><span class="stars">★★★★☆</span></div>
+  <div class="skill"><span>MySQL</span><span class="stars">★★★★★</span></div>
+  <div class="skill"><span>HTML/CSS/JS</span><span class="stars">★★★★★</span></div>
+  <div class="skill"><span>React</span><span class="stars">★★★★☆</span></div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="project-container" id="github-projects">
+    <p>Loading projects...</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-info">
+    <p>Email: prashid@example.com</p>
+    <p>LinkedIn: linkedin.com/in/prashid</p>
+    <p>GitHub: github.com/prashid</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Prashid Pradhan | Built with ❤️ and JavaScript</p>
+  <p>
+    <a href="#">LinkedIn</a> | <a href="#">GitHub</a> | <a href="#">Portfolio</a>
+  </p>
+</footer>
+
+<script>
+// GitHub API Fetch
+fetch('https://api.github.com/users/octocat/repos')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('github-projects');
+    container.innerHTML = "";
+    data.slice(0, 6).forEach(repo => {
+      const card = document.createElement('div');
+      card.className = "project-card";
+      card.innerHTML = `<h3>${repo.name}</h3><p>${repo.description || "No description"}</p><a href="${repo.html_url}" target="_blank">View Repo</a>`;
+      container.appendChild(card);
+    });
+  });
+</script>
+
+</body>
+</html>

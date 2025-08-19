@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prashid Pradhan — Computing CV</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --bg: #0b0f14;
+  --card: rgba(12,16,20,0.72);
+  --muted: #98a7b8;
+  --accent: #2dd4bf;
+  --accent-2: #06b6d4;
+  --glass: rgba(255,255,255,0.04);
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: Inter, sans-serif; background: var(--bg); color: #cbd5e1; scroll-behavior: smooth; }
+
+/* NAV */
+header.site-nav {
+  position: fixed; top: 0; right: 0;
+  height: 64px;
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 0 1rem;
+  z-index: 1000;
+  background: transparent;
+}
+.nav-links {
+  display: flex; gap: 1rem;
+}
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  padding: .3rem .6rem;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-links a:hover { transform: translateY(-2px); }
+.nav-links a.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: var(--bg);
+}
+
+/* Sections */
+main { padding-top: 64px; }
+section {
+  min-height: 100vh;
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container { max-width: 1100px; width: 100%; }
+
+/* Floating CV pill */
+.cv-pill {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, rgba(45,212,191,0.12), rgba(6,182,198,0.06));
+  border: 1px solid rgba(45,212,191,0.16);
+  color: var(--accent);
+  padding: 10px 12px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-family: Poppins, sans-serif;
+  font-size: 0.95rem;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 1200;
+}
+.cv-pill svg { width: 18px; height: 18px; }
+.cv-pill:hover { transform: translateY(-6px); }
+
+/* HOME */
+#home {
+  background: linear-gradient(180deg, rgba(7,10,14,0.5), rgba(6,8,12,0.6)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600') center/cover;
+}
+.home-inner { text-align: center; }
+.home-title { font-size: 2.5rem; font-family: Poppins, sans-serif; color: var(--accent); }
+.home-sub { color: var(--muted); max-width: 800px; margin: auto; }
+#typed { color: var(--accent); font-weight: 700; font-family: Poppins, sans-serif; margin-top: 8px; }
+
+/* ABOUT */
+#about {
+  background: linear-gradient(180deg, rgba(3,8,12,0.6), rgba(6,10,14,0.8)), url('https://images.unsplash.com/photo-1526378721306-6b9f2cd89b2f?q=80&w=1600') center/cover;
+}
+
+/* EDUCATION + EXPERIENCE */
+#edu-exp {
+  background: linear-gradient(180deg, rgba(2,6,9,0.7), rgba(5,9,12,0.85)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600') center/cover;
+}
+.edu-exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.edu-col, .exp-col { display: flex; flex-direction: column; gap: 15px; }
+.edu-col h2, .exp-col h2 { color: var(--accent); font-family: Poppins, sans-serif; }
+.card {
+  background: var(--card);
+  padding: 15px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* SKILLS */
+#skills {
+  background: linear-gradient(180deg, rgba(3,6,10,0.6), rgba(7,10,14,0.85)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600') center/cover;
+}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.skill-box { padding: 16px; border-radius: 10px; background: var(--card); }
+.skill-box h4 { color: var(--accent); }
+
+/* PROJECTS */
+#projects {
+  background: linear-gradient(180deg, rgba(6,8,10,0.6), rgba(7,9,12,0.85)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600') center/cover;
+}
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.project { background: var(--card); padding: 16px; border-radius: 10px; }
+
+/* CONTACT */
+#contact {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.contact-img {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.contact-img img {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+}
+.social-links a {
+  color: white; font-size: 1.5rem; margin: 0 10px;
+}
+.contact-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: var(--radius);
+}
+.field { display: flex; flex-direction: column; margin-bottom: 12px; }
+.field label { font-weight: 600; margin-bottom: 6px; }
+.field input, .field textarea, .field select {
+  padding: 10px; border-radius: 8px; border: none;
+  background: rgba(255,255,255,0.1); color: white;
+}
+button.btn-primary {
+  background: linear-gradient(90deg,var(--accent), var(--accent-2));
+  border: none; padding: 10px 16px; border-radius: 8px;
+  font-weight: 700; cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .edu-exp-grid, .contact-grid { grid-template-columns: 1fr; }
+  .cv-pill { top: auto; bottom: 20px; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#edu-exp">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<a class="cv-pill" href="cv.pdf" download>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</a>
+
+<main>
+  <section id="home">
+    <div class="container home-inner">
+      <h1 class="home-title">Prashid Pradhan</h1>
+      <p class="home-sub">BSc (Hons) Computing — Software Engineering & Database Systems.</p>
+      <div id="typed"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container card">
+      <h2>About</h2>
+      <p>As a BSc (Hons) Computing graduate specializing in software engineering and database systems, I bring both technical expertise and a creative problem-solving mindset.</p>
+      <p>With hands-on experience in full-stack development, data modeling, and AI data training, I have contributed to projects ranging from enterprise-level systems to lightweight prototypes. I am skilled at optimizing performance, ensuring security, and delivering user-friendly solutions.</p>
+      <p>Proficient in Python, JavaScript, SQL, and cloud services, I also excel in tools like Git, Docker, and AWS. My collaborative approach ensures seamless teamwork across diverse, cross-functional projects.</p>
+    </div>
+  </section>
+
+  <section id="edu-exp">
+    <div class="container edu-exp-grid">
+      <div class="edu-col">
+        <h2>Education</h2>
+        <div class="card"><p><strong>2017</strong> — BSc (Hons) Computing, The British College</p></div>
+        <div class="card"><p><strong>2013</strong> — HSEB, SOS Hermann Gmeiner</p></div>
+        <div class="card"><p><strong>2011</strong> — SEE, Vidhya Sagar School</p></div>
+      </div>
+      <div class="exp-col">
+        <h2>Experience</h2>
+        <div class="card"><p><strong>2019–Present</strong> — Image Annotator & AI Data Trainer, CloudFactory</p></div>
+        <div class="card"><p><strong>2021–2023</strong> — Freelance Designer/Developer, Gaule-Tech</p></div>
+        <div class="card"><p><strong>2017–2018</strong> — Intern Developer (ASP.NET), PCS</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-box"><h4>Languages</h4><p>Python, JavaScript, Java</p></div>
+        <div class="skill-box"><h4>Databases</h4><p>MySQL, PostgreSQL, MongoDB</p></div>
+        <div class="skill-box"><h4>Tools</h4><p>Git, Docker, AWS</p></div>
+        <div class="skill-box"><h4>Design</h4><p>UI/UX, Prototyping</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project"><h4>Inventory Management</h4><p>Full-stack app for warehouses.</p></div>
+        <div class="project"><h4>Portfolio Website</h4><p>Responsive personal site.</p></div>
+        <div class="project"><h4>Chat Application</h4><p>Real-time messaging app.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-img">
+        <img src="https://api.dicebear.com/6.x/bottts-neutral/svg?seed=JobHunter" alt="Profile Avatar">
+        <div class="social-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:example@email.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h2>Contact</h2>
+        <form>
+          <div class="field"><label>Name</label><input type="text" required></div>
+          <div class="field"><label>Email</label><input type="email" required></div>
+          <div class="field"><label>Reason</label>
+            <select><option>Job Offer</option><option>Collaboration</option><option>General</option></select>
+          </div>
+          <div class="field"><label>Message</label><textarea rows="5" required></textarea></div>
+          <button class="btn-primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="text-align:center; padding:20px; color:var(--muted)">
+  © <span id="year"></span> Prashid Pradhan
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Typed effect
+(function(){
+  const spot = document.getElementById('typed');
+  const phrases = ['Reliable Backends','Scalable Databases','Full-stack Development','Optimized SQL','AI Data Training'];
+  const staticText = 'Passionate about ';
+  let pi = 0;
+  function type(){
+    let i=0;
+    const phrase = phrases[pi];
+    function step(){
+      if(i<=phrase.length){
+        spot.textContent = staticText + phrase.slice(0,i);
+        i++;
+        setTimeout(step,100);
+      } else {
+        setTimeout(erase,1400);
+      }
+    }
+    step();
+  }
+  function erase(){
+    const phrase = phrases[pi];
+    let len = phrase.length;
+    function step(){
+      if(len>=0){
+        spot.textContent = staticText + phrase.slice(0,len);
+        len--;
+        setTimeout(step,50);
+      } else {
+        pi = (pi+1)%phrases.length;
+        type();
+      }
+    }
+    step();
+  }
+  type();
+})();
+
+// Navbar active state on scroll
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

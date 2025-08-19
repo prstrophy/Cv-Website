@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prashid Pradhan — Portfolio</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   THEME & LAYOUT TOKENS (edit these to change look quickly)
+========================================================= */
+:root{
+  --bg:#070b10;
+  --text:#cfe6e9;
+  --muted:#9fb1bd;
+  --card: rgba(14,18,24,0.72);
+  --radius:14px;
+  --shadow:0 12px 40px rgba(0,0,0,.35);
+
+  /* Accents (teal / cyan / violet / pink) */
+  --teal:#2dd4bf;
+  --cyan:#06b6d4;
+  --blue:#38bdf8;
+  --violet:#8b5cf6;
+  --pink:#f472b6;
+
+  --trans:260ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Basic reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:linear-gradient(180deg,#05070a 0%, #0a1117 100%);
+  color:var(--text); font-family:Inter, system-ui, "Segoe UI", Roboto, Arial;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  scroll-behavior:smooth;
+}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; display:block}
+
+/* =========================================================
+   PRELOADER (full-screen). Edit visibleFor in JS to control duration
+   - Unique hex spinner, orbiting nodes, animated name + subtitle.
+   - To adjust colors change gradient stops above and in SVG <defs>.
+========================================================= */
+#preloader{
+  position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+  background:
+    radial-gradient(1200px 800px at 50% 60%, rgba(0,255,240,.03), transparent 60%),
+    linear-gradient(180deg,#06080d 0%, #04060a 100%);
+  overflow:hidden;
+}
+.pre-grid{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(transparent 23px, rgba(255,255,255,.06) 24px),
+    linear-gradient(90deg, transparent 23px, rgba(255,255,255,.06) 24px);
+  background-size:24px 24px; opacity:.06; animation: gridScroll 8s linear infinite;
+}
+@keyframes gridScroll{ 0%{ transform:translateY(0) } 100%{ transform:translateY(24px) } }
+
+.pre-core{
+  position:relative; width:min(500px,90vw); height:min(480px,90vw);
+  display:grid; place-items:center; gap:12px;
+}
+.hex{ width:210px; height:210px; position:relative; filter:drop-shadow(0 0 12px rgba(56,189,248,.28)); }
+.hex svg{ width:100%; height:100% }
+.hex .stroke{
+  stroke:url(#gradHex); stroke-width:3; fill:none; stroke-linecap:round;
+  stroke-dasharray: 26 12; animation: dash 3.2s linear infinite;
+}
+@keyframes dash{ to{ stroke-dashoffset: -240 } }
+
+/* Orbiting nodes */
+.orbit{ position:absolute; inset:0; animation: spin 6s linear infinite }
+@keyframes spin{ to{ transform:rotate(360deg) } }
+.dot{ position:absolute; width:11px; height:11px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #e6ffff, #7fffd4);
+  box-shadow:0 0 16px rgba(56,189,248,.55); }
+.dot.d1{ top:-6px; left:50%; transform:translateX(-50%) }
+.dot.d2{ bottom:-6px; left:12% }
+.dot.d3{ right:-6px; top:50%; transform:translateY(-50%) }
+
+/* Preloader name + subtitle */
+.pre-name{
+  font-family:Poppins, Inter; font-weight:800; font-size: clamp(1.6rem, 5vw, 2.6rem);
+  letter-spacing:.08em;
+  background:linear-gradient(90deg, var(--teal), var(--cyan), var(--violet));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation: nameHue 10s linear infinite;
+}
+@keyframes nameHue{ to{ filter:hue-rotate(360deg) } }
+
+/* Subtext animation */
+.pre-sub{
+  font-size:.95rem; color:var(--muted); margin-top:6px; opacity:.95;
+  display:flex; gap:8px; align-items:center; transform-origin:center;
+}
+.pre-sub .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 8px var(--teal); animation: subPulse 1.6s ease-in-out infinite; }
+@keyframes subPulse{ 0%,100%{ transform:scale(.9); opacity:.8 } 50%{ transform:scale(1.18); opacity:1 } }
+
+/* Fade out class added after load */
+#preloader.fade-out{ opacity:0; transition: opacity 700ms ease; pointer-events:none }
+
+/* =========================================================
+   NAV
+========================================================= */
+header.site-nav{
+  position:fixed; inset:0 0 auto 0; height:64px; display:flex; align-items:center; justify-content:center;
+  z-index:1200; padding:0 .8rem; background:transparent;
+}
+.nav-inner{ width:100%; max-width:1280px; display:flex; justify-content:flex-end; align-items:center }
+.nav-links{ display:flex; gap:.6rem; align-items:center }
+.nav-links a{
+  position:relative; padding:.35rem .6rem; border-radius:10px;
+  font:700 .95rem Poppins, Inter, system-ui; color:#cfe6e9; opacity:.95;
+  transition:opacity var(--trans), transform var(--trans);
+}
+.nav-links a:hover{ transform:translateY(-1px) }
+.nav-links a::after{
+  content:""; position:absolute; left:12px; right:12px; bottom:6px; height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--cyan));
+  opacity:0; transform:scaleX(0); transform-origin:left center;
+  transition: transform var(--trans), opacity var(--trans); border-radius:2px;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after{ opacity:1; transform:scaleX(1) }
+
+/* =========================================================
+   CV PILL (small circle with tooltip on hover)
+========================================================= */
+.cv-pill{
+  position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:1400;
+  width:44px; height:44px; display:grid; place-items:center; border-radius:50%; cursor:pointer;
+  background: radial-gradient(120px 60px at 50% 60%, rgba(45,212,191,.12), transparent 60%);
+  border:1.5px solid rgba(45,212,191,.45); color:var(--teal);
+  transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+  box-shadow:0 12px 30px rgba(45,212,191,.08); backdrop-filter: blur(4px);
+}
+.cv-pill:hover{ transform:translateY(calc(-50% - 4px)); background: radial-gradient(120px 60px at 50% 60%, rgba(45,212,191,.18), transparent 60%); box-shadow:0 16px 36px rgba(45,212,191,.16) }
+.cv-pill .tip{
+  position:absolute; bottom:56px; right:50%; transform:translateX(50%) translateY(6px);
+  background:#071318; color:#aef3ea; font-weight:800; font-size:.86rem;
+  padding:.42rem .56rem; border-radius:10px; white-space:nowrap; opacity:0; pointer-events:none;
+  transition: all var(--trans); border:1px solid rgba(45,212,191,.28); box-shadow:0 6px 24px rgba(0,0,0,.25)
+}
+.cv-pill:hover .tip{ opacity:1; transform:translateX(50%) translateY(0) }
+
+/* =========================================================
+   SECTIONS (background layering + overlay)
+========================================================= */
+main{ padding-top:64px }
+section{ min-height:100vh; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:88px 18px; }
+.container{ width:100%; max-width:1280px; margin:0 auto; position:relative }
+.bg-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; background-size:cover; background-position:center; opacity:.9; transition: opacity .4s linear }
+.overlay{ position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(6,10,14,.72), rgba(6,10,14,.86)); }
+
+/* section background images (keeps images but readable via overlay) */
+#home .bg-layer{ background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop') }
+#about .bg-layer{ background-image:url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop') }
+#edu-exp .bg-layer{ background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600&auto=format&fit=crop') }
+#skills .bg-layer{ background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop') }
+#projects .bg-layer{ background-image:url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1600&auto=format&fit=crop') }
+#contact .bg-layer{ background-image:url('https://images.unsplash.com/photo-1526378721306-6b9f2cd89b2f?q=80&w=1600&auto=format&fit=crop') }
+
+/* contact overlay gets a gentle diagonal pastel gradient to pop */
+#contact .overlay{ background: linear-gradient(140deg, rgba(244,114,182,.12), rgba(45,212,191,.12)), linear-gradient(180deg, rgba(5,10,15,.75), rgba(5,10,15,.88)) }
+
+/* =========================================================
+   SECTION HEADERS (centered, animated gradient text)
+========================================================= */
+.section-head{ width:100%; display:flex; justify-content:center; align-items:center; margin-bottom:36px }
+.section-title{
+  font:800 clamp(1.6rem, 2.6vw, 2.2rem) Poppins, Inter, sans-serif;
+  background: linear-gradient(90deg, var(--teal), var(--cyan));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation: hueShift 14s linear infinite;
+}
+@keyframes hueShift{ to{ filter:hue-rotate(360deg) } }
+.section-rule{ height:1px; width:min(760px,88vw); background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin:12px auto 0 }
+
+/* Cards, grid utilities */
+.card{ background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow) }
+.p-20{ padding:20px } .p-24{ padding:24px } .p-28{ padding:28px }
+.grid{ display:grid; gap:18px } .grid-2{ grid-template-columns: repeat(2, minmax(0,1fr)) } .grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)) }
+@media (max-width:980px){ .grid-2, .grid-3{ grid-template-columns:1fr } }
+
+/* subtle reveal animation (JS adds .show) */
+.reveal{ opacity:0; transform:translateY(10px); transition: opacity .6s ease, transform .6s ease } 
+.reveal.show{ opacity:1; transform:none }
+
+/* =========================================================
+   HOME (centered content, name gradient + typed line)
+========================================================= */
+.home-wrap{ display:grid; gap:18px; justify-items:center; text-align:center; max-width:1100px; margin:0 auto }
+.home-card{ padding:28px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.06); backdrop-filter: blur(6px) }
+.name{ font-family:Poppins, Inter; font-weight:800; font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing:.02em; margin:2px 0 8px; background: linear-gradient(90deg, var(--teal), var(--blue), var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; animation: slideGrad 8s ease-in-out infinite }
+@keyframes slideGrad{ 0%,100%{ background-position:0% 50% } 50%{ background-position:100% 50% } }
+.home-sub{ color:var(--muted); max-width:920px; margin:0 auto 6px }
+.typed-line{ margin-top:8px; min-height:26px; font-weight:700; font-family:Poppins, Inter; color:var(--teal) }
+
+/* =========================================================
+   ABOUT (reworked small blocks)
+========================================================= */
+#about .section-title{ --grad: linear-gradient(90deg, var(--cyan), var(--blue)); }
+.about-grid{ grid-template-columns: 1.15fr .85fr }
+
+/* Replace small blocks with Highlights / Certifications / Interests */
+.mini-card h4{ margin:0 0 6px; color:var(--teal); font-weight:800; font-family:Poppins }
+.mini-card ul{ margin:0; padding-left:18px; color:var(--muted) }
+
+/* =========================================================
+   EDUCATION & EXPERIENCE (two-column vibe preserved)
+   - "more" expands inline within card when hovered
+========================================================= */
+#edu-exp .section-title{ --grad: linear-gradient(90deg, var(--violet), var(--cyan)) }
+.columns{ grid-template-columns:1fr 1fr; align-items:start }
+.col h3{ font-family:Poppins; margin:0 0 12px; letter-spacing:.01em; color:#e8fbff; font-size:1.3rem }
+.item{ transition: transform var(--trans), box-shadow var(--trans) }
+.item:hover{ transform: translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.35) }
+.item .meta{ color:var(--muted); font-size:.95rem; margin-bottom:6px }
+.item h4{ margin:4px 0 6px; color:var(--teal) }
+.item p{ margin:0; color:#cfe6e9 }
+.more{ margin-top:8px; overflow:hidden; max-height:0; opacity:0; transition:max-height 400ms ease, opacity 400ms ease; color:#bfeef0 }
+.item:hover .more{ max-height:220px; opacity:1 }
+
+/* =========================================================
+   SKILLS (grid + stars style)
+========================================================= */
+#skills .section-title{ --grad: linear-gradient(90deg, var(--teal), var(--pink)) }
+.skill-box h4{ margin:0 0 8px; color:var(--teal) }
+.skill-row{ display:flex; justify-content:space-between; align-items:center; margin:8px 0; font-weight:700 }
+.stars{ letter-spacing:1px; text-shadow: 0 0 6px rgba(255,255,255,.12); color:#ffd66b }
+
+/* =========================================================
+   PROJECTS (cards + button)
+========================================================= */
+#projects .section-title{ --grad: linear-gradient(90deg, var(--blue), var(--violet)) }
+.proj-card h4{ margin:0 0 8px; color:var(--teal) }
+.proj-card p{ margin:0 0 12px; color:var(--muted) }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; font-weight:800; background:linear-gradient(90deg,var(--teal),var(--cyan)); color:#001; border:none; cursor:pointer; transition: transform var(--trans), box-shadow var(--trans); box-shadow:0 10px 24px rgba(0,0,0,.25) }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 16px 32px rgba(0,0,0,.35) }
+
+/* =========================================================
+   CONTACT (small profile image & form enhancements)
+   - select styling improved for readability
+   - floating labels for text fields (except Reason select stays static per request)
+========================================================= */
+#contact .section-title{ --grad: linear-gradient(90deg, var(--pink), var(--teal)) }
+.contact-grid{ grid-template-columns:.9fr 1.1fr; align-items:stretch }
+@media (max-width:980px){ .contact-grid{ grid-template-columns:1fr } }
+
+.contact-card{ padding:24px }
+.profile-side{ display:flex; flex-direction:column; gap:14px; align-items:center; justify-content:center }
+.avatar{ width:120px; height:120px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.07); box-shadow:0 6px 26px rgba(0,0,0,.25) }
+.socials{ display:flex; gap:10px }
+.icon-btn{ width:38px; height:38px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.08); color:#cfe6e9; transition: transform var(--trans), background var(--trans) }
+.icon-btn:hover{ transform:translateY(-2px) }
+.tiny-note{ font-size:.86rem; color:var(--muted); text-align:center }
+
+/* Form: floating labels */
+.form-row{ display:grid; gap:12px; grid-template-columns:1fr 1fr }
+@media (max-width:720px){ .form-row{ grid-template-columns:1fr } }
+.field{ position:relative; display:flex; flex-direction:column; gap:6px }
+label.floating{ position:absolute; top:12px; left:12px; pointer-events:none; color:#99c9cc; transition: all var(--trans); background:transparent; padding:0 6px }
+input[type="text"],input[type="email"], textarea, select{
+  width:100%; background:rgba(255,255,255,.02); color:#e8fbff; border:1px solid rgba(255,255,255,.10); border-radius:10px; padding:12px 12px; outline:none; transition:border var(--trans), background var(--trans);
+}
+input:focus, textarea:focus, select:focus{ border-color: rgba(45,212,191,.6); background:rgba(255,255,255,.04) }
+input:focus + label.floating,
+input:not(:placeholder-shown) + label.floating,
+textarea:focus + label.floating,
+textarea:not(:placeholder-shown) + label.floating{
+  top:-9px; left:10px; font-size:.78rem; background:#071318; border-radius:6px; color:#aef3ea;
+}
+
+/* Reason label static (prevent stacking/overlap) */
+.reason-label{ font-weight:700; color:#a7d2d4; margin-bottom:6px }
+
+/* small warning note */
+.warn{ font-size:.85rem; color:#9dd1cf; background: rgba(45,212,191,.06); border:1px dashed rgba(45,212,191,.18); padding:8px 10px; border-radius:10px; margin-top:10px }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer{ position:relative; z-index:2; padding:22px; text-align:center; color:var(--muted); background: linear-gradient(180deg, #0a1117, #070b10); border-top:1px solid rgba(255,255,255,.04) }
+.old-link{ display:inline-flex; align-items:center; gap:8px; margin-left:12px; position:relative }
+.old-link .hover-label{ position:absolute; left:100%; top:50%; transform:translate(8px,-50%); padding:.25rem .45rem; border-radius:8px; font-size:.78rem; font-weight:700; background:#0a141a; color:#aef3ea; border:1px solid rgba(45,212,191,.28); opacity:0; pointer-events:none; transition:opacity var(--trans), transform var(--trans); white-space:nowrap }
+.old-link:hover .hover-label{ opacity:1; transform:translate(10px,-50%) }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     PRELOADER
+     - Edit the text content below (class .pre-name and .pre-sub)
+     - visibleFor in JS controls minimum show duration (ms)
+========================================================= -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-grid" aria-hidden="true"></div>
+
+  <div class="pre-core" role="status" aria-live="polite">
+    <div class="hex" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <defs>
+          <!-- change colors here if needed -->
+          <linearGradient id="gradHex" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#2dd4bf"/>
+          </linearGradient>
+        </defs>
+        <path class="stroke" d="M50 2 L92 26 L92 74 L50 98 L8 74 L8 26 Z"></path>
+      </svg>
+      <div class="orbit" aria-hidden="true">
+        <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+      </div>
+    </div>
+
+    <div class="pre-name">PRsTrOpHY</div>
+    <div class="pre-sub"><span class="dot" aria-hidden="true"></span><span>Initializing visuals & assets…</span></div>
+  </div>
+</div>
+
+<!-- =========================================================
+   NAVBAR (top-right, minimal). Nav underlines highlight active section.
+========================================================= -->
+<header class="site-nav" role="navigation" aria-label="Main">
+  <div class="nav-inner">
+    <nav class="nav-links" aria-label="Primary Navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#edu-exp">Education & Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- CV pill: set the href to your CV file (cv.pdf or absolute link).
+     The tooltip appears on hover. -->
+<a class="cv-pill" href="cv.pdf" download aria-label="Download CV">
+  <span class="tip">Download CV</span>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+</a>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- HOME -->
+  <section id="home" aria-label="Home section">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="home-wrap reveal card p-28 home-card">
+        <h1 class="name">Prashid Pradhan</h1>
+        <p class="home-sub">
+          BSc (Hons) Computing — Software Engineering & Database Systems.
+          I create maintainable services, performant data layers, and thoughtful UI experiences.
+        </p>
+        <div class="typed-line" id="typed" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-label="About section">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-title">About</div>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+
+      <div class="grid about-grid" style="grid-template-columns:1.2fr .8fr; gap:18px;">
+        <div class="card p-28 about-blurb reveal">
+          <p>
+            I’m a computing graduate specialized in software engineering and database systems. I enjoy turning
+            complex requirements into elegant, well-tested code. My typical day is a blend of thinking about data
+            models, reviewing queries, and iterating UI for clarity.
+          </p>
+          <p>
+            I prefer using small, composable services. I like to measure performance, ship small improvements,
+            and iterate with feedback — especially when data informs product decisions.
+          </p>
+          <p style="color:var(--muted)">Recent: task-scheduling API, SQL performance tuning, and ML dataset quality improvements.</p>
+        </div>
+
+        <!-- NEW: Highlights / Certifications / Interests (replaced earlier "mini about") -->
+        <div class="grid" style="gap:12px">
+          <div class="card p-20 mini-card reveal">
+            <h4>Highlights</h4>
+            <ul>
+              <li>Designed a reporting pipeline that reduced query time by 40%</li>
+              <li>Built REST APIs used by internal teams (monitoring & jobs)</li>
+              <li>Improved labeling QA for computer vision datasets</li>
+            </ul>
+          </div>
+
+          <div class="card p-20 mini-card reveal">
+            <h4>Certifications</h4>
+            <ul>
+              <li>SQL Performance (internal course)</li>
+              <li>Data Labeling Best Practices (company)</li>
+              <li>Cloud Fundamentals — hands-on (self-study)</li>
+            </ul>
+          </div>
+
+          <div class="card p-20 mini-card reveal">
+            <h4>Interests</h4>
+            <ul>
+              <li>Data pipelines & ETL</li>
+              <li>Low-latency APIs</li>
+              <li>Front-end micro-interactions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION & EXPERIENCE (single combined section with two columns) -->
+  <section id="edu-exp" aria-label="Education and Experience">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-title">Education & Experience</div>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+
+      <div class="grid columns" style="gap:18px;">
+        <!-- Education Column -->
+        <div class="col reveal">
+          <h3>Education</h3>
+
+          <article class="card p-20 item">
+            <div class="meta">2017 • The British College — Kathmandu, Nepal</div>
+            <h4>BSc (Hons) Computing</h4>
+            <p>Major: Software Engineering & Database Systems</p>
+            <div class="more">Coursework: databases, operating systems, software project management. Thesis: database-backed task scheduler.</div>
+          </article>
+
+          <article class="card p-20 item">
+            <div class="meta">2013 • SOS Hermann Gmeiner — Shreekhandapur</div>
+            <h4>Higher Secondary Education Board</h4>
+            <p>Focus: mathematics & computing fundamentals.</p>
+            <div class="more">Top projects in algorithmic thinking and small web prototypes.</div>
+          </article>
+
+          <article class="card p-20 item">
+            <div class="meta">2011 • Vidhya Sagar School — Banepa</div>
+            <h4>Secondary Education Examination (SEE)</h4>
+            <p>Solid foundation in science and problem solving.</p>
+            <div class="more">Active in computer club and peer tutoring.</div>
+          </article>
+        </div>
+
+        <!-- Experience Column -->
+        <div class="col reveal">
+          <h3>Experience</h3>
+
+          <article class="card p-20 item">
+            <div class="meta">2019 – Present • CloudFactory</div>
+            <h4>Image Annotator & AI Data Trainer</h4>
+            <p>Led annotation and QA for computer vision datasets.</p>
+            <div class="more">Improvements: streamlined labeling flows, QA dashboards, team training materials.</div>
+          </article>
+
+          <article class="card p-20 item">
+            <div class="meta">2021 – 2023 • Gaule-Tech (Freelance)</div>
+            <h4>Freelance Designer / Developer</h4>
+            <p>Delivered responsive front-ends and basic back-end integrations.</p>
+            <div class="more">Clients included small retailers and personal brands; built deployment pipelines.</div>
+          </article>
+
+          <article class="card p-20 item">
+            <div class="meta">2017 – 2018 • PROFESSIONAL COMPUTER SYSTEM (PCS)</div>
+            <h4>Intern Developer (ASP.NET)</h4>
+            <p>Supported enterprise systems and feature work.</p>
+            <div class="more">Learned SDLC, code reviews, and feature rollout practices.</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" aria-label="Skills">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-title">Skills</div>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-3 reveal">
+        <div class="card p-24 skill-box">
+          <h4>Languages</h4>
+          <div class="skill-row"><span>Python</span><span class="stars">★★★★★</span></div>
+          <div class="skill-row"><span>JavaScript / TypeScript</span><span class="stars">★★★★☆</span></div>
+          <div class="skill-row"><span>Java / C#</span><span class="stars">★★★☆☆</span></div>
+        </div>
+
+        <div class="card p-24 skill-box">
+          <h4>Databases</h4>
+          <div class="skill-row"><span>MySQL / PostgreSQL</span><span class="stars">★★★★☆</span></div>
+          <div class="skill-row"><span>MongoDB</span><span class="stars">★★★☆☆</span></div>
+          <div class="skill-row"><span>SQL Optimization</span><span class="stars">★★★★☆</span></div>
+        </div>
+
+        <div class="card p-24 skill-box">
+          <h4>Tools & Cloud</h4>
+          <div class="skill-row"><span>Git / GitHub</span><span class="stars">★★★★★</span></div>
+          <div class="skill-row"><span>Docker</span><span class="stars">★★★☆☆</span></div>
+          <div class="skill-row"><span>AWS (basic)</span><span class="stars">★★☆☆☆</span></div>
+        </div>
+
+        <div class="card p-24 skill-box">
+          <h4>Frameworks</h4>
+          <div class="skill-row"><span>Node.js / Express</span><span class="stars">★★★★☆</span></div>
+          <div class="skill-row"><span>React</span><span class="stars">★★★★☆</span></div>
+          <div class="skill-row"><span>FastAPI</span><span class="stars">★★★☆☆</span></div>
+        </div>
+
+        <div class="card p-24 skill-box">
+          <h4>Design</h4>
+          <div class="skill-row"><span>UI & Prototyping</span><span class="stars">★★★☆☆</span></div>
+          <div class="skill-row"><span>Photoshop / XD</span><span class="stars">★★★☆☆</span></div>
+          <div class="skill-row"><span>Communication</span><span class="stars">★★★★★</span></div>
+        </div>
+
+        <div class="card p-24 skill-box">
+          <h4>Soft Skills</h4>
+          <div class="skill-row"><span>Problem Solving</span><span class="stars">★★★★★</span></div>
+          <div class="skill-row"><span>Teamwork</span><span class="stars">★★★★☆</span></div>
+          <div class="skill-row"><span>Mentoring</span><span class="stars">★★★★☆</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" aria-label="Projects">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-title">Projects</div>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-3" id="projects-grid">
+        <!-- Dummy projects (you can keep these or uncomment the GitHub fetch below) -->
+        <article class="card p-24 proj-card reveal">
+          <h4>Inventory Management System</h4>
+          <p>Full-stack app for warehouse tracking with role-based access, reporting and search optimization.</p>
+          <button class="btn" onclick="window.open('https://github.com/youruser/inventory-management','_blank')">View Project</button>
+        </article>
+
+        <article class="card p-24 proj-card reveal">
+          <h4>Portfolio Website</h4>
+          <p>Responsive portfolio and CV site with modern UI and performance considerations.</p>
+          <button class="btn" onclick="window.open('https://github.com/youruser/portfolio','_blank')">View Project</button>
+        </article>
+
+        <article class="card p-24 proj-card reveal">
+          <h4>Realtime Chat App</h4>
+          <p>Socket.io chat supporting rooms and message persistence with a lightweight API.</p>
+          <button class="btn" onclick="window.open('https://github.com/youruser/chat-app','_blank')">View Project</button>
+        </article>
+
+        <!-- add more dummy cards as needed -->
+      </div>
+
+      <!-- ===== GitHub fetch notes (commented code block below)
+           - If you enable the fetch, it will create the same card layout
+             and append them into #projects-grid.
+           - To enable: replace 'youruser' with your GitHub username and
+             uncomment the block in the JS section.
+           - If you want only dynamic results, optionally clear #projects-grid first:
+             grid.innerHTML = '';
+      -->
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-label="Contact">
+    <div class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="content container">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-title">Contact</div>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+
+      <div class="grid contact-grid" style="gap:18px">
+        <!-- small image and social icons -->
+        <aside class="card p-24 profile-side reveal">
+          <div class="avatar">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Profile placeholder">
+          </div>
+          <div style="text-align:center">
+            <div style="font-weight:800">Prashid Pradhan</div>
+            <div style="color:var(--muted);font-size:.95rem">BSc (Hons) Computing</div>
+          </div>
+
+          <div class="socials" aria-label="Social links">
+            <!-- Replace links with your profile URLs -->
+            <a class="icon-btn" href="https://github.com/youruser" target="_blank" rel="noopener" aria-label="GitHub">🐙</a>
+            <a class="icon-btn" href="https://linkedin.com/in/youruser" target="_blank" rel="noopener" aria-label="LinkedIn">💼</a>
+          </div>
+
+          <div class="tiny-note">Prefer email? Use the form to the right. I reply within a few business days.</div>
+        </aside>
+
+        <!-- form -->
+        <div class="card p-24 contact-card reveal">
+          <form id="contact-form" aria-label="Contact form">
+            <div class="form-row">
+              <div class="field">
+                <input id="name" name="from_name" type="text" placeholder=" " required />
+                <label class="floating" for="name">Name</label>
+              </div>
+              <div class="field">
+                <input id="email" name="reply_to" type="email" placeholder=" " required />
+                <label class="floating" for="email">Email</label>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:10px">
+              <!-- Static label for Reason (no floating) to avoid stacking issues -->
+              <label class="reason-label" for="reason">Reason</label>
+              <select id="reason" name="reason" aria-label="Reason for contact">
+                <option>Job Offer</option>
+                <option>Collaboration</option>
+                <option>General</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-top:10px">
+              <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+              <label class="floating" for="message">Message</label>
+            </div>
+
+            <div style="display:flex; gap:12px; align-items:center; margin-top:12px">
+              <button class="btn" type="submit">Send Message</button>
+              <div id="form-status" aria-live="polite" style="color:var(--muted); font-weight:700"></div>
+            </div>
+
+            <div class="warn" style="margin-top:12px">
+              Note: EmailJS keys below are placeholders. See JS comments where to replace them.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Prashid Pradhan — Built with clarity & performance
+  <!-- old.html placeholder: replace with your old site path or URL -->
+  <a class="old-link" href="old.html" title="Old version">🗂<span class="hover-label">Old version</span></a>
+</footer>
+
+<!-- =========================================================
+   SCRIPTS & COMMENTS (EmailJS, GitHub fetch, preloader)
+========================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+/* =========================================================
+   PRELOADER behavior
+   - visibleFor (ms) controls minimum time preloader is visible.
+   - Change visibleFor to a larger number to see animation longer.
+========================================================= */
+(function(){
+  const pre = document.getElementById('preloader');
+  const visibleFor = 1200; // milliseconds - control how long the preloader stays
+  window.addEventListener('load', () => {
+    setTimeout(()=> pre.classList.add('fade-out'), visibleFor);
+    setTimeout(()=> pre.remove(), visibleFor + 800);
+  });
+})();
+
+/* =========================================================
+   Scrollspy / Nav underline
+   - Adds .active to nav link of section in view.
+========================================================= */
+(function(){
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const byId = id => Array.from(links).find(a => a.getAttribute('href') === '#'+id);
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(a => a.classList.remove('active'));
+        const active = byId(e.target.id);
+        if(active) active.classList.add('active');
+      }
+    });
+  }, { threshold:0.35 });
+  sections.forEach(s => obs.observe(s));
+})();
+
+/* =========================================================
+   Typed line on Home (I am passionate about ...)
+   - Edits: change 'phrases' array to add/replace words.
+========================================================= */
+(function(){
+  const spot = document.getElementById('typed');
+  if(!spot) return;
+  const staticText = 'I am passionate about ';
+  const phrases = ['reliable backends','scalable databases','clean front-ends','optimized SQL','data pipelines'];
+  let pi = 0;
+  function typePhrase(p){
+    let i = 0;
+    function step(){
+      spot.textContent = staticText + p.slice(0,i);
+      i++;
+      if(i <= p.length) setTimeout(step, 80);
+      else setTimeout(erase, 1100);
+    }
+    step();
+  }
+  function erase(){
+    const current = spot.textContent.replace(staticText,'');
+    if(current.length>0){
+      spot.textContent = staticText + current.slice(0,-1);
+      setTimeout(erase, 35);
+    } else {
+      pi = (pi+1) % phrases.length;
+      typePhrase(phrases[pi]);
+    }
+  }
+  spot.textContent = staticText;
+  typePhrase(phrases[0]);
+})();
+
+/* =========================================================
+   Reveal on scroll (applies .show to elements with .reveal)
+========================================================= */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((items)=>{
+    items.forEach(i=>{
+      if(i.isIntersecting){ i.target.classList.add('show'); io.unobserve(i.target); }
+    });
+  }, {threshold:.12});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* =========================================================
+   EMAILJS - quick setup instructions (REPLACE placeholders)
+   1) Create an EmailJS account: https://www.emailjs.com/
+   2) Create an Email Service (e.g., Gmail, SMTP, etc.)
+   3) Create an Email Template with fields:
+        - from_name, reply_to, reason, message
+   4) Replace the placeholder values below:
+      emailjs.init('YOUR_PUBLIC_KEY');
+      emailjs.sendForm('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID', form)
+   5) Keep this page served via HTTP(S). EmailJS client works from the browser.
+   NOTE: For production you may prefer to send via a backend to keep keys safe.
+========================================================= */
+(function(){
+  // Replace 'YOUR_PUBLIC_KEY' with your EmailJS public key (user ID)
+  emailjs.init('YOUR_PUBLIC_KEY'); // e.g. 'A1b2C3d4E5F6g7H8'
+
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = 'Sending…';
+
+    // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with the values from EmailJS
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(function(){
+        status.textContent = 'Message sent — thanks!';
+        status.style.color = '#7ee7d9';
+        form.reset();
+      }, function(err){
+        console.error('EmailJS error:', err);
+        status.textContent = 'Failed to send. Please email directly.';
+        status.style.color = '#fca5a5';
+      });
+  });
+})();
+
+/* =========================================================
+   GitHub projects fetch (COMMENTED)
+   - Behavior: fetches repos, sorts by updated, takes first 6,
+     and appends cards into #projects-grid with the same card layout
+     used by dummy projects above.
+   - Steps to enable:
+     1) Replace 'youruser' with your GitHub username
+     2) Uncomment the entire block below
+     3) Optionally clear #projects-grid by uncommenting grid.innerHTML = '';
+   - Note: GitHub API has rate limits for unauthenticated requests.
+========================================================= */
+
+/*
+(function(){
+  const user = 'youruser'; // <-- replace with your username
+  fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=6`)
+    .then(r => r.json())
+    .then(repos => {
+      if(!Array.isArray(repos)) return;
+      const grid = document.getElementById('projects-grid');
+      // Optional: remove dummy projects before appending real ones
+      // grid.innerHTML = '';
+      repos.slice(0,6).forEach(repo => {
+        const art = document.createElement('article');
+        art.className = 'card p-24 proj-card reveal';
+        art.innerHTML = `
+          <h4>${repo.name}</h4>
+          <p>${repo.description ? repo.description : 'No description provided.'}</p>
+          <button class="btn" onclick="window.open('${repo.html_url}','_blank')">View Project</button>
+        `;
+        grid.appendChild(art);
+      });
+    })
+    .catch(console.error);
+})();
+*/
+
+/* Footer year */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

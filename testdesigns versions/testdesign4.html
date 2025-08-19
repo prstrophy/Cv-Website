@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prashid Pradhan — Computing CV</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================
+   THEME TOKENS
+   ========================================= */
+:root{
+  --bg: #0b0f14;
+  --text: #cfe7e3;
+  --muted: #9db2af;
+  --glass: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.08);
+  --radius: 14px;
+  --shadow: 0 12px 40px rgba(2,8,12,0.55);
+  --trans: 260ms cubic-bezier(.2,.9,.3,1);
+  /* Section accent pairs (unique per section) */
+  --accent-home-1: #2dd4bf; --accent-home-2: #06b6d4;  /* teal -> cyan */
+  --accent-about-1:#22d3ee; --accent-about-2:#38bdf8;  /* sky -> blue */
+  --accent-edu-1:  #34d399; --accent-edu-2:  #06b6d4;  /* green -> cyan */
+  --accent-skill-1:#a78bfa; --accent-skill-2:#22d3ee;  /* violet -> sky */
+  --accent-proj-1: #f59e0b; --accent-proj-2:#34d399;  /* amber -> green */
+  --accent-contact-1:#ef4444; --accent-contact-2:#22d3ee; /* red -> sky */
+}
+
+/* =========================================
+   BASE
+   ========================================= */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#06070a 0%, #0b0f14 100%);
+  color:var(--text);
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.55;
+  scroll-behavior:smooth;
+}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; display:block}
+
+/* Utility */
+.container{width:100%; max-width:1160px; margin:0 auto; padding:0 20px}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.03));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+/* =========================================
+   NAVBAR (top-right minimal)
+   ========================================= */
+header.site-nav{
+  position:fixed; inset:0 0 auto 0; height:64px;
+  display:flex; align-items:center; justify-content:flex-end;
+  padding:0 12px;
+  background:transparent;
+  z-index:1200;
+  pointer-events:auto;
+}
+.nav-wrap{
+  width:100%; max-width:1160px; display:flex;
+  align-items:center; justify-content:flex-end;
+}
+.nav-links{
+  display:flex; gap:.6rem; align-items:center;
+  background:linear-gradient(180deg, rgba(8,12,16,0.35), rgba(6,10,14,0.25));
+  border:1px solid rgba(255,255,255,0.06);
+  padding:.35rem .4rem; border-radius:999px;
+  backdrop-filter: blur(8px);
+}
+.nav-links a{
+  padding:.42rem .72rem;
+  border-radius:999px;
+  font-weight:600; font-size:.95rem; opacity:.95;
+  transition:transform 180ms ease, background .2s ease, color .2s ease;
+  color:#c5e9e3;
+}
+.nav-links a:hover{ transform:translateY(-2px) }
+.nav-links a.active{
+  color:#001;
+  background:linear-gradient(90deg,#2dd4bf,#06b6d4);
+  box-shadow:0 8px 24px rgba(45,212,191,0.24);
+}
+
+/* =========================================
+   CV PILL (minimal, expands on hover)
+   ========================================= */
+.cv-pill{
+  position:fixed; right:18px; top:50%; transform:translateY(-50%);
+  z-index:1400; display:flex; align-items:center; gap:.6rem;
+  padding:.6rem .7rem;
+  color:#2dd4bf;
+  background:linear-gradient(180deg, rgba(45,212,191,0.15), rgba(6,182,198,0.08));
+  border:1px solid rgba(45,212,191,0.25);
+  border-radius:999px; cursor:pointer;
+  box-shadow:0 14px 30px rgba(45,212,191,0.08);
+  transition:transform var(--trans), box-shadow var(--trans), background var(--trans), padding var(--trans), gap var(--trans);
+}
+.cv-pill:hover{ transform:translateY(calc(-50% - 6px)); box-shadow:0 24px 50px rgba(45,212,191,0.2) }
+.cv-pill svg{ width:18px;height:18px; flex:0 0 auto }
+.cv-pill span{ overflow:hidden; max-width:0; white-space:nowrap; transition:max-width 360ms ease; font-weight:700; }
+.cv-pill:hover span{ max-width:160px } /* expands to show label */
+@media (max-width:720px){ .cv-pill{ right:12px } }
+
+/* =========================================
+   SECTIONS (unique BGs + glass panels)
+   To switch an image off and see pure gradient:
+   - comment the url(...) line of that section.
+   ========================================= */
+main{padding-top:64px}
+section{
+  min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden;
+}
+.section-inner{ width:100%; }
+.center{ display:grid; place-items:center; text-align:center }
+
+#home{
+  /* IMAGE + GRADIENT (HOME) */
+  background:
+    linear-gradient(180deg, rgba(7,12,14,0.65), rgba(5,8,10,0.75)),
+    url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop'); /* comment this line to test gradient only */
+  background-size:cover; background-position:center;
+}
+#about{
+  background:
+    radial-gradient(80% 120% at 70% 20%, rgba(34,211,238,0.18), transparent 60%),
+    linear-gradient(180deg, rgba(6,12,14,0.7), rgba(4,8,10,0.9)),
+    url('https://images.unsplash.com/photo-1526378721306-6b9f2cd89b2f?q=80&w=1600&auto=format&fit=crop'); /* comment to test */
+  background-size:cover; background-position:center;
+}
+#edu-exp{
+  background:
+    linear-gradient(180deg, rgba(3,9,8,0.7), rgba(5,10,11,0.92)),
+    url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1600&auto=format&fit=crop'); /* comment to test */
+  background-size:cover; background-position:center;
+}
+#skills{
+  background:
+    radial-gradient(90% 120% at 30% 10%, rgba(167,139,250,0.18), transparent 60%),
+    linear-gradient(180deg, rgba(6,8,12,0.7), rgba(7,11,15,0.92)),
+    url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop'); /* comment to test */
+  background-size:cover; background-position:center;
+}
+#projects{
+  background:
+    radial-gradient(120% 120% at 10% 80%, rgba(245,158,11,0.18), transparent 55%),
+    linear-gradient(180deg, rgba(7,9,12,0.7), rgba(8,10,13,0.92)),
+    url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop'); /* comment to test */
+  background-size:cover; background-position:center;
+}
+#contact{
+  background:
+    radial-gradient(130% 150% at 80% 10%, rgba(239,68,68,0.18), transparent 55%),
+    linear-gradient(180deg, rgba(7,8,12,0.75), rgba(6,9,12,0.95));
+  /* no image here for a bold gradient vibe */
+}
+
+/* =========================================
+   SECTION TITLES (animated gradient text)
+   ========================================= */
+.section-title{
+  margin:0 0 18px 0;
+  font-family:Poppins, Inter, sans-serif;
+  font-size:clamp(1.9rem, 4vw, 2.6rem);
+  font-weight:700;
+  letter-spacing:.2px;
+  display:inline-block;
+  position:relative;
+  background-clip:text; -webkit-background-clip:text;
+  color:transparent;
+  animation: hue 10s linear infinite;
+}
+.section-title.centered{ display:block; text-align:center }
+.title-underline{
+  height:3px; width:150px; margin:10px auto 22px auto; border-radius:3px; opacity:.9;
+}
+@keyframes hue{ from{ filter:hue-rotate(0deg) } to{ filter:hue-rotate(360deg) } }
+
+/* Title variant per section */
+#home .section-title{ background-image:linear-gradient(90deg,var(--accent-home-1),var(--accent-home-2)) }
+#about .section-title{ background-image:linear-gradient(90deg,var(--accent-about-1),var(--accent-about-2)) }
+#edu-exp .section-title{ background-image:linear-gradient(90deg,var(--accent-edu-1),var(--accent-edu-2)) }
+#skills .section-title{ background-image:linear-gradient(90deg,var(--accent-skill-1),var(--accent-skill-2)) }
+#projects .section-title{ background-image:linear-gradient(90deg,var(--accent-proj-1),var(--accent-proj-2)) }
+#contact .section-title{ background-image:linear-gradient(90deg,var(--accent-contact-1),var(--accent-contact-2)) }
+
+/* matching underline colors */
+#home .title-underline{ background:linear-gradient(90deg,var(--accent-home-1),var(--accent-home-2)) }
+#about .title-underline{ background:linear-gradient(90deg,var(--accent-about-1),var(--accent-about-2)) }
+#edu-exp .title-underline{ background:linear-gradient(90deg,var(--accent-edu-1),var(--accent-edu-2)) }
+#skills .title-underline{ background:linear-gradient(90deg,var(--accent-skill-1),var(--accent-skill-2)) }
+#projects .title-underline{ background:linear-gradient(90deg,var(--accent-proj-1),var(--accent-proj-2)) }
+#contact .title-underline{ background:linear-gradient(90deg,var(--accent-contact-1),var(--accent-contact-2)) }
+
+/* =========================================
+   HOME (centered glass hero)
+   ========================================= */
+.hero{
+  display:grid; place-items:center;
+  padding:28px; gap:10px;
+}
+.hero .glass{
+  max-width:960px; padding:28px 26px 22px;
+}
+.hero h1{
+  margin:0 0 8px 0;
+  font-size:clamp(2.2rem,4.2vw,3.2rem);
+  font-family:Poppins, Inter, sans-serif;
+  color:#e9fffb;
+}
+.hero .sub{
+  color:var(--muted); font-size:1.05rem; margin:0 auto 6px auto; max-width:820px;
+}
+#typed{ color:#b8fff4; font-weight:700; font-family:Poppins, Inter, sans-serif; min-height:26px }
+
+/* =========================================
+   ABOUT (glass grid + extra sections)
+   ========================================= */
+.about-grid{
+  display:grid; gap:18px;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+@media (max-width:980px){ .about-grid{ grid-template-columns:1fr } }
+.about-card{ padding:22px }
+.about-points{
+  display:grid; gap:12px;
+}
+.point{
+  padding:14px 16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+/* =========================================
+   EDUCATION & EXPERIENCE (same section, different columns)
+   ========================================= */
+.edu-exp-grid{
+  display:grid; gap:18px;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width:980px){ .edu-exp-grid{ grid-template-columns:1fr } }
+.block{ padding:22px }
+.item{
+  position:relative; padding:16px 16px 14px 16px; border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+  border:1px solid var(--border); margin-bottom:12px;
+  transition:transform var(--trans), box-shadow var(--trans);
+}
+.item:hover{ transform: translateY(-4px); box-shadow:0 18px 42px rgba(6,16,20,0.35) }
+.item h4{ margin:.2rem 0; color:#e6fffb }
+.item .meta{ color:var(--muted); font-size:.95rem; margin-bottom:4px }
+.item .hover-more{
+  display:block; max-height:0; overflow:hidden; transition:max-height 320ms ease; color:#a7f3eb;
+}
+.item:hover .hover-more{ max-height:120px }
+.badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.badge{
+  font-size:.78rem; padding:.25rem .55rem; border-radius:999px;
+  background:linear-gradient(90deg,var(--accent-edu-1),var(--accent-edu-2));
+  color:#012; font-weight:700;
+}
+
+/* =========================================
+   SKILLS (groups with rating stars)
+   ========================================= */
+.skills-grid{
+  display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+.skill-card{ padding:18px }
+.skill-card h4{ margin:.1rem 0 10px 0; color:#eafdfb }
+.skill-line{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.06);
+}
+.stars{ letter-spacing:1px; color:#ffe58a } /* star color */
+small.note{color:var(--muted)}
+
+/* =========================================
+   PROJECTS (richer dummy data)
+   ========================================= */
+.projects-grid{
+  display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.project-card{ padding:18px; display:flex; flex-direction:column; gap:10px }
+.project-card h4{ margin:.1rem 0; color:#fff8ea }
+.tags{ display:flex; flex-wrap:wrap; gap:8px }
+.tag{ font-size:.76rem; padding:.22rem .5rem; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08) }
+.project-card p{ color:var(--muted) }
+.project-card a{ font-weight:700; color:#b8fff4 }
+
+/* =========================================
+   CONTACT (two columns: profile + form)
+   ========================================= */
+.contact-wrap{
+  display:grid; gap:18px; grid-template-columns: .9fr 1.1fr;
+}
+@media (max-width:980px){ .contact-wrap{ grid-template-columns:1fr } }
+
+.profile-card{ padding:22px; text-align:center }
+.profile-pic{
+  width:130px; height:130px; margin:0 auto 12px auto; border-radius:50%;
+  border:3px solid rgba(255,255,255,0.18);
+  background:
+    radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,0.12), transparent 60%),
+    #0F172A url('https://i.imgur.com/0Z8FQ7f.png') center/70% no-repeat; /* cartoon-ish placeholder */
+}
+.icon-links{ display:flex; justify-content:center; gap:12px; margin-top:10px }
+.icon-btn{
+  width:42px; height:42px; display:grid; place-items:center;
+  border-radius:10px; border:1px solid rgba(255,255,255,0.1);
+  background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.03));
+  transition:transform var(--trans), box-shadow var(--trans);
+}
+.icon-btn:hover{ transform:translateY(-3px); box-shadow:0 16px 32px rgba(34,211,238,0.2) }
+.icon-btn svg{ width:20px; height:20px }
+
+.form-card{ padding:22px }
+.field{ display:flex; flex-direction:column; margin-bottom:12px }
+.field label{ font-weight:600; margin-bottom:6px; color:#e6fffb }
+.input, .textarea, .select{
+  padding:11px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);
+  background:rgba(5,8,10,0.6); color:#dff7f3; font-size:1rem; outline:none;
+}
+.select{ appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:
+  linear-gradient(45deg, transparent 50%, #b8fff4 50%),
+  linear-gradient(135deg, #b8fff4 50%, transparent 50%),
+  linear-gradient(to right, transparent, transparent);
+  background-position:
+  calc(100% - 18px) calc(1em + 2px),
+  calc(100% - 13px) calc(1em + 2px),
+  100% 0;
+  background-size:5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat:no-repeat;
+}
+.input:focus, .textarea:focus, .select:focus{
+  border-color:#7ee7d9; box-shadow:0 0 0 3px rgba(45,212,191,0.18)
+}
+button.btn{
+  margin-top:6px;
+  background:linear-gradient(90deg,var(--accent-contact-1),var(--accent-contact-2));
+  color:#001; border:none; padding:12px 16px; border-radius:12px;
+  font-weight:800; cursor:pointer; box-shadow:0 14px 42px rgba(34,211,238,0.16);
+  transition:transform var(--trans)
+}
+button.btn:hover{ transform:translateY(-2px) }
+#form-status{ margin-top:6px; color:#b8fff4; font-weight:600 }
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer{ padding:22px; text-align:center; color:var(--muted); font-size:.95rem }
+
+/* =========================================
+   REVEAL
+   ========================================= */
+.reveal{ opacity:0; transform:translateY(10px); transition:opacity 520ms ease, transform 520ms ease }
+.reveal.show{ opacity:1; transform:none }
+</style>
+</head>
+<body>
+
+<!-- Minimal top-right navigation -->
+<header class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-wrap">
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#edu-exp">Education & Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Floating minimal CV pill -->
+<a class="cv-pill" href="cv.pdf" download aria-label="Download CV">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+  <span>Download CV</span>
+</a>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home" class="center">
+    <div class="section-inner">
+      <div class="container hero">
+        <div class="card glass reveal">
+          <h1>Prashid Pradhan</h1>
+          <p class="sub">BSc (Hons) Computing — Software Engineering & Database Systems. I build reliable backends, clean front-ends, and data pipelines that scale.</p>
+          <div id="typed" aria-live="polite"></div>
+        </div>
+
+        <h2 class="section-title centered">Home</h2>
+        <div class="title-underline"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="center">
+    <div class="section-inner">
+      <div class="container">
+        <h2 class="section-title centered">About</h2>
+        <div class="title-underline"></div>
+
+        <div class="about-grid">
+          <div class="card about-card reveal">
+            <p>
+              I design and implement full-stack solutions focused on performance, maintainability, and security.
+              My background in software engineering and database systems helps me translate product requirements
+              into pragmatic implementations. I enjoy collaborating across disciplines to ship impactful features.
+            </p>
+            <div class="about-points" style="margin-top:12px">
+              <div class="point">• Recent: designed a task scheduling API, optimized SQL for a reporting pipeline, contributed to ML data labeling workflows.</div>
+              <div class="point">• Interests: backend architecture, relational databases, data tooling, and clean UI with thoughtful UX.</div>
+              <div class="point">• Tools I like: GitHub Actions, Docker, Postman, Figma/XD, Prisma/ORMs.</div>
+            </div>
+          </div>
+
+          <!-- Extra quick lists -->
+          <div class="card about-card reveal">
+            <h4 style="margin:0 0 8px 0;color:#e6fffb">Tooling & Design</h4>
+            <div class="about-points">
+              <div class="point">Dev Tools: VS Code, Git/GitHub, Docker, Postman</div>
+              <div class="point">Design Tools: Figma, Adobe XD, Photoshop, Illustrator</div>
+              <div class="point">Practices: Code Reviews, CI/CD, Issue Tracking</div>
+              <div class="point">Domains: APIs, CRUD dashboards, analytics, content systems</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION & EXPERIENCE (single section, separated columns) -->
+  <section id="edu-exp" class="center">
+    <div class="section-inner">
+      <div class="container">
+        <h2 class="section-title centered">Education & Experience</h2>
+        <div class="title-underline"></div>
+
+        <div class="edu-exp-grid">
+          <!-- Education column -->
+          <div class="card block reveal">
+            <h3 style="margin:0 0 10px 0">Education</h3>
+
+            <div class="item">
+              <div class="meta">2017 • The British College — Kathmandu, Nepal</div>
+              <h4>BSc (Hons) Computing</h4>
+              <span class="hover-more">Major: Software Engineering & Database Systems • Coursework: DB Design, Algorithms, Web Engineering, Software Project</span>
+              <div class="badges">
+                <span class="badge">Backend</span><span class="badge">SQL</span><span class="badge">Systems</span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="meta">2013 • SOS Hermann Gmeiner — Shreekhandapur, Nepal</div>
+              <h4>Higher Secondary Education Board</h4>
+              <span class="hover-more">Focus areas: Mathematics & Computing fundamentals</span>
+              <div class="badges">
+                <span class="badge">Math</span><span class="badge">Logic</span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="meta">2011 • Vidhya Sagar School — Banepa, Nepal</div>
+              <h4>Secondary Education Examination (SEE)</h4>
+              <span class="hover-more">Strong foundation in science and problem-solving</span>
+            </div>
+          </div>
+
+          <!-- Experience column -->
+          <div class="card block reveal">
+            <h3 style="margin:0 0 10px 0">Experience</h3>
+
+            <div class="item">
+              <div class="meta">2019 – Present • CloudFactory</div>
+              <h4>Image Annotator & AI Data Trainer</h4>
+              <span class="hover-more">Improved dataset quality and labeling throughput for CV models; helped refine QC processes and documentation.</span>
+              <div class="badges">
+                <span class="badge">ML Data</span><span class="badge">QA</span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="meta">2021 – 2023 • Gaule-Tech</div>
+              <h4>Freelance Graphic Designer / Developer</h4>
+              <span class="hover-more">Delivered responsive UIs, lightweight web apps, and brand assets for small businesses.</span>
+              <div class="badges">
+                <span class="badge">UI</span><span class="badge">Front-end</span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="meta">2017 – 2018 • PROFESSIONAL COMPUTER SYSTEM (PCS)</div>
+              <h4>Intern Developer (ASP.NET)</h4>
+              <span class="hover-more">Contributed to legacy systems and new features; learned enterprise workflows and collaboration patterns.</span>
+              <div class="badges">
+                <span class="badge">.NET</span><span class="badge">Teamwork</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="center">
+    <div class="section-inner">
+      <div class="container">
+        <h2 class="section-title centered">Skills</h2>
+        <div class="title-underline"></div>
+
+        <div class="skills-grid">
+          <div class="card skill-card reveal">
+            <h4>Languages & Frameworks</h4>
+            <div class="skill-line"><span>Python</span><span class="stars">★★★★★</span></div>
+            <div class="skill-line"><span>JavaScript (Node / React)</span><span class="stars">★★★★☆</span></div>
+            <div class="skill-line"><span>Java / C#</span><span class="stars">★★★☆☆</span></div>
+            <small class="note">Comfortable across backend and front-end stacks.</small>
+          </div>
+
+          <div class="card skill-card reveal">
+            <h4>Databases</h4>
+            <div class="skill-line"><span>MySQL / PostgreSQL</span><span class="stars">★★★★☆</span></div>
+            <div class="skill-line"><span>MongoDB</span><span class="stars">★★★☆☆</span></div>
+            <div class="skill-line"><span>SQL Optimization</span><span class="stars">★★★★☆</span></div>
+            <small class="note">Modeling, indexing, query tuning, migrations.</small>
+          </div>
+
+          <div class="card skill-card reveal">
+            <h4>Tools & Cloud</h4>
+            <div class="skill-line"><span>Git / GitHub</span><span class="stars">★★★★★</span></div>
+            <div class="skill-line"><span>Docker</span><span class="stars">★★★☆☆</span></div>
+            <div class="skill-line"><span>AWS (basic)</span><span class="stars">★★☆☆☆</span></div>
+            <small class="note">CI/CD, containers, and environment setup.</small>
+          </div>
+
+          <div class="card skill-card reveal">
+            <h4>Design & Soft Skills</h4>
+            <div class="skill-line"><span>UI & Prototyping</span><span class="stars">★★★☆☆</span></div>
+            <div class="skill-line"><span>Communication</span><span class="stars">★★★★★</span></div>
+            <div class="skill-line"><span>Problem Solving</span><span class="stars">★★★★★</span></div>
+            <small class="note">Figma/XD, quick prototypes, user empathy.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="center">
+    <div class="section-inner">
+      <div class="container">
+        <h2 class="section-title centered">Projects</h2>
+        <div class="title-underline"></div>
+
+        <div class="projects-grid" id="projects-grid">
+          <!-- Rich dummy projects -->
+          <article class="card project-card reveal">
+            <h4>Inventory Management System</h4>
+            <p>Full-stack app for warehouse tracking with real-time reporting and search optimization. Role-based auth and exportable analytics.</p>
+            <div class="tags"><span class="tag">Node</span><span class="tag">Express</span><span class="tag">MySQL</span></div>
+            <a href="https://github.com/prashidpradhan/inventory-management" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <h4>Portfolio Website</h4>
+            <p>Polished personal site with responsive UI, lazy images, and semantic markup. Focus on accessibility and performance budgets.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+            <a href="https://github.com/prashidpradhan/portfolio" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <h4>Chat Application</h4>
+            <p>Real-time messaging with Socket.io, private rooms, and message persistence. Deployed with SSL and basic moderation.</p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Socket.io</span><span class="tag">MongoDB</span></div>
+            <a href="https://github.com/prashidpradhan/chat-app" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <h4>Task Tracker API</h4>
+            <p>RESTful API with JWT auth, rate limiting, and OpenAPI docs; CI pipeline and containerized dev environment.</p>
+            <div class="tags"><span class="tag">Node</span><span class="tag">Docker</span><span class="tag">PostgreSQL</span></div>
+            <a href="https://github.com/prashidpradhan/task-tracker-api" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <h4>Weather Dashboard</h4>
+            <p>Dashboard that aggregates public APIs with caching, charts, and configurable locations; client-side routing.</p>
+            <div class="tags"><span class="tag">Charts</span><span class="tag">API</span></div>
+            <a href="#" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <article class="card project-card reveal">
+            <h4>Blog CMS</h4>
+            <p>Admin-first CMS with role management, media uploads, and markdown support. Emphasis on DX and editor experience.</p>
+            <div class="tags"><span class="tag">Express</span><span class="tag">Prisma</span><span class="tag">SQLite</span></div>
+            <a href="#" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+        </div>
+
+        <!-- ========= ENABLE THIS TO AUTO-FETCH YOUR GITHUB PROJECTS =========
+        <script>
+        (function(){
+          const user = 'prashidpradhan'; // <- change to your username
+          fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=6`)
+            .then(r=>r.json()).then(repos=>{
+              const grid = document.getElementById('projects-grid');
+              if(!Array.isArray(repos)) return;
+              repos.slice(0,6).forEach(repo=>{
+                const art = document.createElement('article');
+                art.className='card project-card';
+                art.innerHTML = `
+                  <h4>${repo.name}</h4>
+                  <p>${repo.description || 'No description.'}</p>
+                  <div class="tags"><span class="tag">GitHub</span></div>
+                  <a href="${repo.html_url}" target="_blank" rel="noopener">View on GitHub</a>`;
+                grid.appendChild(art);
+              });
+            }).catch(console.error);
+        })();
+        </script>
+        ===================================================================== -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="center">
+    <div class="section-inner">
+      <div class="container">
+        <h2 class="section-title centered">Contact</h2>
+        <div class="title-underline"></div>
+
+        <div class="contact-wrap">
+          <!-- Profile & links -->
+          <div class="card profile-card reveal">
+            <div class="profile-pic" aria-hidden="true"></div>
+            <h3 style="margin:0 0 6px 0">Let’s connect</h3>
+            <p style="color:var(--muted)">Open to roles, collaborations, and interesting challenges.</p>
+            <div class="icon-links">
+              <a class="icon-btn" href="https://github.com/prashidpradhan" target="_blank" aria-label="GitHub">
+                <!-- GitHub icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.35-1.75-1.35-1.75-1.1-.75.08-.74.08-.74 1.22.09 1.86 1.26 1.86 1.26 1.08 1.85 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.31-5.48-1.34-5.48-5.96 0-1.32.47-2.4 1.24-3.25-.12-.3-.54-1.55.12-3.23 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.68.24 2.93.12 3.23.77.85 1.24 1.93 1.24 3.25 0 4.63-2.81 5.65-5.49 5.95.43.37.81 1.1.81 2.22v3.3c0 .32.21.69.82.58A12 12 0 0 0 12 .5Z"/></svg>
+              </a>
+              <a class="icon-btn" href="https://linkedin.com/in/prashidpradhan" target="_blank" aria-label="LinkedIn">
+                <!-- LinkedIn icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2.94 2.94 0 0 1 22 6v12a2.94 2.94 0 0 1-3 3H5a2.94 2.94 0 0 1-3-3V6a2.94 2.94 0 0 1 3-3Zm-9.65 7H7.18v7.95h2.17Zm.15-2.6a1.26 1.26 0 1 0-1.26 1.26 1.26 1.26 0 0 0 1.26-1.26ZM19 14.12c0-2.64-1.41-3.86-3.28-3.86a2.84 2.84 0 0 0-2.58 1.42h-.05V10H10.9v7.95h2.18v-3.94a1.63 1.63 0 0 1 1.53-1.75c1 0 1.4.73 1.4 1.8v3.89H19Z"/></svg>
+              </a>
+              <a class="icon-btn" href="mailto:prashid@example.com" aria-label="Email">
+                <!-- Mail icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5Z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="card form-card reveal">
+            <form id="contact-form" aria-label="Contact form" novalidate>
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="from_name" type="text" class="input" placeholder="Your full name" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="reply_to" type="email" class="input" placeholder="you@example.com" required>
+              </div>
+              <div class="field">
+                <label for="reason">Reason</label>
+                <select id="reason" name="reason" class="select">
+                  <option>Job Offer</option>
+                  <option>Collaboration</option>
+                  <option>General</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" class="textarea" placeholder="Write your message here..." required></textarea>
+              </div>
+
+              <button class="btn" type="submit">Send Message</button>
+              <div id="form-status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> Prashid Pradhan — Built with clarity & performance
+</footer>
+
+<!-- EmailJS (enable when ready) -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+/* Initialize EmailJS when using the form:
+emailjs.init('YOUR_EMAILJS_USER_ID'); // 1) put your EmailJS user ID
+
+// 2) In the submit handler below, replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID
+*/
+</script>
+
+<script>
+/* =========================================
+   TYPED EFFECT: "Passionate about <changing>"
+   (keeps "Passionate about" static)
+   ========================================= */
+(function(){
+  const spot = document.getElementById('typed');
+  const phrases = ['Reliable Backends','Scalable Databases','Data Training','Full-stack Development','Optimized SQL'];
+  const staticText = 'Passionate about ';
+  let index = 0, i = 0, mode = 'type';
+
+  function tick(){
+    const current = phrases[index];
+    if(mode === 'type'){
+      if(i <= current.length){
+        spot.textContent = staticText + current.slice(0,i++);
+        return setTimeout(tick, 90);
+      } else { mode='hold'; return setTimeout(tick, 1200); }
+    }
+    if(mode === 'hold'){
+      mode='erase'; return setTimeout(tick, 30);
+    }
+    if(mode === 'erase'){
+      if(i > 0){
+        spot.textContent = staticText + current.slice(0,--i);
+        return setTimeout(tick, 35);
+      } else { mode='type'; index=(index+1)%phrases.length; return setTimeout(tick, 200); }
+    }
+  }
+  // start
+  spot.textContent = staticText; tick();
+})();
+
+/* =========================================
+   SCROLLSPY + REVEAL
+   ========================================= */
+(function(){
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('main section[id]');
+  const map = {};
+  sections.forEach(s => map[s.id] = s);
+
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const id = en.target.id;
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+      }
+    });
+  }, {root:null, rootMargin:'-28% 0px -60% 0px', threshold:0});
+  sections.forEach(s => obs.observe(s));
+
+  // reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const rev = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); rev.unobserve(e.target); }
+    });
+  }, {threshold:.08});
+  revealEls.forEach(el => rev.observe(el));
+})();
+
+/* =========================================
+   CONTACT: EmailJS submission (enable when ready)
+   ========================================= */
+/*
+(function(){
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = 'Sending...';
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+      .then(function(){
+        status.textContent = 'Message sent — thanks!';
+        status.style.color = '#7ee7d9';
+        form.reset();
+      }, function(err){
+        console.error('EmailJS error:', err);
+        status.textContent = 'Failed to send. Please email directly.';
+        status.style.color = '#fca5a5';
+      });
+  });
+})();
+*/
+
+/* =========================================
+   YEAR
+   ========================================= */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
