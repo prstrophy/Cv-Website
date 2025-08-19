@@ -140,6 +140,7 @@ Preloader Styles
 }
 
 /*
+/*
 ========================================================================================
 Header & Navigation Styles
 ========================================================================================
@@ -182,6 +183,84 @@ header a:hover::after,
 header a.active::after {
     transform: scaleX(1);
 }
+
+/* Mobile menu icon styles */
+.menu-icon {
+    display: none; /* Hidden by default on larger screens */
+    color: #e6edf3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    z-index: 1100; /* Ensure it's above other content */
+}
+
+/* Mobile navigation menu styles */
+.mobile-nav {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.95); /* Darker overlay */
+    backdrop-filter: blur(10px);
+    z-index: 999; /* Below the menu icon but above main content */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%); /* Start off-screen */
+}
+
+.mobile-nav.active {
+    transform: translateX(0); /* Slide in */
+    display: flex; /* Make sure it becomes flex when active */
+}
+
+.mobile-nav a {
+    color: #e6edf3;
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.mobile-nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: cyan;
+    transform: translateX(-50%);
+    transition: width 0.3s;
+}
+
+.mobile-nav a:hover::after,
+.mobile-nav a.active::after {
+    width: 80%;
+}
+
+/* Media query for responsive header */
+@media (max-width: 768px) {
+    header {
+        justify-content: space-between; /* Space out nav and icon */
+        padding: 0.8rem 1.5rem;
+        border-radius: 0; /* Remove rounded corner for full width */
+        width: 100%; /* Full width on mobile */
+    }
+
+    header a {
+        display: none; /* Hide regular nav links on small screens */
+    }
+
+    .menu-icon {
+        display: block; /* Show hamburger icon */
+    }
+}
+
 
 /*
 ========================================================================================
@@ -395,8 +474,25 @@ Quote Section Styles (Updated)
     margin-bottom: 0.5rem;
 }
 .stars {
-  color: gold;
-  text-shadow: 0 0 4px #000;
+    /* The rating value is passed via the `style` attribute in the HTML. */
+    --rating: 0;
+    position: relative;
+    display: inline-block;
+    font-size: 1.1em; /* Adjust star size */
+    line-height: 1;
+    letter-spacing: 0.1em;
+    color: #4a4a4a; /* Base (empty) star color */
+    text-shadow: 0 0 4px #000; /* Subtle text shadow for contrast */
+}
+
+/* Pseudo-element for the gold overlay clipped to the rating width */
+.stars::before {
+    content: "★★★★★";
+    position: absolute;
+    inset: 0;
+    width: calc(var(--rating) / 5 * 100%);
+    overflow: hidden;
+    color: gold; /* Filled star color */
 }
 
 #projects {
@@ -539,6 +635,17 @@ button:hover {
 @keyframes fadeBlink {
     0%, 100% { opacity: 0.85; }
     50% { opacity: 0.4; }
+}
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Stacks the columns vertically */
+        justify-items: center; /* Centers the content */
+        text-align: center;
+    }
+
+    .contact-info {
+        margin-bottom: 2rem; /* Adds space between the image and the form */
+    }
 }
 
 footer {

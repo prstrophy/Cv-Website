@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preName = document.querySelector(".pre-name");
     const shapeContainer = document.getElementById("shape-container");
     const mainContent = document.getElementById("main-content");
-    
+
     // Function to generate a random hex color
     function getRandomColor() {
         return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </svg>
         `
     };
-    
+
     // Selects a random shape and injects it into the shape container
     const shapeNames = Object.keys(shapes);
     const randomShapeKey = shapeNames[`${Math.floor(Math.random() * shapeNames.length)}`];
@@ -177,8 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     ========================================================================================
     Quote Carousel Logic
-    This script manages the dynamic quotes in the "About" section.
-    The quote changes when the user clicks anywhere on the quote box.
+    This script manages the dynamic quotes in the "About" section. The quote changes when the user clicks anywhere on the quote box.
     ========================================================================================
     */
     // Array of inspirational quotes
@@ -197,47 +196,64 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: "If you want to achieve greatness stop asking for permission.", author: "Anonymous" },
         { text: "Things work out best for those who make the best of how things work out.", author: "John Wooden" },
         { text: "To live a creative life, we must lose our fear of being wrong.", author: "Joseph Chilton Pearce" },
-        { text: "If you are not willing to risk the usual, you will have to settle for the ordinary.", author: "Jim Rohn" },
-        { text: "The only person you are destined to become is the person you decide to be.", author: "Ralph Waldo Emerson" },
-        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-        { text: "If you're not making mistakes, then you're not doing anything.", author: "John Wooden" },
-        { text: "The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will.", author: "Vince Lombardi" },
-        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-        { text: "Your time is limited, don't waste it living someone else's life.", author: "Steve Jobs" },
-        { text: "The road to success and the road to failure are almost exactly the same.", author: "Colin R. Davis" },
-        { text: "The only place where success comes before work is in the dictionary.", author: "Vidal Sassoon" },
-        { text: "You may have to fight a battle more than once to win it.", author: "Margaret Thatcher" },
-        { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" }
     ];
 
-    const quoteSection = document.getElementById('quote-section');
-    const quoteDisplay = document.getElementById('quote-display');
-    const authorDisplay = document.getElementById('author-display');
+    // Select the DOM elements for the quote and author display
+    const quoteDisplay = document.getElementById("quote-display");
+    const authorDisplay = document.getElementById("author-display");
 
-    let lastRandomIndex = -1;
-
-    // Function to display a random quote, ensuring it's not the same as the last one
+    // Function to display a random quote from the array
     function displayRandomQuote() {
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * quotes.length);
-        } while (randomIndex === lastRandomIndex);
-        
-        lastRandomIndex = randomIndex;
-        updateQuoteDisplay(randomIndex);
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const quote = quotes[randomIndex];
+        quoteDisplay.textContent = quote.text;
+        authorDisplay.textContent = `- ${quote.author}`;
     }
 
-    // Function to update the DOM with the new quote and author
-    function updateQuoteDisplay(index) {
-        quoteDisplay.textContent = `"${quotes[index].text}"`;
-        authorDisplay.textContent = `- ${quotes[index].author}`;
+    // Call the function once to display a quote on initial page load
+    displayRandomQuote();
+
+    // Add a click event listener to the quote section to change the quote
+    document.getElementById("quote-section").addEventListener("click", displayRandomQuote);
+
+
+    /*
+    ========================================================================================
+    Mobile Navigation Logic
+    This script handles the opening and closing of the mobile navigation menu (hamburger icon).
+    ========================================================================================
+    */
+    const openMenuBtn = document.getElementById('open-menu');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileNavMenu = document.getElementById('mobile-nav-menu');
+    const mobileNavLinks = mobileNavMenu.querySelectorAll('a');
+
+    // Function to open the mobile menu
+    function openMobileMenu() {
+        mobileNavMenu.classList.add('active');
+        openMenuBtn.style.display = 'none';
+        closeMenuBtn.style.display = 'block';
     }
 
-    // Event listeners to handle the quote display
-    window.addEventListener('load', displayRandomQuote); // Display a random quote on page load
-    if (quoteSection) {
-        quoteSection.addEventListener('click', displayRandomQuote); // Change the quote on click
+    // Function to close the mobile menu
+    function closeMobileMenu() {
+        mobileNavMenu.classList.remove('active');
+        openMenuBtn.style.display = 'block';
+        closeMenuBtn.style.display = 'none';
     }
+
+    // Event listeners for opening and closing the mobile menu
+    if (openMenuBtn) {
+        openMenuBtn.addEventListener('click', openMobileMenu);
+    }
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close the mobile menu when a navigation link is clicked
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
 
     /*
     ========================================================================================

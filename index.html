@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div id="main-content">
+   <div id="main-content">
         
         <header>
             <a href="#home" class="active">Home</a>
@@ -32,7 +32,22 @@
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
+            <!-- Hamburger menu icon for mobile -->
+            <div class="menu-icon">
+                <i class="fas fa-bars" id="open-menu"></i>
+                <i class="fas fa-times" id="close-menu" style="display: none;"></i>
+            </div>
         </header>
+
+        <!-- Mobile navigation menu -->
+        <nav class="mobile-nav" id="mobile-nav-menu">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#edu-exp">Education & Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
         <section id="home">
             <div class="content hidden">
@@ -117,45 +132,43 @@
             </div>
         </section>
         
-       <section id="skills">
-            <h2 class="section-title hidden">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-group" role="listitem" aria-label="Programming Languages">
-                    <h3>Programming Languages</h3>
-                    <div class="skill"><span>Python</span><span class="stars" aria-label="2 out of 5 stars">★★☆☆☆</span></div>
-                    <div class="skill"><span>JavaScript</span><span class="stars" aria-label="3.5 out of 5 stars">★★★⯪☆</span></div>
-                    <div class="skill"><span>Java</span><span class="stars" aria-label="2 out of 5 stars">★★☆☆☆</span></div>
-                    <div class="skill"><span>SQL</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                    <div class="skill"><span>PHP</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                    <div class="skill"><span>HTML / CSS (Bootstrap & Gumby)</span><span class="stars" aria-label="4 out of 5 stars">★★★★★</span></div>
-                    <div class="skill"><span>C++/C#</span><span class="stars" aria-label="4 out of 5 stars">★★★☆☆</span></div>
-                    <div class="skill"><span>ASP.NET</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
-                </div>
-                <div class="skill-group" role="listitem" aria-label="Tools">
-                    <h3>Tools</h3>
-                    <div class="skill"><span>Aptana</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
-                    <div class="skill"><span>Eclipse</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
-                    <div class="skill"><span>Git & GitHub</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
-                    <div class="skill"><span>Notepad++ & Subline text</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
-                    <div class="skill"><span>Visual Studio Code</span><span class="stars" aria-label="4.5 out of 5 stars">★★★★⯪</span></div>
-                    <div class="skill"><span>XAMPP/WAMPP</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                </div>
-                <div class="skill-group" role="listitem" aria-label="Databases">
-                    <h3>Databases</h3>
-                    <div class="skill"><span>MongoDB</span><span class="stars" aria-label="3 out of 5 stars">★★★☆☆</span></div>
-                    <div class="skill"><span>MySQL</span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span></div>
-                    <div class="skill"><span>Oracle Database</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                </div>
-                <div class="skill-group" role="listitem" aria-label="Design & Creative Tools">
-                    <h3>Design & Creative Tools</h3>
-                    <div class="skill"><span>Adobe XD</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                    <div class="skill"><span>Photoshop</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                    <div class="skill"><span>Illustrator</span><span class="stars" aria-label="4 out of 5 stars">★★★★☆</span></div>
-                </div>
+      <section id="skills">
+    <h2 class="section-title hidden">Skills</h2>
+    <div class="skills-grid">
+        <div class="skill-group" role="listitem" aria-label="Programming Languages">
+            <h3>Programming Languages</h3>
+            <div class="skill"><span>Python</span><span class="stars" aria-label="2 out of 5 stars" style="--rating: 2;">★★★★★</span></div>
+            <div class="skill"><span>JavaScript</span><span class="stars" aria-label="3.5 out of 5 stars" style="--rating: 3.5;">★★★★★</span></div>
+            <div class="skill"><span>Java</span><span class="stars" aria-label="2 out of 5 stars" style="--rating: 2;">★★★★★</span></div>
+            <div class="skill"><span>SQL</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+            <div class="skill"><span>PHP</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+            <div class="skill"><span>HTML / CSS (Bootstrap & Gumby)</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+            <div class="skill"><span>C++/C#</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
+            <div class="skill"><span>ASP.NET</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
+        </div>
+        <div class="skill-group" role="listitem" aria-label="Tools">
+            <h3>Tools</h3>
+            <div class="skill"><span>Aptana</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
+            <div class="skill"><span>Eclipse</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
+            <div class="skill"><span>Git & GitHub</span><span class="stars" aria-label="5 out of 5 stars" style="--rating: 5;">★★★★★</span></div>
+            <div class="skill"><span>Notepad++ & Subline text</span><span class="stars" aria-label="5 out of 5 stars" style="--rating: 5;">★★★★★</span></div>
+            <div class="skill"><span>Visual Studio Code</span><span class="stars" aria-label="4.5 out of 5 stars" style="--rating: 4.5;">★★★★★</span></div>
+            <div class="skill"><span>XAMPP/WAMPP</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+        </div>
+        <div class="skill-group" role="listitem" aria-label="Databases">
+            <h3>Databases</h3>
+            <div class="skill"><span>MongoDB</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
+            <div class="skill"><span>MySQL</span><span class="stars" aria-label="5 out of 5 stars" style="--rating: 5;">★★★★★</span></div>
+            <div class="skill"><span>Oracle Database</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+        </div>
+             <div class="skill-group" role="listitem" aria-label="Design & Creative Tools">
+                 <h3>Design & Creative Tools</h3>
+                 <div class="skill"><span>Adobe XD</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+                <div class="skill"><span>Photoshop</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+            <div class="skill"><span>Illustrator</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
             </div>
-        </section>
-
-
+         </div>
+</section>
         <section id="projects">
             <h2 class="section-title hidden">Projects</h2>
             <div id="projects-grid" class="projects-grid">
