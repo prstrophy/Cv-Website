@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     document.querySelectorAll(".hidden").forEach((el) => observer.observe(el));
     const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("header a");
+    const navLinks = document.querySelectorAll('header a, .mobile-nav a');
     window.addEventListener("scroll", () => {
         let current = "";
         sections.forEach((sec) => {
