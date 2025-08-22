@@ -243,24 +243,44 @@ header a.active::after {
     width: 80%;
 }
 
-/* Media query for responsive header */
-@media (min-width: 900px) {
-    /* Hides the hamburger and close icons on larger screens */
+/*
+========================================================================================
+Responsive Styles
+========================================================================================
+*/
+/* This media query ensures the mobile navigation elements (hamburger icon and menu)
+    are hidden on larger screens, like desktops and tablets.
+*/
+@media (min-width: 768px) {
     #open-menu, #close-menu {
         display: none !important;
     }
-    /* Ensures the mobile nav menu is hidden on larger screens */
     #mobile-nav-menu {
         display: none;
     }
 }
-@media (max-width: 899px) {
-    /* Hides the main navigation links on smaller screens */
+
+/* This media query hides the main navigation links and other desktop elements
+    on small screens to prevent them from overlapping with the mobile menu.
+*/
+@media (max-width: 767px) {
     .header-nav {
         display: none;
     }
 }
 
+/* This specific rule for the 'About' section improves its layout on mobile devices
+    by stacking the content vertically.
+*/
+@media (max-width: 768px) {
+    #about .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    #about .about-image {
+        margin-bottom: 2rem;
+    }
+}
 /*
 ========================================================================================
 Section-specific Styles
