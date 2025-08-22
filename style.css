@@ -183,17 +183,20 @@ header a:hover::after,
 header a.active::after {
     transform: scaleX(1);
 }
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+}
 
 /* Mobile menu icon styles */
 .menu-icon {
-    display: none; /* Hidden by default on larger screens */
+    display: none;
     color: #e6edf3;
     font-size: 1.5rem;
     cursor: pointer;
-    margin-left: 1rem;
-    z-index: 1100; /* Ensure it's above other content */
+    z-index: 1100;
+    margin-left: auto; /* This pushes it to the right */
 }
-
 /* Mobile navigation menu styles */
 .mobile-nav {
     display: none; /* Hidden by default */
@@ -251,24 +254,34 @@ Responsive Styles
 /* This media query ensures the mobile navigation elements (hamburger icon and menu)
     are hidden on larger screens, like desktops and tablets.
 */
-@media (min-width: 768px) {
-    #open-menu, #close-menu {
-        display: none !important;
-    }
-    #mobile-nav-menu {
-        display: none;
-    }
-}
-
-/* This media query hides the main navigation links and other desktop elements
-    on small screens to prevent them from overlapping with the mobile menu.
-*/
 @media (max-width: 767px) {
     .header-nav {
         display: none;
     }
+    
+    .menu-icon {
+        display: block;
+    }
+    
+    section {
+        padding: 6rem 4% 2rem;
+    }
+    
+    h2.section-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
 }
 
+@media (min-width: 768px) {
+    .menu-icon {
+        display: none !important;
+    }
+    
+    .mobile-nav {
+        display: none !important;
+    }
+}
 /* This specific rule for the 'About' section improves its layout on mobile devices
     by stacking the content vertically.
 */
@@ -330,7 +343,7 @@ Section-specific Styles
 #home #typedtext { color: #367b7d; font-weight: bold; }
 
 #about {
-    background: linear-gradient(180deg, rgba(31, 1, 60, 0.6), rgba(11, 30, 31, 0.75)), url("https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1600");
+    background: linear-gradient(180deg, rgba(31, 1, 60, 0.6), rgba(11, 30, 31, 0.75)), url("https://images.unsplash.com/photo-1623520333087-62b8793e3d23?q=80&w=1600");
     background-size: cover;
     background-position: center;
     padding-top: 5.75rem; /* Adjust this value as needed */
@@ -540,8 +553,13 @@ Quote Section Styles (Updated)
     padding: 1.5rem;
     border-radius: 10px;
     transition: transform 0.3s, background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-
+.project-card p {
+    flex-grow: 1;
+}
 .project-card:hover {
     transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.08);
@@ -550,13 +568,14 @@ Quote Section Styles (Updated)
 .project-btn {
     display: inline-block;
     margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
+      padding: 0.6rem 1.2rem;
     border-radius: 6px;
     background: teal;
     color: #0d1117;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    
 }
 
 .project-btn:hover {

@@ -26,18 +26,22 @@
    <div id="main-content">
         
         <header>
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#edu-exp">Education & Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-            <!-- Hamburger menu icon for mobile -->
-            <div class="menu-icon">
-                <i class="fas fa-bars" id="open-menu"></i>
-                <i class="fas fa-times" id="close-menu" style="display: none;"></i>
-            </div>
-        </header>
+    <!-- Desktop navigation links wrapped in a container -->
+    <div class="header-nav">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#edu-exp">Education & Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+    
+    <!-- Hamburger menu icon for mobile -->
+    <div class="menu-icon">
+        <i class="fas fa-bars" id="open-menu"></i>
+        <i class="fas fa-times" id="close-menu" style="display: none;"></i>
+    </div>
+</header>
 
         <!-- Mobile navigation menu -->
         <nav class="mobile-nav" id="mobile-nav-menu">
@@ -160,6 +164,7 @@
             <div class="skill"><span>MongoDB</span><span class="stars" aria-label="3 out of 5 stars" style="--rating: 3;">★★★★★</span></div>
             <div class="skill"><span>MySQL</span><span class="stars" aria-label="5 out of 5 stars" style="--rating: 5;">★★★★★</span></div>
             <div class="skill"><span>Oracle Database</span><span class="stars" aria-label="4 out of 5 stars" style="--rating: 4;">★★★★★</span></div>
+            <div class="skill"><span>Azure Database</span><span class="stars" aria-label="3.5 out of 5 stars" style="--rating: 3.5;">★★★★★</span></div>
         </div>
              <div class="skill-group" role="listitem" aria-label="Design & Creative Tools">
                  <h3>Design & Creative Tools</h3>
@@ -173,52 +178,48 @@
             <h2 class="section-title hidden">Projects</h2>
             <div id="projects-grid" class="projects-grid">
                 <div class="project-card hidden">
-                    <h4>Project One</h4>
+                    <h4>ASP.Net MVC Webapp</h4>
                     <p>
-                        A full-stack e-commerce platform with user
-                        authentication and a payment gateway.
+                        A Student Registration webapp that shows the student marks/update their details.
+                        Done this in Intern to learn more about Asp.Net MVC.
                     </p>
-                    <a href="#" class="project-btn"
-                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <a href="https://github.com/prstrophy/MVCWEbappIntern" class="project-btn" target="_blank">View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                             <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
                             <path d="M5 5h5V3H3v7h2z"/>
                         </svg>
                     </a>
                 </div>
                 <div class="project-card hidden">
-                    <h4>Project Two</h4>
+                    <h4>TeamProject E-commerce Website</h4>
                     <p>
-                        A real-time chat application built with WebSockets and
-                        Node.js.
+                        A TeamProject E-commerce website done in the Bachelors 2nd year with 3-4 teammembers.
+                        It has use of PHP/Bootstrap and Oracle connect for database.
+                        Also had Paypal integration, Email verification , ER diagrams and use case for user.
                     </p>
-                   <a href="#" class="project-btn"
-                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                   <a href="https://github.com/prstrophy/teamProject" class="project-btn" target="_blank">View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                             <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
                             <path d="M5 5h5V3H3v7h2z"/>
                         </svg>
                     </a>
                 </div>
                 <div class="project-card hidden">
-                    <h4>Project Three</h4>
+                    <h4>PolarHRM</h4>
                     <p>
-                        A data visualization dashboard for analyzing sales
-                        data using React and D3.js.
+                        A C# App for Polar HRM. Which uses a file to show data of your Heartrate,Speed etc while Cycling/Running.
                     </p>
-                   <a href="#" class="project-btn"
-                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                   <a href="https://github.com/prstrophy/PolarAssignment" class="project-btn" target="_blank">View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                             <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
                             <path d="M5 5h5V3H3v7h2z"/>
                         </svg>
                     </a>
                 </div>
                 <div class="project-card hidden">
-                    <h4>Project Four</h4>
+                    <h4>Bloodbank Webapp</h4>
                     <p>
-                        A personal portfolio website showcasing my skills and
-                        projects.
+                        A Webapp made with SDLC planning "Agile Method". It is a platform where people can see Donor and Sender with their needy details like phoneno and location.
+                        User registration for both and also Sort people as per bloodtype and location so receiver can contact people closer to their area for convenience.
                     </p>
-                <a href="#" class="project-btn"
-                        >View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <a href="https://github.com/prstrophy/Bloodbank" class="project-btn" target="_blank">View Project<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                             <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"/>
                             <path d="M5 5h5V3H3v7h2z"/>
                         </svg>
@@ -226,9 +227,7 @@
                 </div>
 				
             </div>
-			 <p class="warning-text" style="text-align: center;" >
-                        *Projects are missing for NOW (This is just dummy tester ) until the fetch system is done correctly..Until then use the Github icon in contact 
-                    </p>
+			 
         </section>
         
         <section id="contact">
