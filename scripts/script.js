@@ -207,6 +207,30 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', closeMobileMenu);
     });
+    
+});
+/* --- EMAILJS FORM SUBMISSION --- */
+(function() {
+    // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS User ID
+    emailjs.init('ei2jvO71Le80gH_vr');
+})();
+
+const contactForm = document.getElementById('contact-form');
+contactForm.addEventListener('submit', function(e) {
+     e.preventDefault();
+
+    // Set the value of the hidden input with the current time
+    document.getElementById('submission-time').value = new Date().toLocaleTimeString();
+
+    emailjs.sendForm('service_jxk7svs', 'template_fzfbibo', this)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            alert('Your message has been sent successfully!');
+            contactForm.reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            alert('Failed to send the message. Please try again.');
+        });
 });
 
  /*
@@ -265,38 +289,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // window.addEventListener('load', fetchAndDisplayProjects);
     // --- END: GITHUB API FETCHING CODE ---
     */
-    /*
-    ========================================================================================
-    Contact Form Logic (EmailJS)
-    This is a commented-out section explaining how to integrate a third-party service
-    like EmailJS to make your contact form functional without a backend server.
-    ========================================================================================
-    */
-    /*
-    // --- START: EMAILJS FORM CODE ---
-    // Step 1: Include the EmailJS SDK in your HTML file
-    // This is already in your <head> section:
-    // <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    //
-    // Step 2: Sign up for an account at https://www.emailjs.com/
-    // and get your User ID, Service ID, and Template ID.
-    // (function() {
-    //     // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS User ID
-    //     emailjs.init('YOUR_PUBLIC_KEY');
-    // })();
-    // const contactForm = document.getElementById('contact-form');
-    // contactForm.addEventListener('submit', function(e) {
-    //     e.preventDefault(); // Prevents the default form submission behavior
-    //     // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-    //     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-    //         .then(function(response) {
-    //             console.log('SUCCESS!', response.status, response.text);
-    //             alert('Your message has been sent successfully!');
-    //             contactForm.reset(); // Reset the form fields after successful submission
-    //         }, function(error) {
-    //             console.log('FAILED...', error);
-    //             alert('Failed to send the message. Please try again.');
-    //         });
-    // });
-    // --- END: EMAILJS FORM CODE ---
-    */
+   
