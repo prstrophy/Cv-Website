@@ -11,6 +11,10 @@ These styles apply to the entire website for a consistent look and feel.
     box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;   
+}   /*  SMMOOTH SCROLLING ON HTML*/
+
 /* Base styles for the body, including background, font, and scroll behavior */
 body {
     font-family: "Segoe UI", Tahoma, sans-serif;
